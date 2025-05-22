@@ -1,0 +1,22 @@
+project-root/
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── form.js          ← 投票画面のJS
+│   │   ├── result.js        ← 結果表示のJS（グラフとか）
+│   │   └── review.js        ← コメント投稿のJS
+│   └── images/              ← シューズ画像とか
+├── views/
+│   ├── form.ejs             ← 投票画面
+│   ├── result.ejs           ← 投票後の平均＋自分の結果表示
+│   └── review.ejs           ← コメント（ブログ風）一覧表示
+├── routes/
+│   ├── form.js              ← GET/POST for 投票
+│   ├── result.js            ← 平均・個人結果表示用
+│   └── review.js            ← コメント投稿・表示
+├── firebase/
+│   └── config.js            ← Firebase接続用設定
+├── app.js                   ← メインサーバー（Express）
+├── package.json
+└── README.md

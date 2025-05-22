@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>レビュー一覧</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>みんなのレビュー</h1>
+
+  <% if (reviews.length === 0) { %>
+    <p>まだレビューがありません。</p>
+  <% } else { %>
+    <% reviews.forEach((r, i) => { %>
+      <div class="review">
+        <p><strong>投稿日:</strong> <%= r.createdAt %></p>
+        <p><strong>スコア:</strong> <%= r.ratings.join(' / ') %></p>
+        <p><strong>コメント:</strong> <%= r.comment || '（コメントなし）' %></p>
+        <hr>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>

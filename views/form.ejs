@@ -28,6 +28,9 @@
     「●●のレビューは詳しいけど、自分には合うのか分からない…」<br>
     そんな声から、<strong>実際に使った人たちの「投票形式」評価</strong>を採用しました。
   </p>
+  <h3>みんなの評価</h3>
+<canvas id="communityRadarChart"></canvas>
+<p><%= voteCount %> 人が評価しました</p>
   <p>
     クッション性・安定性・軽さなど、<strong>10項目の評価</strong>をもとに<br>
     レーダーチャートで感覚の違いも“見える化”。<br>
@@ -139,11 +142,40 @@
 
 
   <div class="fixed-footer">
-    🛍️ このシューズはこちらから購入 → <a href="https://amzn.to/438Aq2L" target="_blank">Amazon</a>
+   <div class="button-area">
+  <button onclick="window.open('https://amzn.to/3SkETt0')">Amazonで見る</button>
+  <button onclick="window.open('https://hb.afl.rakuten.co.jp/hgc/44a0fcda.60c3ac99.44a0fcdb.a0b32837/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%259A%25E3%2582%25AC%25E3%2582%25B5%25E3%2582%25B941%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">https://search.rakuten.co.jp/search/mall/%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B941/'>楽天で見る</button>
+</div>
   </div>
 
   <script src="/js/form.js"></script>
   <script>
+    
+  const ctx = document.getElementById('communityRadarChart').getContext('2d');
+  const communityChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['クッション', '安定性', '軽さ', 'コスパ', '履き心地', 'デザイン', '通気性', 'スピード性能', 'グリップ', '耐久性'],
+      datasets: [{
+        label: '平均評価',
+        data: <%- JSON.stringify(averageRatings) %>,
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      }
+    }
+  });
+
     // ホストのレーダーチャート描画
     const ctx = document.getElementById('hostChart').getContext('2d');
     new Chart(ctx, {

@@ -93,19 +93,7 @@ button:hover {
     grid-template-columns: 1fr;
   }
 }
-    .fixed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-   padding: 0.18rem 0 !important;
-  font-size: 0.85rem !important;
-  text-align: center;
-  border-top: 1px solid #ccc;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
-  z-index: 99;
-}
+   
 
     .my-evaluation {
       margin-top: 3rem;
@@ -296,47 +284,35 @@ button:hover {
   }
 }
 
-.shop-button-group {
-  display: flex;
-  justify-content: center;
-  gap: 0.1rem;
-  margin-top: 1.5rem;
-  align-items: center;
-  gap: 0.6em; 
-  flex-wrap: wrap; /* 小さい画面対応 */
-}
-
-.shop-button1 {
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  background-color: #f0c20d;
-  color: rgb(16, 1, 1);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.shop-button2 {
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  background-color: #db72a6e0;
-  color: rgba(16, 1, 1, 1);
-  border: none;
-  border-radius: 6px;
-
-  cursor: pointer;
-  transition: background-color 0.2s;
+.fixed-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 100;
+  padding: 0.1rem 0;
 }
 .shop-button-group {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.6em;
   margin: 0;
 }
 .shop-button1,
 .shop-button2 {
-  padding: 0.27rem 0.7rem;
-  font-size: 0.87rem;
+  padding: 0.25rem 1.1rem;
+  font-size: 0.9rem;
   border-radius: 6px;
 }
+
+#communityRadarChart {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+

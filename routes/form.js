@@ -5,7 +5,7 @@ const { getFirestore, collection, addDoc } = require('firebase/firestore');
 const { initializeApp } = require('firebase/app');
 
 
-const { getDocs, collection } = require('firebase/firestore');
+
 const db = require('../firebase'); // ←Firebaseインスタンス
 
 router.get('/form', async (req, res) => {

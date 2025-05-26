@@ -186,20 +186,26 @@ button:hover {
     }
   }
 
-  .top-header {
+ .top-header {
   text-align: center;
-  padding: 2rem 1rem;
-  position:relative;
-  background-image: url('/images/header_bg.jpg'); /* 背景画像ある場合 */
-  background-size: cover;
-  background-position: center;
+  background: rgba(255,255,255,0.9);
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
 }
 
-.highlight {
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
-  color: #fff;
-  padding: 0.3em 0.6em;
-  border-radius: 5px;
+.top-header .highlight {
+  background: linear-gradient(90deg,#dbeafe 60%,#fff 100%);
+  border-radius: 0.7em;
+  padding: 0.2em 0.7em;
+}
+
+.top-image img {
+  border-radius: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  background: #fff;
 }
 
 

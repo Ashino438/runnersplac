@@ -41,7 +41,11 @@
   </p>
 </div>
 
-
+<div class="community-chart-container">
+  <h2>みんなの評価</h2>
+  <canvas id="communityRadarChart"></canvas>
+  <p id="voteCountText"></p>
+</div>
 
 <body data-shoe="pegasus41">
   <div class="container">
@@ -143,11 +147,74 @@
   <div class="fixed-footer">
   <div class="shop-button-group">
   <button class="shop-button1" onclick="window.open('https://amzn.to/3SkETt0')">Amazonで見る</button>
-  <button class="shop-button2" onclick="window.open('https://hb.afl.rakuten.co.jp/hgc/44a0fcda.60c3ac99.44a0fcdb.a0b32837/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B941%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9')" target="_blank" rel="nofollow sponsored noopener">
+  <button class="shop-button2" onclick="window.open('https://hb.afl.rakuten.co.jp/hgc/44a0fcda.60c3ac99.44a0fcdb.a0b32837/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B941%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9')" >
   楽天で見る</button>
 </div>
 
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+  import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+    authDomain: "mystlide.firebaseapp.com",
+    projectId: "mystlide",
+    storageBucket: "mystlide.firebasestorage.app",
+    messagingSenderId: "823773802251",
+    appId: "1:823d531f428f02f463fc0e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const snapshot = await getDocs(collection(db, 'ratings'));
+  const total = Array(10).fill(0);
+  let count = 0;
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    if (data.ratings) {
+      data.ratings.forEach((val, i) => {
+        total[i] += val;
+      });
+      count++;
+    }
+  });
+
+  const avgRatings = total.map(x => +(x / count).toFixed(2));
+  document.getElementById('voteCountText').textContent = `${count}人が評価しました`;
+
+  const ctx = document.getElementById('communityRadarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['クッション', '安定性', '軽さ', 'コスパ', '履き心地', 'デザイン', '通気性', 'スピード性能', 'グリップ', '耐久性'],
+      datasets: [{
+        label: 'みんなの平均評価',
+        data: avgRatings,
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          suggestedMin: 0,
+          suggestedMax: 5,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      }
+    }
+  });
+</script>
+
 
   <script src="/js/form.js"></script>
   <script>

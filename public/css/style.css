@@ -189,6 +189,7 @@ button:hover {
   .top-header {
   text-align: center;
   padding: 2rem 1rem;
+  position:relative;
   background-image: url('/images/header_bg.jpg'); /* 背景画像ある場合 */
   background-size: cover;
   background-position: center;
@@ -323,7 +324,7 @@ button:hover {
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
   background-color: #db72a6e0;
-  color: rgba(16, 1, 1, 0.007);
+  color: rgba(16, 1, 1, 1);
   border: none;
   border-radius: 6px;
 

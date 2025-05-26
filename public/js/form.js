@@ -1,3 +1,6 @@
+ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+
 document.getElementById('ratingForm').addEventListener('submit', async function (e) {
     e.preventDefault();
   
@@ -15,6 +18,39 @@ document.getElementById('ratingForm').addEventListener('submit', async function 
       ratings: ratings,
       comment: comment
     };
+
+   
+const firebaseConfig = {
+  apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+  authDomain: "mystlide.firebaseapp.com",
+  projectId: "mystlide",
+  storageBucket: "mystlide.firebasestorage.app",
+  messagingSenderId: "823773802251",
+  appId: "1:823d531f428f02f463fc0e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const snapshot = await getDocs(collection(db, 'ratings'));
+
+let total = Array(10).fill(0);
+let count = 0;
+
+snapshot.forEach(doc => {
+  const data = doc.data();
+  if (data.ratings) {
+    data.ratings.forEach((score, i) => {
+      total[i] += score;
+    });
+    count++;
+  }
+});
+
+const avgRatings = total.map(t => +(t / count).toFixed(2));
+
+// あとは avgRatings を Chart.js に渡して表示すればOK！
+
   
     try {
       const res = await fetch('/form/submit', {

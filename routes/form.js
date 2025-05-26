@@ -4,6 +4,38 @@ const router = express.Router();
 const { getFirestore, collection, addDoc } = require('firebase/firestore');
 const { initializeApp } = require('firebase/app');
 
+
+const { getDocs, collection } = require('firebase/firestore');
+const db = require('../firebase'); // ←Firebaseインスタンス
+
+router.get('/form', async (req, res) => {
+  const snapshot = await getDocs(collection(db, 'ratings_pegasus41'));
+  const ratings = snapshot.docs.map(doc => doc.data());
+
+  const numCategories = 10;
+  const totals = Array(numCategories).fill(0);
+  let count = 0;
+
+  ratings.forEach(r => {
+    for (let i = 0; i < numCategories; i++) {
+      totals[i] += parseInt(r[`category${i}`] || 0);
+    }
+    count++;
+  });
+
+  const averageRatings = count === 0 ? Array(numCategories).fill(0) : totals.map(t => (t / count).toFixed(2));
+
+  res.render('form', {
+    categories: [
+      "クッション性", "安定性", "軽さ", "コスパ", "履き心地（フィット感）",
+      "デザイン", "通気性", "スピード性能", "グリップ", "耐久性"
+    ],
+    averageRatings,
+    voteCount: count
+  });
+});
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
   authDomain: "mystlide.firebaseapp.com",

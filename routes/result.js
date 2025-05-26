@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
     const avgRatings = sum.map(total => +(total / count).toFixed(2));
 
-    // 最新のコメントを3件取得（コメントがあるものだけ）
+    // 最新のコメントを6件取得（コメントがあるものだけ）
     const q = query(collection(db, 'ratings'), orderBy('createdAt', 'desc'), limit(10));
     const latestSnapshot = await getDocs(q);
     const recentComments = [];
@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
     res.render('result', {
       myRatings,
       avgRatings,
-      recentComments: recentComments.slice(0, 6)|| [] // コメント3件に限定
+      recentComments: recentComments.slice(0, 6)|| [] // コメント6件に限定
     });
   } catch (err) {
     console.error('取得エラー:', err);

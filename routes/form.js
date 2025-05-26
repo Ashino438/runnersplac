@@ -6,7 +6,7 @@ const { initializeApp } = require('firebase/app');
 
 
 
-const db = require('../firebase'); // ←Firebaseインスタンス
+const db = require('../config'); // ←Firebaseインスタンス
 
 router.get('/form', async (req, res) => {
   const snapshot = await getDocs(collection(db, 'ratings_pegasus41'));

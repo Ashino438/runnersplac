@@ -50,7 +50,7 @@ snapshot.forEach(doc => {
 const avgRatings = total.map(t => +(t / count).toFixed(2));
 
 // あとは avgRatings を Chart.js に渡して表示すればOK！
-
+console.log("form.js開始");
   
     try {
       const res = await fetch('/form/submit', {
@@ -58,6 +58,7 @@ const avgRatings = total.map(t => +(t / count).toFixed(2));
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+     
   
       if (res.ok) {
         window.location.href = '/result'; // 結果ページへリダイレクト
@@ -69,4 +70,7 @@ const avgRatings = total.map(t => +(t / count).toFixed(2));
       alert('エラーが発生しました');
     }
   });
+console.log("form.js動いたよ"); // ← ← ← ← ← この行を**一番最後に置く！**
+  
+
   

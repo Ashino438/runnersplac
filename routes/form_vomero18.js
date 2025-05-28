@@ -7,9 +7,9 @@ const { initializeApp } = require('firebase/app');
 
 
 const db = require('../firebase/config.js'); // ←Firebaseインスタンス
-
+const COLLECTION_NAME = 'ratings_vomero18';
 router.get('/form', async (req, res) => {
-  const snapshot = await getDocs(collection(db, 'ratings_pegasus41'));
+ const snapshot = await getDocs(collection(db, COLLECTION_NAME));
   const ratings = snapshot.docs.map(doc => doc.data());
 
   const numCategories = 10;
@@ -45,7 +45,7 @@ router.post('/submit', async (req, res) => {
   try {
     const { ratings, comment } = req.body;
 
-    await addDoc(collection(db, 'ratings'), {
+    await addDoc(collection(db, COLLECTION_NAME),  {
       ratings,
       comment,
       createdAt: new Date()

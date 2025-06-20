@@ -1,5 +1,8 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json'); // ← 秘密鍵のファイル名
+
+const base64 = process.env.FIREBASE_API_KEY; // ← Renderに設定した環境変数
+const jsonString = Buffer.from(base64, 'base64').toString('utf8');
+const serviceAccount = JSON.parse(jsonString);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

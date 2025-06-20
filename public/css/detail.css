@@ -100,6 +100,7 @@ canvas {
   display: block;
   margin: 0 auto;
   max-width: 100%;
+  margin-bottom: 2em; 
 }
 
 /* 固定フッター */
@@ -128,6 +129,11 @@ canvas {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   transition: background 0.3s;
 }
+
+.fixed-footer a {
+  outline: none;
+}
+
 
 .fixed-footer a:hover {
   background: #005fcc;
@@ -300,8 +306,119 @@ input[type="radio"] {
 }
 
 .hostevaluation{
+    width: 12%;
+}
+.row{
+    width: 10%;
+}
+
+.buy-btn1 {
+  background: #ff5722; /* 明るいオレンジ */
+  color: white;
+  padding: 0.6em 1.2em;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.buy-btn1:hover {
+  background: #e64a19;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.5em;
+    font-size: 25px;
+  }
+
+  .detail-page {
+    padding: 1em;
+    margin: 0.5em;
+    border-radius: 6px;
+  }
+
+  h1, h2 {
+    font-size: 16px;
+    margin-top: 1em;
+    padding-left: 0.4em;
+  }
+
+  .shoe-detail-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .buy-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8em;
+    font-size: 16px;
+    text-align: center;
+    margin: 1em auto;
+    border-radius: 10px;
+  }
+
+  table.host-eval-table {
+    font-size: 12px;
+  }
+
+  .host-eval-table th,
+  .host-eval-table td {
+    padding: 0.4em;
+  }
+
+  .fixed-footer a {
+    font-size: 18px;
+    padding: 0.5em 1em;
+  }
+
+  .rating-options {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rating-options label {
+    font-size: 16px;
+  }
+
+  #comment-form textarea {
+    font-size: 13px;
+  }
+
+  #comment-form button {
+    width: 100%;
+    font-size: 15px;
+    padding: 0.7em;
+  }
+
+  #posted-comments li {
+    font-size: 13px;
+    padding: 0.6em;
+  }
+
+  .hostevaluation,
+  .row {
+    width: 100%;
+  }
+ .hostevaluation{
     width: 15%;
 }
 .row{
     width: 15%;
 }
+
+canvas#avgChart {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  margin-bottom: 4em; 
+}
+
+}
+

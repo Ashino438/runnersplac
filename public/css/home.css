@@ -1,7 +1,7 @@
 /* ===================== 共通スタイル ===================== */
 body {
   font-family: sans-serif;
-  padding: 10px;
+  padding: 8px;
   margin: 0;
 }
 
@@ -9,12 +9,7 @@ main {
   padding: 10px;
 }
 
-.col-midsole {
-  word-wrap: break-word;     /* 長い単語も途中で折る */
-  white-space: normal;       /* 折り返しを有効にする */
-  max-width: 90px;           /* 好きな横幅に調整してOK */
-  overflow-wrap: break-word;
-}
+
 
 .col-img,
 .col-brand,
@@ -73,6 +68,15 @@ main {
   background: #0f9d75;
   transform: scale(1.05);
 }
+
+.spacer-row td {
+  padding: 0;
+  margin: 0;
+  height: 0;
+  border: none;
+  background-color: white!important;
+}
+
 
 /* ===================== ヘッダー ===================== */
 header.main-header {
@@ -242,7 +246,7 @@ header.main-header {
 .shoes-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .shoes-table th,
@@ -273,13 +277,20 @@ header.main-header {
 /* ===================== スマホ用 ===================== */
 @media (max-width: 768px) {
   .shoes-table,
-  .shoes-table thead,
   .shoes-table tbody,
-  .shoes-table th,
   .shoes-table td,
   .shoes-table tr {
     display: block;
     width: 100%;
+    justify-content: space-between;
+  }
+
+  .name-cell{
+    font-size: 2em;
+    text-align: center!important;
+  }
+  .shoes-table th {
+    display: none;
   }
 
   .shoes-table tr {
@@ -295,6 +306,7 @@ header.main-header {
     align-items: center;
     padding: 8px 0;
     border-bottom: 1px solid #eee;
+
   }
 
   .shoes-table td::before {
@@ -303,6 +315,7 @@ header.main-header {
     color: #333;
     flex: 1;
     margin-right: 10px;
+     text-align: left;
   }
 
   .shoes-table td {
@@ -337,4 +350,5 @@ header.main-header {
   .filter-container input[type="number"] {
     width: 100%;
   }
+  
 }

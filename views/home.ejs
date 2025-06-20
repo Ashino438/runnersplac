@@ -117,10 +117,7 @@
 
    
   <table class="shoes-table">
-  <thead>
-    
-    
-  </thead>
+ 
  <tbody>
   <% shoes.forEach(function(shoe, i) { %>
      <% let zebraClass = i % 2 === 0 ? "zebra-a" : "zebra-b"; %>
@@ -133,7 +130,7 @@
       
     </tr>
     <!-- 画像＋スペック -->
-     <tr >
+    <tr >
       <th class="col-img">画像</th>
       <th class="col-chart" colspan="2">評価チャート</th>
       <th class="col-brand">ブランド</th>
@@ -145,60 +142,55 @@
       <th class="col-price">値段</th>
       <th class="col-rating">総合評価</th>
     </tr>
-    <tr >
-      <td class="img-cell" rowspan="3">
-        <img src="<%= shoe.image %>" class="shoe-table-img">
-        <div class="img-actions">
-    <a href="/shoes/<%= shoe.id %>" class="detail-btn" >詳細 ▼</a>
-    <a href="<%= shoe.buyUrl %>" target="_blank" class="buy-btn">購入</a>
-  </div>
+    <tr>
+  <td class="img-cell" rowspan="3" data-label="画像">
+    <img src="<%= shoe.image %>" class="shoe-table-img">
+    <div class="img-actions">
+      <a href="/shoes/<%= shoe.id %>" class="detail-btn">詳細 ▼</a>
+      <a href="<%= shoe.buyUrl %>" target="_blank" class="buy-btn">購入</a>
+    </div>
+    <div class="comment-anchor" data-shoe-id="<%= shoe.id %>"></div>
+  </td>
+  <td class="col-chart" rowspan="3" colspan="2" data-label="評価チャート">
+    <canvas id="chart-<%= shoe.id %>" width="30" height="30"></canvas>
+  </td>
+  <td class="col-brand" data-label="ブランド"><%= shoe.brand %></td>
+  <td class="col-weight" data-label="重さ"><%= shoe.weight %></td>
+  <td class="col-midsole" colspan="2" data-label="ミッドソール"><%= shoe.midsole %></td>
+  <td class="col-drop" data-label="ドロップ"><%= shoe.drop %></td>
+  <td class="col-offset" data-label="オフセット"><%= shoe.offset %></td>
+  <td class="col-purpose" colspan="2" data-label="用途"><%= shoe.purpose %></td>
+  <td class="col-price" data-label="値段"><%= shoe.price %></td>
+  <td class="col-rating" data-label="総合評価"><%= shoe.rating %></td>
+</tr>
 
-  <!-- コメント差し込み用の空divだけ配置 -->
-  <div class="comment-anchor" data-shoe-id="<%= shoe.id %>"></div>
-        </div>
-      </td>
-      <td class="col-chart" rowspan="3"  colspan="2">
-        <canvas id="chart-<%= shoe.id %>" width="30" height="30"></canvas>
-      </td>
-      <td class="col-brand"><%= shoe.brand %></td>
-      <td class="col-weight"><%= shoe.weight %></td>
-      <td class="col-midsole"  colspan="2"><%= shoe.midsole %></td>
-      <td class="col-drop"><%= shoe.drop %></td>
-      <td class="col-offset"><%= shoe.offset %></td>
-      <td class="col-purpose"  colspan="2"><%= shoe.purpose %></td>
-      <td class="col-price"><%= shoe.price %></td>
-      <td class="col-rating"><%= shoe.rating %></td>
-    </tr>
-   <tr >
-      <th class="perf-th">クッション</th>
-      <th class="perf-th">安定性</th>
-      <th class="perf-th">軽さ</th>
-      <th class="perf-th">コスパ</th>
-      <th class="perf-th">履き心地</th>
-      <th class="perf-th">デザイン</th>
-      <th class="perf-th">通気性</th>
-      <th class="perf-th">スピード</th>
-      <th class="perf-th">グリップ</th>
-      <th class="perf-th">耐久性</th>
-    </tr>
-    <tr class="score-row" >
+<tr>
+  <th class="perf-th">クッション</th>
+  <th class="perf-th">安定性</th>
+  <th class="perf-th">軽さ</th>
+  <th class="perf-th">コスパ</th>
+  <th class="perf-th">履き心地</th>
+  <th class="perf-th">デザイン</th>
+  <th class="perf-th">通気性</th>
+  <th class="perf-th">スピード</th>
+  <th class="perf-th">グリップ</th>
+  <th class="perf-th">耐久性</th>
+</tr>
 
-    
-      
-      <td class="perf-td"><%= shoe.chartData[0] %></td>
-      <td class="perf-td"><%= shoe.chartData[1] %></td>
-      <td class="perf-td"><%= shoe.chartData[2] %></td>
-      <td class="perf-td"><%= shoe.chartData[3] %></td>
-      <td class="perf-td"><%= shoe.chartData[4] %></td>
-      <td class="perf-td"><%= shoe.chartData[5] %></td>
-      <td class="perf-td"><%= shoe.chartData[6] %></td>
-      <td class="perf-td"><%= shoe.chartData[7] %></td>
-      <td class="perf-td"><%= shoe.chartData[8] %></td>
-      <td class="perf-td"><%= shoe.chartData[9] %></td>
-    </tr>
-    <% /* ここで空白行や区切り行を入れてもOK */ %>
-  <% }); %>
-  
+<tr class="score-row">
+  <td class="perf-td" data-label="クッション"><%= shoe.chartData[0] %></td>
+  <td class="perf-td" data-label="安定性"><%= shoe.chartData[1] %></td>
+  <td class="perf-td" data-label="軽さ"><%= shoe.chartData[2] %></td>
+  <td class="perf-td" data-label="コスパ"><%= shoe.chartData[3] %></td>
+  <td class="perf-td" data-label="履き心地"><%= shoe.chartData[4] %></td>
+  <td class="perf-td" data-label="デザイン"><%= shoe.chartData[5] %></td>
+  <td class="perf-td" data-label="通気性"><%= shoe.chartData[6] %></td>
+  <td class="perf-td" data-label="スピード"><%= shoe.chartData[7] %></td>
+  <td class="perf-td" data-label="グリップ"><%= shoe.chartData[8] %></td>
+  <td class="perf-td" data-label="耐久性"><%= shoe.chartData[9] %></td>
+</tr>
+<% }) %>
+
 </tbody>
 </table>
 

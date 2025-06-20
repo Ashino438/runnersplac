@@ -1,0 +1,307 @@
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 1em;
+  line-height: 1.6;
+  background: #f8f8f8;
+}
+
+.detail-page {
+  background: #fff;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+h1 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.shoe-detail-img {
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 1em;
+  border-radius: 10px;
+}
+
+.buy-btn {
+  display: inline-block;
+  background: #007aff;
+  color: white;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  text-decoration: none;
+  margin: 1em 0;
+}
+
+table.host-eval-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-size: 13px;
+}
+
+.host-eval-table th, .host-eval-table td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+}
+
+#comment-form {
+  margin-top: 2em;
+  background: #fff;
+  padding: 1em;
+  border-radius: 8px;
+}
+
+#comment-form textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5em;
+  font-size: 14px;
+  resize: vertical;
+}
+
+#comment-form select {
+  width: 100%;
+  margin-bottom: 0.8em;
+  padding: 0.4em;
+}
+
+#comment-form button {
+  background: #28a745;
+  color: white;
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#posted-comments {
+  margin-top: 1em;
+  list-style: none;
+  padding-left: 0;
+}
+
+#posted-comments li {
+  background: #fff;
+  margin-bottom: 0.5em;
+  padding: 0.6em;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 固定フッター */
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  padding: 0.8em 0.5em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  z-index: 1000;
+}
+
+.fixed-footer a {
+  background: #007aff;
+  color: #fff;
+  padding: 0.6em 1.2em;
+  border-radius: 9999px; /* 丸くしてボタン感 */
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.fixed-footer a:hover {
+  background: #005fcc;
+}
+ 
+body {
+  padding-bottom: 80px;
+}
+
+body {
+  background: #f1f3f5;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  color: #333;
+}
+
+.detail-page {
+  background: #fff;
+  padding: 1.5em;
+  margin: 1em auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+  max-width: 700px;
+}
+
+h1, h2 {
+  font-weight: 600;
+  color: #222;
+  border-left: 4px solid #007aff;
+  padding-left: 0.5em;
+  margin-top: 1.5em;
+}
+
+table.host-eval-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.host-eval-table th {
+  background: #f8f9fa;
+  text-align: left;
+  padding: 0.6em;
+  font-size: 13px;
+  border-bottom: 1px solid #ddd;
+}
+
+.host-eval-table td {
+  padding: 0.6em;
+  font-size: 13px;
+  border-bottom: 1px solid #eee;
+}
+
+#posted-comments li {
+  font-family: monospace;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 0.4em 0.6em;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+
+.star {
+  font-size: 16px;
+  color: #ffc107; /* 黄色 */
+  margin-right: 2px;
+}
+
+.star.empty {
+  color: #e0e0e0;
+}
+
+.star.half {
+  position: relative;
+  display: inline-block;
+  color: #e0e0e0;
+}
+
+.star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+.rating-row {
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.rating-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3em;
+}
+
+.rating-options {
+  display: flex;
+  gap: 0.3em;
+}
+
+.rating-options label {
+  cursor: pointer;
+  font-size: 18px;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+
+.rating-options.star {
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
+}
+
+.star.selected {
+  color: #ffc107;
+}
+
+
+.rating-options.input[type="radio"]:checked + .star {
+  color: #ffc107;
+}
+
+
+
+#comment-form button {
+  background: #007aff;
+  color: white;
+  padding: 0.6em 1.5em;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  margin: 1em auto 0;
+  transition: background 0.3s;
+}
+
+#comment-form button:hover {
+  background: #005fcc;
+}
+
+#posted-comments {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1em;
+}
+
+#posted-comments li {
+  background: #ffffff;
+  border-left: 4px solid #007aff;
+  margin-bottom: 0.8em;
+  padding: 0.8em;
+  font-size: 13.5px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.hostevaluation{
+    width: 15%;
+}
+.row{
+    width: 15%;
+}

@@ -2,6 +2,7 @@
   "name": "runners_plac",
   "version": "1.0.0",
   "main": "app.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +15,7 @@
     "express": "^5.1.0",
     "firebase": "^11.7.3",
     "firebase-admin": "^13.4.0"
+    
+
   }
 }

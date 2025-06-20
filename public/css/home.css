@@ -1,0 +1,340 @@
+/* ===================== 共通スタイル ===================== */
+body {
+  font-family: sans-serif;
+  padding: 10px;
+  margin: 0;
+}
+
+main {
+  padding: 10px;
+}
+
+.col-midsole {
+  word-wrap: break-word;     /* 長い単語も途中で折る */
+  white-space: normal;       /* 折り返しを有効にする */
+  max-width: 90px;           /* 好きな横幅に調整してOK */
+  overflow-wrap: break-word;
+}
+
+.col-img,
+.col-brand,
+.col-weight,
+.col-midsole,
+.col-drop,
+.col-offset,
+.col-purpose,
+.col-price,
+.col-rating,
+.col-chart {
+  width: 8.33%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.score-row td {
+  width: 8%;
+  word-break: break-word;
+  text-align: center;
+}
+
+.perf-th {
+  width: 8%;
+  text-align: center;
+  padding: 4px 2.5px;
+}
+
+.detail-btn,
+.buy-btn {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  border-radius: 1.4em;
+  font-weight: 600;
+  font-size: 0.85em;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.detail-btn {
+  background: linear-gradient(to right, #4a90e2, #357ae8);
+}
+
+.buy-btn {
+  background: linear-gradient(to right, #1dd1a1, #10ac84);
+}
+
+.detail-btn:hover {
+  background: #285de0;
+  transform: scale(1.05);
+}
+
+.buy-btn:hover {
+  background: #0f9d75;
+  transform: scale(1.05);
+}
+
+/* ===================== ヘッダー ===================== */
+header.main-header {
+  text-align: center;
+  padding: 2.3em 0 1.3em 0;
+  margin-bottom: 2.4em;
+  background: linear-gradient(90deg, #4266be 0%, #6bc1d1 100%);
+  color: #fff;
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 2px 20px 0 #bbc6ea40;
+}
+
+.main-header h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0 0 0.5em 0;
+  text-shadow: 0 2px 10px #35486e55;
+}
+
+.main-header nav {
+  display: flex;
+  justify-content: center;
+  gap: 2.1em;
+  margin-top: 0.7em;
+}
+
+.main-header nav a {
+  color: #fff;
+  background: rgba(255,255,255,0.10);
+  padding: 0.47em 1.3em;
+  border-radius: 9px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s, color 0.2s;
+}
+
+.main-header nav a:hover {
+  background: #fff;
+  color: #2955b7;
+  border: 1px solid #cbe3f8;
+}
+
+/* ===================== 検索ボックス ===================== */
+.search-box {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+#searchInput {
+  width: 70%;
+  max-width: 400px;
+  padding: 0.6em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+}
+
+/* ===================== 絞り込みボタン ===================== */
+#filterButton,#toggleFilter{
+  background-color: #007bff;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  text-align: center;
+  width: fit-content;
+  padding: 10px 30px;
+  margin: 15px auto 0 auto;
+  display: block;
+}
+
+#filterButton:hover {
+  background-color: #0056b3;
+}
+
+/* ===================== フィルター ===================== */
+.filter-container {
+    display: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+
+}
+.filter-container.open {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  margin: 20px auto;
+  max-width: 700px;
+  transition: max-height 0.4s ease;
+  flex-direction: column;
+  gap: 1.3em;
+  display:block;
+  opacity: 1;
+  transform: translateY(0);
+
+}
+
+.filter-container label {
+  font-weight: 500;
+  font-size: 0.95em;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.filter-container fieldset {
+  border: 1px solid #d6e3f3;
+  border-radius: 10px;
+  padding: 1em;
+  background: #f5faff;
+}
+
+.filter-container legend {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #2955b7;
+  padding: 0 5px;
+}
+
+.filter-container input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #007bff, #66bfff);
+  border-radius: 5px;
+  outline: none;
+}
+
+.filter-container input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.filter-container input[type="number"],
+.filter-container input[type="range"] {
+  flex: 1;
+}
+
+.filter-container input[type="number"] {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 80px;
+  font-size: 0.95em;
+}
+
+.brandCheckbox {
+  margin-right: 0.3em;
+}
+
+
+/* ===================== テーブル ===================== */
+.shoes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7em;
+}
+
+.shoes-table th,
+.shoes-table td {
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.shoes-table tbody tr:nth-child(even) {
+  background: #f4f8fc;
+}
+
+.shoes-table tbody tr:nth-child(odd) {
+  background: #cacaf4;
+}
+
+.shoe-table-img {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ===================== スマホ用 ===================== */
+@media (max-width: 768px) {
+  .shoes-table,
+  .shoes-table thead,
+  .shoes-table tbody,
+  .shoes-table th,
+  .shoes-table td,
+  .shoes-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .shoes-table tr {
+    margin-bottom: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .shoes-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .shoes-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .shoes-table td {
+    flex: 2;
+    text-align: right;
+  }
+
+  .detail-btn,
+  .buy-btn {
+    font-size: 0.9em;
+    padding: 0.6em 1.2em;
+    border-radius: 1.5em;
+    margin-top: 0.5em;
+    display: inline-block;
+  }
+
+  .main-header h1 {
+    font-size: 1.3em;
+  }
+
+  .intro p {
+    font-size: 0.95em;
+    line-height: 1.5;
+  }
+
+  .main-header nav a {
+    font-size: 0.85em;
+    padding: 0.3em 0.9em;
+  }
+
+  .filter-container input[type="range"],
+  .filter-container input[type="number"] {
+    width: 100%;
+  }
+}

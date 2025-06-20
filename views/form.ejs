@@ -51,7 +51,7 @@
   <p id="voteCountText"></p>
 </div>
 
-<body data-shoe="pegasus41">
+
   <div class="container">
     <h1>Pegasus 41 の評価</h1>
     <form id="ratingForm">
@@ -174,7 +174,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const snapshot = await getDocs(collection(db, 'ratings'));
+  const snapshot = await getDocs(collection(db, 'ratings_pegasus41'));
   const total = Array(10).fill(0);
   let count = 0;
 

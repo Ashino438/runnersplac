@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <h1>Pegasus 41 の評価結果</h1>
-    <canvas id="ratingChart" width="200" height="200"></canvas>
+    <canvas id="ratingChart" width="300" height="300"></canvas>
     <div class="recent-comments">
   <h2>🗣️ 最近のコメント</h2>
   <% if (recentComments.length > 0) { %>
@@ -82,10 +82,12 @@
   <p class="fade-up">総合的に見て、Nike Air Zoom Pegasus 41はジョグ用途における理想的なバランス型シューズだ。特にクッション性、安定性、履き心地、耐久性での高評価が光り、日々のランニングを快適に支えてくれる。スピードを求めるシーンではやや控えめな性能だが、その分初心者から上級者まで幅広い層に対応できる懐の深さがある。ランナーにとって一足は持っておきたい、そんな頼れる存在。それがこのペガサス41である。</p>
 </div>
   </div>
-  <div class="fixed-footer">
-    🛍️ このシューズはこちらから購入 → <a href="https://amzn.to/438Aq2L" target="_blank">Amazon</a>
-  </div>
-
+   <div class="fixed-footer">
+  <div class="shop-button-group">
+  <button class="shop-button1" onclick="window.open('https://amzn.to/3SkETt0')">Amazonで見る</button>
+  <button class="shop-button2" onclick="window.open('https://hb.afl.rakuten.co.jp/hgc/44a0fcda.60c3ac99.44a0fcdb.a0b32837/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B941%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9')" >
+  楽天で見る</button>
+</div>
 
   <script>
     const myRatings = <%- JSON.stringify(myRatings) %>;
@@ -119,7 +121,6 @@
         ]
       },
       options: {
-        responsive: true,
         scales: {
           r: {
             min: 0,

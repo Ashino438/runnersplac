@@ -6,6 +6,7 @@ document.getElementById('ratingForm').addEventListener('submit', async function 
   
     const formData = new FormData(e.target);
     const ratings = [];
+    const COLLECTION_NAME="ratings_vomero18"
   
     for (let i = 0; i < 10; i++) {
       const val = formData.get(`category${i}`);
@@ -32,7 +33,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const snapshot = await getDocs(collection(db, 'ratings'));
+const snapshot = await getDocs(collection(db, COLLECTION_NAME));
 
 let total = Array(10).fill(0);
 let count = 0;
@@ -50,17 +51,18 @@ snapshot.forEach(doc => {
 const avgRatings = total.map(t => +(t / count).toFixed(2));
 
 // あとは avgRatings を Chart.js に渡して表示すればOK！
-
+console.log("form.js開始");
   
     try {
-      const res = await fetch('/form/submit', {
+      const res = await fetch('/form_vomero18/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+     
   
       if (res.ok) {
-        window.location.href = '/result'; // 結果ページへリダイレクト
+        window.location.href = '/result_vomero18'; // 結果ページへリダイレクト
       } else {
         alert('送信に失敗しました');
       }
@@ -69,4 +71,7 @@ const avgRatings = total.map(t => +(t / count).toFixed(2));
       alert('エラーが発生しました');
     }
   });
+console.log("form.js動いたよ"); // ← ← ← ← ← この行を**一番最後に置く！**
+  
+
   

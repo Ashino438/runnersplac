@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Nike Vomero 18のレビューと評価｜Runnersplac</title>
+  <meta name="description" content="Nike Vomero 18のクッション性・安定性・耐久性を中心にレビューとユーザー投票。信頼性ある長距離ランナー向け評価サイト。">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+</head>
+<body data-shoe="vomero18">
+  <div class="top-header">
+  <h1><span class="highlight">Nike Air Zoom Vomero 18 レビュー＆ユーザー評価</span></h1>
+  <p><span class="highlight">厚底×しっかり系の王道，クッションと安定感を両立した一足</span></p>
+  <div class="top-image">
+    <img src="/images/top_1.png" alt="ヴォメロ18" style="max-width: 500px; width: 90%; display: block; margin: 1.5rem auto 0;">
+  </div>
+</div>
+
+
+  <div class="return-home">
+    <a href="/home">🏠 ホームへ戻る</a>
+  </div>
+
+  <div class="site-intro" style="margin: 2rem auto; max-width: 800px; text-align: center; line-height: 1.6;">
+  <h2 style="font-size: 1.3rem; margin-bottom: 1rem;">🏃‍♂️ Runnersplacとは？</h2>
+  <p>
+    Runnersplacは，市民ランナーによる市民ランナーのための<br>
+    <strong>ランニングシューズ評価サイト</strong>です。<br><br>
+    「スペックやレビューは見たけど，結局どう感じるのかが知りたい…」<br>
+    そんな声から，<strong>実際に走った人たちの“感覚ベース”の投票評価</strong>を採用しました。
+  </p>
+  
+  <p>
+    クッション性・安定性・軽さなど，<strong>10項目を5段階で評価</strong>し，<br>
+    レーダーチャートで「感覚の違い」も見える化。<br>
+    コメント投稿機能や，ホストの解説レビューも掲載中です。
+  </p>
+  <p>
+    1足の評価が，誰かの1足選びを助ける。<br>
+    そんな場所を目指して日々アップデートしています。
+  </p>
+</div>
+
+
+
+<div class="community-chart-container">
+  <h2>みんなの評価</h2>
+  <canvas id="communityRadarChart" ></canvas>
+  <p id="voteCountText"></p>
+</div>
+
+
+  <div class="container">
+    <h1>vomero18 の評価</h1>
+    <form id="ratingForm">
+      <div class="grid">
+        <% const categories = [
+          "クッション性", "安定性", "軽さ", "コスパ", "履き心地（フィット感）",
+          "デザイン", "通気性", "スピード性能", "グリップ", "耐久性"
+        ]; %>
+
+        <% categories.forEach((cat, index) => { %>
+          <div class="category">
+            <label><%= cat %></label>
+            <div class="bar-group">
+              <% for(let i=1; i<=5; i++) { %>
+                <input type="radio" name="category<%= index %>" id="cat<%= index %>_<%= i %>" value="<%= i %>" required>
+                <label for="cat<%= index %>_<%= i %>"><%= i %></label>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+
+      <label for="comment">レビューコメント（任意）:</label>
+      <textarea name="comment" id="comment" rows="4" placeholder="例：反発が気持ちよくてテンポ走に最高！"></textarea>
+
+      <button type="submit">送信する</button>
+    </form>
+
+    <div class="my-evaluation" id="myEvaluation" style="display: none;">
+      <h2>あなたの評価</h2>
+      <ul id="myRatingList"></ul>
+      <p><strong>コメント:</strong> <span id="myComment"></span></p>
+    </div>
+
+    <div class="host-commentary" >
+      <h2 class="fade-up">ホストの評価と解説</h2>
+      <div class="host-chart">
+        <canvas id="hostChart"></canvas>
+      </div>
+    <div class="host-commentary">
+  <div class="host-commentary">
+  <h2 class="fade-up">ホストの評価と解説</h2>
+  <div class="host-chart">
+    <canvas id="hostChart"></canvas>
+  </div>
+  <h3 class="fade-up"><strong>1. クッション性</strong></h3> <p class="fade-up"> ナイキ Vomero 18のクッション性は、数あるランニングシューズの中でもとくに「安心感」と「快適さ」が際立っている印象だ。ヒール部46mm、前足部36mmというシリーズ最厚のミッドソールには、上層にZoomXフォーム、下層にReactXフォームという二層構造が採用されている。この組み合わせが、「沈み込みの気持ちよさ」と「地面からの突き上げを防ぐ安定感」を絶妙なバランスで両立している。
+実際に履いてみると、最初に感じるのは「包み込まれるような柔らかさ」だと言われている。特にかかとから着地するタイプのランナーには、その沈み込みとともに優しく衝撃を吸収してくれる感じが伝わってくる。とはいえ、足が沈み込みすぎてフワフワ不安になるような感覚はなく、着地後すぐに適度な反発で自然に前に足が出る。ジョグやLSD（ロングスローディスタンス）でゆったり走るときは、「何も考えずにずっと走り続けられる」といった声も多い。
+</p><p>
+ZoomXフォームの“跳ねるような反発感”は、このモデルではそこまで強調されていない。前作やレーシングモデルほど“バインッ”とした弾み方は感じにくく、その分だけ足元が安定する作りになっている。逆に「速いペースだと、クッションの沈みから戻りまでにワンテンポ遅れがある」とか「ペースアップしたときにやや重く感じる」という意見もちらほら。なので、スピードを求める人よりは、普段のジョグや疲労抜き、長めのリラックスランで“足を守りたい”ランナーに合っている。
+</p>
+「膝や腰の痛みを感じやすい人」「怪我明けで慎重に距離を踏みたい人」にとっては特に恩恵が大きい。実際、「脚が重くなりにくい」「着地のショックがすごく和らぐ」といったレビューも目立っている。公式にはReactXフォームで従来比13％エネルギーリターン向上と発表されているし、体感としてもミッドソール全体で“気持ちよく沈んで、ちゃんと戻る”感覚を得られる。
+</p><p>
+総じて、Vomero 18のクッション性は「厚み・柔らかさ・安心感」が強く、特にゆっくり長く走るジョグやリカバリーにベストな1足。沈み込みすぎずにきちんと戻るから、どのレベルのランナーにもおすすめしやすいモデルとして高く評価されている。
+
+</p>
+  <h3 class="fade-up"><strong>2. 安定性 – 4.6/5</strong></h3>
+  <p class="fade-up">厚底なのに不思議なくらいブレない。ナイキって昔は安定性微妙なイメージあったけど、このVomero 18はむしろどっしりしてて、初めて履いたとき「うわ、安定感えぐっ」って思った。かかとのパッドもガッチリしてて、着地のときに足がグラつく感覚がほぼない。広めのアウトソールが効いてるのか、横ブレしそうな場面でも安心して走れるし、長い距離を走ってもフォームが崩れにくいのが嬉しい。重心移動もスムーズで、なんかこう“勝手に前に進む感”がある。足が勝手に転がっていくような、そんな自然さ。アッパーのフィット感も絶妙で、走ってる途中に靴ひもを締め直したくなることがなかったのも、地味にありがたかったな。</p>
+
+  <h3 class="fade-up"><strong>3. 軽さ – 3.0/5</strong></h3>
+  <p class="fade-up">正直に言うと、最初に持ったとき「重っ！」って思った。でも実際に走ってみると、見た目よりは軽く感じる。ZoomXとReactXのミッドソールがスムーズに転がってくれるからか、足がもたつくってことは意外とないんだよね。ただ、ペース上げてくるとやっぱり重さが響く。1km4分30秒切ってくると、クッションが沈んで反応がちょっと鈍くなるし、「もっと軽かったらなぁ…」って気持ちになる。でもまあ、ジョグ専用と割り切れば全然アリ。逆にこの重さが“脚の着地を丁寧にする感覚”をくれることもあるし、リカバリー目的での使用ならむしろアリ寄りのアリって感じ。</p>
+
+  <h3 class="fade-up"><strong>4. コスパ – 4.6/5</strong></h3>
+  <p class="fade-up">ZoomX搭載でこの価格は、ぶっちゃけナイキ太っ腹すぎない？ってなる。最近のランシューって2万超え当たり前になってる中で、16,500円でこのクオリティは嬉しい。機能もデザインもちゃんとしてて、しかも耐久性もあるとなると、これは驚きのコスパ。走ってよし、歩いてよし、普段履きにもよしってなると、ほんとに毎日使えるやつ。他のブランドのハイエンドモデルと比べても遜色ないし、むしろ「この値段でこの性能なら文句ないでしょ」って思う。日常でもランでも活躍するし、「最初の一足」にも「2足目のジョグ用」にも勧められる万能タイプ。</p>
+
+  <h3 class="fade-up"><strong>5. 履き心地 – 4.6/5</strong></h3>
+  <p class="fade-up">足入れた瞬間の「ふかっ…」って感触が気持ちよすぎる。ZoomXの柔らかさに、タンや履き口の厚めパッドが組み合わさって、まるで枕みたいな感触。履き慣らしなんていらないし、いきなり長時間履いても靴擦れの心配もまったくなかった。アッパーはメッシュなんだけど、伸縮性あって足を柔らかく包んでくれる感じ。しかもかかとのホールドが抜群に良くて、走っていてもズレる感じがなく安心できる。ナイキって幅狭めの印象あったけど、これはちょいゆったり目で足指がちゃんと動かせる余裕があるのも好印象。幅広・甲高の人でも「ナイキにしては合うかも」ってなると思う。</p>
+
+  <h3 class="fade-up"><strong>6. デザイン – 4.2/5</strong></h3>
+  <p class="fade-up">厚底なのに意外とスッキリした見た目で、街中でも浮かないデザインが好印象。カラー展開も豊富で、派手すぎない色味が多いから、普段使いにも合わせやすい。ミッドソールに刻まれたZOOMXのロゴも存在感あるし、ナイキらしいスポーティーさはちゃんとあるけど、やりすぎてないのがちょうどいい感じ。特に最近のボメロは以前よりもファッション寄りの要素が増えてて、シューズ単体で見ても“いけてる感”がある。ランニングの行き帰りにもそのまま履いていけるし、1足でいろんなシーンをカバーできるのがうれしい。</p>
+
+  <h3 class="fade-up"><strong>7. 通気性 – 3.2/5</strong></h3>
+  <p class="fade-up">Vomero 18の通気性は、可もなく不可もなくといったところ。エンジニアードメッシュのアッパーはそれなりに通気性を持っていて、走っていて息苦しさを感じるほどではない。でも、タンや履き口のパッドがしっかり厚めに作られているぶん、熱がこもりやすく、特に夏場のロングジョグでは蒸れを感じるシーンもあった。通気に特化したシューズと比べるとやや劣る印象。ただ、そのぶん冬場は暖かく、寒さを感じにくいのはメリット。これ一足でオールシーズンをカバーするには少し工夫が必要だけど、厚めのソックスで調整したり、夏は速乾性の高い薄手のソックスを合わせるなどである程度の対応はできる。ちなみに、走行中に「暑い！」とストレスになるレベルではないので、基本的な快適さはちゃんと担保されている。走行距離やペースが長時間・長距離になればなるほど気になるポイントではあるけど、日常のジョグやリカバリーランの範囲では致命的な欠点にはならない。全体としては、通気性“特化”ではないが“実用上困らない”というバランスに落ち着いている。</p>
+
+  <h3 class="fade-up"><strong>8. スピード性能 – 3.2/5</strong></h3>
+  <p class="fade-up">Vomero 18にスピードを求めすぎるとちょっと拍子抜けするかもしれない。まず重さがネックで、テンポ走やインターバルのようなスピード練習をすると、シューズが少しもたつく感覚がある。さらに、反発もそこまで強くないので、バネのように弾き返してくれるタイプのシューズとは違って、自力で前に進む必要がある。それでも、「遅い」わけではないんだ。前足部のロッカー構造が効いていて、自然な体重移動ができるから、一定ペースを刻むにはちょうどいい。特にLSDやリカバリーランで、無理なく長時間走りたいときには最高の相棒になる。実際、1km6分ペースで60分以上走っても疲労感が少なく、「走った」という満足感は残る。この“自然なテンポ維持力”がスピード性能の本質で、タイム狙いのシューズじゃないけど、気持ちよく一定ペースで走りたい人には合ってる。派手さはないけど、安定した走りを支えてくれる、そんな“縁の下の力持ち”みたいな存在だ。</p>
+
+  <h3 class="fade-up"><strong>9. グリップ – 4.2/5</strong></h3>
+  <p class="fade-up">グリップに関しては文句なしに高評価。アウトソールのパターンと素材がかなりしっかりしていて、乾いたアスファルトや公園の遊歩道、坂道なんかでも安心して踏み込める。地面に吸い付くようなグリップ感というよりは、ズルっといかない安定感って感じ。雨の日に使っても大きな不安はなかったけど、濡れたタイルやマンホールの上ではちょっと滑ることもあったから、そこは注意。特に街中を走る人は、濡れた白線や鉄板にだけ気をつければOK。それでも全体的なグリップ力は高く、走っていて「怖いな」と思うことはまずない。カーブでも足元がグラつかず、下り坂でもスピードを出しすぎないようコントロールできるし、アップダウンの多いコースにも対応できる柔軟性がある。しかもラバー素材が厚めなので、耐久性も高くて、長くグリップ力をキープしてくれる。とにかく「信頼して足を預けられる」っていう安心感が大きい。これがあると無意識にフォームも安定してくる気がする。</p>
+
+  <h3 class="fade-up"><strong>10. 耐久性 – 4.4/5</strong></h3>
+  <p class="fade-up">Vomero 18は長く使えるシューズを探している人にはかなりおすすめ。アウトソールのラバーは硬めでしっかりしてるし、摩耗しやすい箇所にもきちんと補強が入っている。実際に走行距離が300kmを超えてもソールの削れは最小限で、まだまだいけるって思えるタフさがある。ミッドソールのZoomXも、上部だけに使われていることで耐久性に配慮されていて、クッションのヘタリが抑えられている感じ。ReactXとの二層構造が上手く効いていて、長期間履いても“反発が死んだ感”は出にくい。アッパーも裂けにくい素材で、強く締めすぎたりしてもストレスはあまり感じないし、ほつれも今のところ出てない。タンや履き口のパッドもヘタリにくい印象で、毎日使っても長く持ちそう。ハードユースする人でも500〜800kmは使えるんじゃないかなって期待してる。コスパのところでも書いたけど、「毎日履けるタフなやつ」って、結局いちばん信頼できる。 </p>
+
+  <h3 class="fade-up"><strong>合計スコア: 39.6/50（平均3.96/5）</strong></h3>
+  <p class="fade-up">総合的に見て、Nike Vomero 18は安定感・耐久性・クッション性が光る一足。特にジョグやロング走、リカバリーを重視する人には理想的なバランスで、日々のランをしっかり支えてくれる存在。万人受けしやすいフィーリングで、2足目や普段履き用途にもおすすめ。逆にレースやスピード系を求める人にはやや重さが気になるかもしれないけど、安心して長く付き合える信頼感がこのシューズの最大の武器だと思う。</p>
+</div>
+<div class="instagram-banner">
+    📷 評価の裏話や動画レビューは <a href="https://www.instagram.com/25553runner" target="_blank">Instagramでチェック</a>
+  </div>
+
+    </div>
+  </div>
+
+
+  <div class="fixed-footer">
+  <div class="shop-button-group">
+  <button class="shop-button1" onclick="window.open('https://amzn.to/3SkETt0')">Amazonで見る</button>
+  <button class="shop-button2" onclick="window.open('https://hb.afl.rakuten.co.jp/hgc/44a0fcda.60c3ac99.44a0fcdb.a0b32837/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B941%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9')" >
+  楽天で見る</button>
+</div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+  import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+    authDomain: "mystlide.firebaseapp.com",
+    projectId: "mystlide",
+    storageBucket: "mystlide.firebasestorage.app",
+    messagingSenderId: "823773802251",
+    appId: "1:823d531f428f02f463fc0e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const collectionname="ratings_vomero18"
+
+  const snapshot = await getDocs(collection(db, collectionname));
+  const total = Array(10).fill(0);
+  let count = 0;
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    if (data.ratings) {
+      data.ratings.forEach((val, i) => {
+        total[i] += val;
+      });
+      count++;
+    }
+  });
+
+  const avgRatings = total.map(x => +(x / count).toFixed(2));
+  document.getElementById('voteCountText').textContent = `${count}人が評価しました`;
+
+  const ctx = document.getElementById('communityRadarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['クッション', '安定性', '軽さ', 'コスパ', '履き心地', 'デザイン', '通気性', 'スピード性能', 'グリップ', '耐久性'],
+      datasets: [{
+        label: 'みんなの平均評価',
+        data: avgRatings,
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          suggestedMin: 0,
+          suggestedMax: 5,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      }
+    }
+  });
+</script>
+
+
+
+  <script>
+ 
+
+    // ホストのレーダーチャート描画
+    const ctx = document.getElementById('hostChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: [
+          "クッション性", "安定性", "軽さ", "コスパ", "履き心地（フィット感）",
+          "デザイン", "通気性", "スピード性能", "グリップ", "耐久性"
+        ],
+        datasets: [{
+          label: 'ホスト評価',
+          data: [4, 4.6, 3, 4.6, 4.6, 4.2, 3.2, 3.2, 4.2, 4.4],
+
+          backgroundColor: 'rgba(46, 204, 113, 0.2)',
+          borderColor: '#2ecc71',
+          pointBackgroundColor: '#2ecc71'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            min: 0,
+            max: 5,
+            ticks: {
+              stepSize: 1
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <script>
+    document.getElementById('ratingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const ratingList = document.getElementById('myRatingList');
+      const comment = formData.get('comment');
+
+      ratingList.innerHTML = '';
+
+      <% categories.forEach((cat, index) => { %>
+  const val<%= index %> = formData.get('category<%= index %>');
+  const li<%= index %> = document.createElement('li');
+  li<%= index %>.textContent = '<%= cat %>: ' + val<%= index %> + ' 点';
+  ratingList.appendChild(li<%= index %>);
+<% }); %>
+
+      document.getElementById('myComment').textContent = comment || '（コメントなし）';
+      document.getElementById('myEvaluation').style.display = 'block';
+    });
+  
+ document.addEventListener('DOMContentLoaded', () => {
+  const fadeElements = document.querySelectorAll('.fade-up');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.style.transitionDelay = `${i * 0.15}s`; // ← 順番ごとに遅らせる
+        el.classList.add('visible');
+        observer.unobserve(el); // 一度だけ発動
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  fadeElements.forEach(el => observer.observe(el));
+});
+ 
+
+
+
+
+  </script>
+    <script type="module" src="/js/form_vomero18.js"></script>
+</body>
+</html>

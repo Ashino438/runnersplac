@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ランニングシューズ評価サイト｜みんなのおすすめ比較</title>
+  <meta name="description" content="最新ランニングシューズのスペック・用途・価格・総合評価を一覧で比較できるサイト。実際のユーザー評価も掲載。">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- OGPやfaviconもお好みで追加 -->
+  <link rel="stylesheet" href="/css/home.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <h1>runnersplac-db</h1>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/about">サイトについて</a>
+      <a href="https://www.instagram.com/25553runner" >Instagram</a>
+  </div></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>このサイトは、実際に走るみんなの「リアルな評価」と管理人のレビューを集めて、  
+ランニングシューズ選びを“データと感想”で徹底サポートする比較サイトです。  
+クッションや安定性、軽さなど各項目のスコアや詳細レビューを一覧でチェックでき、  
+自分に合う1足をじっくり選べます。
+
+現在，投票コメント機能実装中です！少々お待ち下さい．．．
+</p>
+    </section>
+    <section class="search-box">
+  <input type="text" id="searchInput" placeholder="シューズ名で検索" />
+</section>
+<button id="toggleFilter" style="margin: 10px 0;">▼ 絞り込み条件を表示</button>
+
+<div class="filter-container">
+  
+
+  <!-- 重さ -->
+
+  <label >
+    min:
+<input type="range" id="weightMin" min="100" max="400" step="5" value="100"><span id="weightMinValue"></span>
+
+  </label>
+  <br>
+  <label >
+    max:
+  <input type="range" id="weightMax" min="100" max="400" step="5" value="400"><span id="weightMaxValue"></span>
+  </label>
+<p id="weightRangeDisplay">重さ: --- g〜 --- g</p>
+
+
+
+
+
+  <!-- 価格 -->
+  
+<label>
+  最小価格: 
+  <input type="range" id="priceMin" min="0" max="40000" step="100" value="0">
+  <span id="priceMinValue">5000円</span>
+</label>
+<br>
+<label>
+  最大価格: 
+  <input type="range" id="priceMax" min="0" max="40000" step="100" value="40000">
+  <span id="priceMaxValue">15000円</span>
+</label>
+<p id="priceRangeDisplay">価格: --- 円〜 --- 円</p>
+
+<label for="dropMin">最小ドロップ（mm）: 
+  <input type="range" id="dropMin" min="0" max="20" step="1" value="0">
+  <span id="dropMinValue">0mm</span>
+</label>
+
+<label for="dropMax">最大ドロップ（mm）: 
+  <input type="range" id="dropMax" min="0" max="20" step="1" value="15">
+  <span id="dropMaxValue">15mm</span>
+</label>
+
+
+  <!-- 性能スコア -->
+  <fieldset>
+    <legend>性能スコアの下限（〇点以上）</legend>
+    <label>クッション性: <input type="number" id="minCushion" min="0" max="5" step="0.5"></label>
+    <label>スピード性能: <input type="number" id="minSpeed" min="0" max="5" step="0.5"></label>
+  
+  <label>安定性: <input type="number" id="minStability" min="0" max="5" step="0.5"></label>
+  <label>コスパ: <input type="number" id="minCost" min="0" max="5" step="0.5"></label>
+  <label>耐久性: <input type="number" id="minDurability" min="0" max="5" step="0.5"></label>
+    <!-- 必要に応じて追加 -->
+  </fieldset>
+
+  <fieldset>
+  <legend>ブランドで絞り込み</legend>
+  <label><input type="checkbox" class="brandCheckbox" value="nike"> NIKE</label>
+  <label><input type="checkbox" class="brandCheckbox" value="asics"> ASICS</label>
+  <label><input type="checkbox" class="brandCheckbox" value="hoka"> HOKA</label>
+  <label><input type="checkbox" class="brandCheckbox" value="puma"> PUMA</label>
+  <label><input type="checkbox" class="brandCheckbox" value="adidas"> ADIDAS</label>
+  <label><input type="checkbox" class="brandCheckbox" value="on"> ON</label>
+  <label><input type="checkbox" class="brandCheckbox" value="newbalance"> NEW BALANCE</label>
+  <label><input type="checkbox" class="brandCheckbox" value="mizuno"> MIZUNO</label>
+</fieldset>
+
+
+  <button id="filterButton">絞り込む</button>
+
+  
+
+</div>
+<div id="filterInfo" style="margin-top:10px; font-size:14px; color:#555;"></div>
+
+
+   
+  <table class="shoes-table">
+  <thead>
+    
+    
+  </thead>
+ <tbody>
+  <% shoes.forEach(function(shoe, i) { %>
+     <% let zebraClass = i % 2 === 0 ? "zebra-a" : "zebra-b"; %>
+    <!-- シューズ名の行 -->
+    <tr class="spacer-row">
+        <td colspan="2" class="spacer-row td"></td>
+    </tr>
+    <tr>
+      <td class="name-cell" colspan="2"><strong><%= shoe.name %></strong></td>
+      
+    </tr>
+    <!-- 画像＋スペック -->
+     <tr >
+      <th class="col-img">画像</th>
+      <th class="col-chart" colspan="2">評価チャート</th>
+      <th class="col-brand">ブランド</th>
+      <th class="col-weight">重さ</th>
+      <th class="col-midsole" colspan="2">ミッドソール</th>
+      <th class="col-drop">ドロップ</th>
+      <th class="col-drop">オフセット</th>
+      <th class="col-purpose" colspan="2">用途</th>
+      <th class="col-price">値段</th>
+      <th class="col-rating">総合評価</th>
+    </tr>
+    <tr >
+      <td class="img-cell" rowspan="3">
+        <img src="<%= shoe.image %>" class="shoe-table-img">
+        <div class="img-actions">
+    <a href="/shoes/<%= shoe.id %>" class="detail-btn" >詳細 ▼</a>
+    <a href="<%= shoe.buyUrl %>" target="_blank" class="buy-btn">購入</a>
+  </div>
+
+  <!-- コメント差し込み用の空divだけ配置 -->
+  <div class="comment-anchor" data-shoe-id="<%= shoe.id %>"></div>
+        </div>
+      </td>
+      <td class="col-chart" rowspan="3"  colspan="2">
+        <canvas id="chart-<%= shoe.id %>" width="30" height="30"></canvas>
+      </td>
+      <td class="col-brand"><%= shoe.brand %></td>
+      <td class="col-weight"><%= shoe.weight %></td>
+      <td class="col-midsole"  colspan="2"><%= shoe.midsole %></td>
+      <td class="col-drop"><%= shoe.drop %></td>
+      <td class="col-offset"><%= shoe.offset %></td>
+      <td class="col-purpose"  colspan="2"><%= shoe.purpose %></td>
+      <td class="col-price"><%= shoe.price %></td>
+      <td class="col-rating"><%= shoe.rating %></td>
+    </tr>
+   <tr >
+      <th class="perf-th">クッション</th>
+      <th class="perf-th">安定性</th>
+      <th class="perf-th">軽さ</th>
+      <th class="perf-th">コスパ</th>
+      <th class="perf-th">履き心地</th>
+      <th class="perf-th">デザイン</th>
+      <th class="perf-th">通気性</th>
+      <th class="perf-th">スピード</th>
+      <th class="perf-th">グリップ</th>
+      <th class="perf-th">耐久性</th>
+    </tr>
+    <tr class="score-row" >
+
+    
+      
+      <td class="perf-td"><%= shoe.chartData[0] %></td>
+      <td class="perf-td"><%= shoe.chartData[1] %></td>
+      <td class="perf-td"><%= shoe.chartData[2] %></td>
+      <td class="perf-td"><%= shoe.chartData[3] %></td>
+      <td class="perf-td"><%= shoe.chartData[4] %></td>
+      <td class="perf-td"><%= shoe.chartData[5] %></td>
+      <td class="perf-td"><%= shoe.chartData[6] %></td>
+      <td class="perf-td"><%= shoe.chartData[7] %></td>
+      <td class="perf-td"><%= shoe.chartData[8] %></td>
+      <td class="perf-td"><%= shoe.chartData[9] %></td>
+    </tr>
+    <% /* ここで空白行や区切り行を入れてもOK */ %>
+  <% }); %>
+  
+</tbody>
+</table>
+
+</main>
+
+
+
+
+<script>
+  window.onload = function () {
+    const shoeList = <%- JSON.stringify(shoes) %>;
+
+    // 検索処理
+    document.getElementById('searchInput').addEventListener('input', function () {
+          
+      const keyword = this.value.toLowerCase();
+      const rows = document.querySelectorAll('.shoes-table tbody > tr');
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const nameCell = row.querySelector('.name-cell');
+
+        if (nameCell) {
+          const shoeName = nameCell.textContent.toLowerCase();
+          const match = shoeName.includes(keyword);
+
+          for (let j = 0; j < 6; j++) {
+            const targetRow = rows[i - 1 + j];
+            if (targetRow) {
+              targetRow.style.display = match ? '' : 'none';
+            }
+          }
+        }
+      }
+    });
+
+    // 絞り込み処理
+ // スライダーラベルの更新
+ 
+function updateSliderLabels() {
+  document.getElementById("priceMinValue").textContent =
+    document.getElementById("priceMin").value + "円";
+  document.getElementById("priceMaxValue").textContent =
+    document.getElementById("priceMax").value + "円";
+  document.getElementById("weightMinValue").textContent =
+    document.getElementById("weightMin").value + "g";
+  document.getElementById("weightMaxValue").textContent =
+    document.getElementById("weightMax").value + "g";
+}
+function updateDropLabels() {
+  document.getElementById("dropMinValue").textContent =
+    document.getElementById("dropMin").value + "mm";
+  document.getElementById("dropMaxValue").textContent =
+    document.getElementById("dropMax").value + "mm";
+}
+function updateRangeDisplays() {
+  const priceMin = document.getElementById("priceMin").value;
+  const priceMax = document.getElementById("priceMax").value;
+  const weightMin = document.getElementById("weightMin").value;
+  const weightMax = document.getElementById("weightMax").value;
+
+  document.getElementById("priceRangeDisplay").textContent =
+    `価格: ${priceMin}円〜${priceMax}円`;
+  document.getElementById("weightRangeDisplay").textContent =
+    `重さ: ${weightMin}g〜${weightMax}g`;
+}
+
+// 初期表示
+updateSliderLabels();
+updateRangeDisplays();
+updateDropLabels();
+// スライダー変化で表示更新
+["priceMin", "priceMax", "weightMin", "weightMax"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => {
+    updateSliderLabels();
+    updateRangeDisplays();
+  });
+});
+["dropMin", "dropMax"].forEach(id => {
+  document.getElementById(id).addEventListener("input", updateDropLabels);
+});
+
+document.getElementById("filterButton").addEventListener("click", () => {
+  const filters = {
+    weightRange: [
+      parseInt(document.getElementById("weightMin").value),
+      parseInt(document.getElementById("weightMax").value)
+    ],
+    priceRange: [
+      parseInt(document.getElementById("priceMin").value),
+      parseInt(document.getElementById("priceMax").value)
+    ],
+    minScores: {}
+  };
+const dropMin = parseInt(document.getElementById("dropMin")?.value);
+const dropMax = parseInt(document.getElementById("dropMax")?.value);
+filters.dropRange = [isNaN(dropMin) ? 0 : dropMin, isNaN(dropMax) ? 20 : dropMax];
+
+  const getVal = id => parseFloat(document.getElementById(id)?.value);
+  const scoreLabels = {
+    "クッション性": "minCushion",
+    "スピード性能": "minSpeed",
+    "安定性": "minStability",
+    "コスパ": "minCost",
+    "デザイン": "minDesign",
+    "耐久性": "minDurability"
+  };
+  for (const [label, id] of Object.entries(scoreLabels)) {
+    const val = getVal(id);
+    if (!isNaN(val)) filters.minScores[label] = val;
+  }
+
+  // ブランドと厚みの取得
+ filters.selectedBrands = Array.from(document.querySelectorAll('.brandCheckbox:checked'))
+  .map(cb => cb.value.toLowerCase());
+
+  
+
+  // 表示テキスト
+  const infoText = `
+    重さ: ${filters.weightRange[0]}〜${filters.weightRange[1]}g，
+    価格: ${filters.priceRange[0]}〜${filters.priceRange[1]}円，
+    クッション性: ${filters.minScores["クッション性"] ?? "指定なし"}以上，
+    スピード性能: ${filters.minScores["スピード性能"] ?? "指定なし"}以上，
+    安定性: ${filters.minScores["安定性"] ?? "指定なし"}以上，
+    コスパ: ${filters.minScores["コスパ"] ?? "指定なし"}以上，
+    デザイン: ${filters.minScores["デザイン"] ?? "指定なし"}以上，
+    耐久性: ${filters.minScores["耐久性"] ?? "指定なし"}以上
+  `;
+  document.getElementById("filterInfo").textContent = infoText;
+
+  filterShoesDom(filters);
+});
+
+function filterShoesDom(filters) {
+  const rows = Array.from(document.querySelectorAll('.shoes-table tbody > tr'));
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    if (!row.classList.contains('spacer-row')) continue;
+
+    const groupRows = rows.slice(i, i + 6);
+    const dataRow = groupRows[5];
+    const weightCell = groupRows[3]?.querySelector('.col-weight');
+    const priceCell = groupRows[3]?.querySelector('.col-price');
+  const brandCell = groupRows[3]?.querySelector('.col-brand') || groupRows[3]?.querySelector('.col-brand');
+const brand = brandCell?.textContent?.trim().toLowerCase();
+console.log("brand:", brand, "selected:", filters.selectedBrands);
+   
+
+    if (!dataRow || !weightCell || !priceCell) continue;
+
+    const weight = parseInt(weightCell.textContent);
+    const price = parseInt(priceCell.textContent.replace(/[^\d]/g, ''));
+    const tds = dataRow.querySelectorAll('.perf-td');
+    const chartData = Array.from(tds).map(td => parseFloat(td.textContent));
+   let fore = 0, heel = 0;
+const offsetText = groupRows[3]?.querySelector('.col-offset')?.textContent || '';
+
+if (offsetText.includes('/')) {
+  const parts = offsetText.split('/').map(part => parseInt(part.trim()) || 0);
+  if (parts.length === 2) {
+    fore = parts[0];
+    heel = parts[1];
+  }
+}
+
+const drop = Math.abs(heel - fore); 
+   const brandOk = filters.selectedBrands.length === 0 || filters.selectedBrands.includes(brand);
+    const dropOk = drop >= filters.dropRange[0] && drop <= filters.dropRange[1];
+    const meets = brandOk  &&dropOk && checkShoeAgainstFilter(chartData, weight, price, filters);
+
+    groupRows.forEach(tr => {
+      tr.style.display = meets ? '' : 'none';
+    });
+
+    i += 5;
+  }
+}
+
+function checkShoeAgainstFilter(chartData, weight, price, filters) {
+  const { weightRange, priceRange, minScores } = filters;
+
+  if (weight < weightRange[0] || weight > weightRange[1]) return false;
+  if (price < priceRange[0] || price > priceRange[1]) return false;
+
+  const indexMap = {
+    "クッション性": 0,
+    "安定性": 1,
+    "軽さ": 2,
+    "コスパ": 3,
+    "履き心地": 4,
+    "デザイン": 5,
+    "通気性": 6,
+    "スピード性能": 7,
+    "グリップ": 8,
+    "耐久性": 9
+  };
+
+  return Object.entries(minScores).every(([label, min]) => {
+    const idx = indexMap[label];
+    return idx === undefined || chartData[idx] >= min;
+  });
+}
+
+    // チャート描画
+    const charts = {};
+    <% shoes.forEach(function(shoe) { %>
+      var ctxId = 'chart-<%= shoe.id %>';
+      var ctx = document.getElementById(ctxId);
+
+      console.log("canvas ID:", ctxId);
+      console.log("canvas:", ctx);
+      console.log("chartData:", <%- JSON.stringify(shoe.chartData) %>);
+
+      if (ctx) {
+        if (charts[ctxId]) {
+          charts[ctxId].destroy();
+        }
+
+        charts[ctxId] = new Chart(ctx, {
+          type: 'radar',
+          data: {
+            labels: ['ク', '安', '軽', 'コ', '履', 'デ', '通', '速', 'グ', '耐'],
+            datasets: [{
+              label: '評価',
+              data: <%- JSON.stringify(shoe.chartData) %>,
+              fill: true,
+              borderWidth: 1,
+              pointRadius: 1
+            }]
+          },
+          options: {
+            scales: {
+              r: {
+                pointLabels: { font: { size: 9 } },
+                ticks: { display: false },
+                min: 0,
+                max: 5
+              }
+            },
+            plugins: {
+              legend: { display: false }
+            },
+            elements: {
+              line: { borderWidth: 2 }
+            }
+          }
+        });
+      } else {
+        console.warn("canvasが見つからない:", ctxId);
+      }
+    <% }); %>
+
+    // 初期表示
+    renderShoeList(shoeList);
+
+    function renderShoeList(shoes) {
+      const container = document.getElementById("shoeList");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (shoes.length === 0) {
+        container.innerHTML = "<p>該当するシューズが見つかりませんでした。</p>";
+        return;
+      }
+
+      shoes.forEach(shoe => {
+        const div = document.createElement("div");
+        div.className = "shoe-item";
+        div.textContent = `✅ ${shoe.name}（${shoe.weight}g / ¥${shoe.price}）`;
+        container.appendChild(div);
+      });
+    }
+
+    function filterShoes(shoes, filters) {
+      return shoes.filter(shoe => {
+        const { weightRange, priceRange, minScores } = filters;
+        const inWeight = shoe.weight >= weightRange[0] && shoe.weight <= weightRange[1];
+        const inPrice = shoe.price >= priceRange[0] && shoe.price <= priceRange[1];
+
+        const meetsScores = Object.entries(minScores).every(([key, min]) => {
+          const index = getScoreIndex(key);
+          return shoe.chartData[index] >= min;
+        });
+
+        return inWeight && inPrice && meetsScores;
+      });
+    }
+
+    function getScoreIndex(label) {
+      const labels = ["クッション性", "安定性", "軽さ", "コスパ", "履き心地", "デザイン", "通気性", "スピード性能", "グリップ", "耐久性"];
+      return labels.indexOf(label);
+    }
+  };
+  const toggleBtn = document.getElementById("toggleFilter");
+  const filterBox = document.querySelector(".filter-container");
+
+  toggleBtn.addEventListener("click", () => {
+    filterBox.classList.toggle("open");
+    toggleBtn.textContent = filterBox.classList.contains("open")
+      ? "▲ 絞り込み条件を隠す"
+      : "▼ 絞り込み条件を表示";
+  });
+
+
+</script>
+
+ <script src="/js/comment.js"></script> 
+</body>
+</html>
+

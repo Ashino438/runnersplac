@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="<%= shoe.name %> の詳細レビュー。クッション性・グリップ・耐久性を徹底比較。市民ランナーや初心者にもおすすめのランニングシューズ。">
+<meta name="keywords" content="ランニングシューズ, <%= shoe.brand %>, <%= shoe.name %>, レビュー, マラソン, ジョギング, クッション, 安定性, 初心者, 評価">
+<meta property="og:title" content="<%= shoe.name %>｜ランニングシューズ徹底レビュー">
+<meta property="og:description" content="クッション性と安定性に優れた<%= shoe.name %>を徹底解説。実際のユーザー評価付き。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://yourdomain.com/images/<%= shoe.image %>">
+<meta property="og:url" content="https://yourdomain.com/shoes/<%= shoe.id %>">
+
+  <title><%= shoe.name %> | ランニングシューズ詳細</title>
+  <link rel="stylesheet" href="/css/detail.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <div class="detail-page">
+    <h1><%= shoe.name %></h1>
+    <img src="<%= shoe.image %>" class="shoe-detail-img">
+
+    <!-- 差し込み先（JSがここにcomment-sectionを移動） -->
+    <div class="comment-anchor" data-shoe-id="<%= shoe.id %>"></div>
+
+    <p>重さ: <%= shoe.weight %>g</p>
+    <p>ドロップ: <%= shoe.offset %></p>
+    <p>ミッドソール: <%= shoe.midsole %></p>
+    <p>価格: <%= shoe.price %>円</p>
+    <a href="<%= shoe.buyUrl %>" target="_blank" class="buy-btn">▶ 購入ページへ</a>
+<h2>グラフ</h2>
+    <canvas id="chart" width="300" height="300"></canvas>
+  </div>
+    <h2>ホストによる評価</h2>
+<table class="host-eval-table">
+  <thead>
+    <tr>
+      <th class="row">項目</th>
+      <th class="hostevaluation">スコア</th>
+      <th class="hostComment">コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+      const labels = ['クッション性','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード性能','グリップ','耐久性'];
+      for (let i = 0; i < 10; i++) {
+        const label = labels[i];
+        const score = shoe.chartData[i];
+       
+    %>
+      <tr>
+        <td><%= label %></td>
+        <td >
+  <% for (let s = 1; s <= 5; s++) { %>
+    <% if (score >= s) { %>
+      <span class="star full">★</span>
+    <% } else if (score >= s - 0.5) { %>
+      <span class="star half">★</span>
+    <% } else { %>
+      <span class="star empty">☆</span>
+    <% } %>
+  <% } %>
+</td>
+
+        <td ><%= shoe.hostComment ? shoe.hostComment[label] : 'コメントなし' %></td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+
+    
+
+  <!-- 差し込まれるコメントフォームは body の一番下に1個だけ置く！ -->
+  <h2>コメント投稿</h2>
+<form id="comment-form">
+  <label>コメント:</label><br>
+  <textarea id="userComment" rows="4" cols="40" placeholder="このシューズについて感想をどうぞ"></textarea><br><br>
+<div id="userRatings" class="ratings-wrapper">
+ <% labels.forEach((label, index) => { %>
+  <div class="rating-row">
+    <span class="rating-label"><%= label %>:</span>
+    <div class="rating-options">
+      <% for (let score = 1; score <= 5; score++) { %>
+  <input type="radio" id="rating-<%= index %>-<%= score %>" name="rating-<%= index %>" value="<%= score %>">
+  <label for="rating-<%= index %>-<%= score %>" class="star" data-index="<%= index %>" data-score="<%= score %>">★</label>
+<% } %>
+    </div>
+  </div>
+<% }); %>
+
+</div>
+
+  <button type="submit">投稿する</button>
+</form>
+
+<ul id="posted-comments"></ul>
+
+<h2>みんなの平均評価</h2>
+<canvas id="avgChart" width="300" height="300"></canvas>
+
+<footer class="fixed-footer" style="text-align:center; margin-top:2em;">
+  <a href="/" style="margin-right:1em;">Home</a>
+  <a href="https://www.instagram.com/25553runner" target="_blank" rel="noopener">
+    <i class="fab fa-instagram"></i>
+  </a>
+</footer>
+
+
+
+  <!-- グラフとコメントのスクリプト -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('chart');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['クッション', '安定性', '軽さ', 'コスパ', '履き心地', 'デザイン', '通気性', 'スピード', 'グリップ', '耐久性'],
+        datasets: [{
+          label: '<%= shoe.name %>',
+          data: <%= JSON.stringify(shoe.chartData) %>
+        }]
+      },
+      options: {
+  responsive: true,
+  scales: {
+    r: {
+      min: 0,
+      max: 5,
+      ticks: {
+        stepSize: 1,
+        backdropColor: 'transparent'
+      }
+    }
+  }
+}
+
+    });
+
+
+  </script>
+<!-- 古いけど安定して使えるCDN -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+<script src="/firebase/config.js"></script>  <!-- firebaseConfig & 初期化 -->
+<script src="/js/comment.js"></script>       <!-- コメント処理 -->
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-const base64 = process.env.FIREBASE_API_KEY; // ← Renderに設定した環境変数
+const base64 = process.env.FIREBASE_KEY; // ← Renderに設定した環境変数
 const jsonString = Buffer.from(base64, 'base64').toString('utf8');
 const serviceAccount = JSON.parse(jsonString);
 

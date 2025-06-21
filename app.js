@@ -28,7 +28,7 @@ app.use('/review', reviewRouter);
 app.use('/shoes', shoeRoutes);
 app.use("/api/comments", commentRoute);
 app.get('/', (req, res) => {
-  res.redirect('/form');
+  res.redirect('/home');
 });
 
 

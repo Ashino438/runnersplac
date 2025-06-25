@@ -12,7 +12,7 @@ const shoes = [
   price: 20900,
   rating: 3.45,
   brand: "ASICS",
-  chartData: [4.5, 4.5, 1.5, 2.5, 4.0, 3, 4.0, 2.0, 4.5, 4],
+  chartData: [4.5, 5, 1.5, 2.5, 4.0, 3, 4.0, 2.0, 4.5, 4],
   buyUrl: "https://www.amazon.co.jp/s?k=GEL-KAYANO+31&__mk_ja_JP=カタカナ&crid=21ADOJWHI5XHT&sprefix=gel-kayano+31%2Caps%2C373&linkCode=ll2&tag=260407-22&linkId=6776234ef0cfedf68e7c8853f47e74bd&language=ja_JP&ref_=as_li_ss_tl"
 },
 {
@@ -40,9 +40,9 @@ const shoes = [
   offset: "27/35",
   purpose: "ジョグ",
   price: 13200,
-  rating: 3.1,
+  rating: 2.9,
   brand: "ASICS",
-  chartData: [3.5, 3.5, 4.0, 4.0, 3.0, 3, 1.0, 3.0, 3.0, 3],
+  chartData: [3.0, 3.5, 4.0, 5.0, 3.0, 3, 1.0, 2.0, 3.0, 3],
   buyUrl: "https://amzn.to/457fuKQ"
 },
 {
@@ -57,7 +57,7 @@ const shoes = [
   price: 15400,
   rating: 3.8,
   brand: "ASICS",
-  chartData: [5.0, 4.0, 3.5, 4.5, 4.5, 3, 2.5, 4.0, 2.5, 4],
+  chartData: [5.0, 4.0, 3.5, 4.5, 4.5, 3, 4, 3.5, 2.5, 4],
   buyUrl: "https://amzn.to/4dN2Zq0"
 },
 {
@@ -732,7 +732,7 @@ const shoes = [
   price: 19800,
   rating: 3.35,
   brand: "adidas",
-  chartData: [3, 3.5, 2.5, 4.5, 3.5, 3, 3, 2, 3, 4],
+  chartData: [4.5, 3.5, 2.5, 3, 3.5, 3, 3, 2, 3, 4],
   buyUrl: "https://amzn.to/4mPNVMk"
 },
 {
@@ -792,7 +792,7 @@ const shoes = [
   price: 13200,
   rating: 3.75,
   brand: "adidas",
-  chartData: [4, 3, 4.5, 4, 4.5, 3.5, 4, 3.5, 3, 3],
+  chartData: [4, 3, 1.5, 3.5, 4.5, 3.5, 4, 3.5, 3, 3],
   buyUrl: "https://amzn.to/4ktvHyD"
 },
 {
@@ -807,7 +807,7 @@ const shoes = [
   price: 22000,
   rating: 3.57,
   brand: "adidas",
-  chartData: [3.7, 3.2, 3, 4, 4, 3, 3.5, 2.5, 3.5, 4],
+  chartData: [3.7, 3.2, 3, 2, 4, 3, 3.5, 2.5, 3.5, 4],
   buyUrl: "https://amzn.to/43wUvA0"
 },
 {
@@ -1827,7 +1827,7 @@ const shoes = [
     price: 29700,
     rating: 4.0,
     brand: "PUMA",
-    chartData: [4.5, 2.5, 4.5, 4.5, 4.5, 4, 4, 3.5, 3.5, 4],
+    chartData: [4.5, 2.5, 4.5, 4.5, 4.5, 4, 4, 5, 3.5, 4],
     buyUrl: "https://amzn.to/4kVYETQ"
   },
   {
@@ -1842,7 +1842,7 @@ const shoes = [
     price: 35200,
     rating: 3.5,
     brand: "PUMA",
-    chartData: [4, 2.5, 2.5, 5, 4.5, 4, 4, 3, 3, 3.5],
+    chartData: [4, 2.5, 3.5,1.5 , 4.5, 4, 4, 5, 3, 3.5],
     buyUrl: "https://amzn.to/4mJkFqC"
   },
   {
@@ -1887,7 +1887,7 @@ const shoes = [
     price: 18700,
     rating: 3.7,
     brand: "PUMA",
-    chartData: [4.5, 3.5, 2, 2, 4, 2.5, 3, 4, 4, 4],
+    chartData: [4.5, 3.5, 2, 2, 4, 2.5, 3, 2.5, 4, 4],
     buyUrl: "https://amzn.to/4kxyWVO"
   },
   {
@@ -1902,7 +1902,7 @@ const shoes = [
     price: 24200,
     rating: 3.8,
     brand: "PUMA",
-    chartData: [5, 4.5, 2, 1.5, 4.5, 3, 3, 4, 3, 4.5],
+    chartData: [5, 4.5, 2, 1.5, 4.5, 3, 3, 1.5, 3, 4.5],
     buyUrl: "https://amzn.to/3FFEsXq"
   },
   {
@@ -1917,7 +1917,7 @@ const shoes = [
     price: 19800,
     rating: 3.7,
     brand: "PUMA",
-    chartData: [4, 4.5, 2.5, 2.5, 4, 3.5, 3, 4, 4, 4],
+    chartData: [4, 4.5, 2.5, 2.5, 4, 3.5, 3, 3.5, 4, 4],
     buyUrl: "https://amzn.to/4kxyXJm"
   },
   {
@@ -1943,7 +1943,7 @@ const shoes = [
     midsole: "Nitro + ProfoamLite",
     drop: 10,
     offset: "30/20",
-    purpose: "",
+    purpose: "部活用",
     price: 9240,
     rating: 3.4,
     brand: "PUMA",
@@ -1958,7 +1958,7 @@ const shoes = [
     midsole: "Nitro",
     drop: 8,
     offset: "35/27",
-    purpose: "",
+    purpose: "トレイル",
     price: 20900,
     rating: 3.5,
     brand: "PUMA",
@@ -1973,7 +1973,7 @@ const shoes = [
     midsole: "Nitro + ProfoamLite",
     drop: 8,
     offset: "31/23",
-    purpose: "",
+    purpose: "スピード中底",
     price: 15000,
     rating: 3.7,
     brand: "PUMA",
@@ -1988,7 +1988,7 @@ const shoes = [
     midsole: "Nitro",
     drop: 6,
     offset: "22/28",
-    purpose: "",
+    purpose: "うす底",
     price: 16500,
     rating: 3.6,
     brand: "PUMA",
@@ -2003,11 +2003,11 @@ const shoes = [
     midsole: "Softride",
     drop: null,
     offset: "",
-    purpose: "",
+    purpose: "通勤，部活",
     price: 6490,
     rating: 3.2,
     brand: "PUMA",
-    chartData: [2.5, 3, 2.5, 2, 3.5, 3, 3, 5, 3, 3],
+    chartData: [2.5, 3, 2.5, 2, 3.5, 3, 3, 2.5, 3, 3],
     buyUrl: "https://amzn.to/45Jomqb"
   },
   {
@@ -2018,7 +2018,7 @@ const shoes = [
     midsole: "Softride",
     drop: null,
     offset: "",
-    purpose: "",
+    purpose: "通勤，部活",
     price: 8000,
     rating: 3.1,
     brand: "PUMA",
@@ -2033,11 +2033,11 @@ const shoes = [
     midsole: "ProfoamLite",
     drop: null,
     offset: "",
-    purpose: "",
+    purpose: "部活",
     price: 9900,
     rating: 3.6,
     brand: "PUMA",
-    chartData: [2, 3, 3.5, 3.5, 4, 3.5, 3.5, 4.5, 4, 3],
+    chartData: [2, 3, 3.5, 3.5, 4, 3.5, 3.5, 2.5, 4, 3],
     buyUrl: "https://amzn.to/445IK3z"
   }
 
@@ -2048,5 +2048,7 @@ const shoes = [
 
   // ほか追加したいだけ増やしてOK
 ];
+
+console.log(JSON.stringify(shoes))
 
 module.exports = shoes;

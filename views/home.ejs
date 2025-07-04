@@ -10,12 +10,24 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+ 
+  <div id="nickname-popup" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:999;">
+  <p>ニックネームを設定してください：</p>
+  <input type="text" id="nickname-input" placeholder="例：きよし"><br><br>
+  <button id="save-nickname">保存</button>
+</div>
+
   <header class="main-header">
     <h1>runnersplac-db</h1>
     <nav>
       <a href="/">ホーム</a>
       <a href="/about">サイトについて</a>
       <a href="https://www.instagram.com/25553runner" >Instagram</a>
+      <span id="user-info">
+      <button id="login-btn">ログイン</button>
+      <span id="user-name" style="display:none;"></span>
+      <button id="logout-btn" style="display:none;">ログアウト</button>
+    </span>
   </div></a>
     </nav>
   </header>
@@ -27,7 +39,9 @@
 クッションや安定性、軽さなど各項目のスコアや詳細レビューを一覧でチェックでき、  
 自分に合う1足をじっくり選べます。
 
-現在，投票コメント機能実装中です！少々お待ち下さい．．．
+最終的にはランニング系SNSで最大になれるように頑張っていきます！応援おねがいします！
+
+詳細ボタンよりシューズの細かいレビューコメント機能を使用できます．
 </p>
     </section>
     <section class="search-box">
@@ -497,6 +511,63 @@ function checkShoeAgainstFilter(chartData, weight, price, filters) {
   });
 
 
+</script>
+<script type="module">
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+    authDomain: "mystlide.firebaseapp.com",
+    databaseURL: "https://mystlide-default-rtdb.firebaseio.com",
+    projectId: "mystlide",
+    storageBucket: "mystlide.firebasestorage.app",
+    messagingSenderId: "823773802251",
+    appId: "1:823773802251:web:823d531f428f02f463fc0e",
+    measurementId: "G-E2V49FQSMX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const userName = document.getElementById("user-name");
+    let isLoggingIn = false;
+
+    loginBtn?.addEventListener("click", async () => {
+      if (isLoggingIn) return;
+      isLoggingIn = true;
+
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        alert("ログイン失敗：" + err.message);
+        console.error(err);
+      } finally {
+        isLoggingIn = false;
+      }
+    });
+
+    logoutBtn?.addEventListener("click", () => {
+      signOut(auth);
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline";
+        userName.style.display = "inline";
+        userName.textContent = `${user.displayName} さん`;
+      } else {
+        loginBtn.style.display = "inline";
+        logoutBtn.style.display = "none";
+        userName.style.display = "none";
+      }
+    });
+  });
 </script>
 
  <script src="/js/comment.js"></script> 

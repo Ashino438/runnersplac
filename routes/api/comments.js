@@ -4,7 +4,7 @@ const { db } = require('../../firebase/admin'); // ← ✅ 分割代入にする
 ;
 
 router.post("/", async (req, res) => {
-  const { shoeId, comment, ratings } = req.body;
+  const { shoeId, comment, ratings,nickname, } = req.body;
 
   if (!shoeId || !comment || !Array.isArray(ratings)) {
     return res.status(400).json({ error: "データ不正" });
@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
       .add({
         comment,
         ratings,
+        nickname,
         createdAt: new Date().toISOString()
       });
 

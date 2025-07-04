@@ -1,3 +1,15 @@
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { app } from "/firebase/config.js"; // 初期化済みのFirebaseアプリ
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+const auth = getAuth(app);
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("comment-form");
   const commentInput = document.getElementById("userComment");
@@ -36,8 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+       if (!currentUser) {
+    alert("コメント投稿にはログインが必要です！");
+    return;
+  }
+
       const text = commentInput.value.trim();
       if (!text) return alert("コメントを入力してください");
+
+       if (!nickname) {
+    const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+    if (userDoc.exists()) {
+      nickname = userDoc.data().nickname;
+    } else {
+      nickname = "匿名";
+    }
+  }
 
       const ratingArray = getRatingArray();
       console.log(ratingArray);
@@ -48,16 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           comment: text,
           ratings: ratingArray,
-          shoeId: shoeId
-        })
+          shoeId: shoeId,
+           nickname: nickname        })
       });
 
       if (res.ok) {
-        const li = document.createElement("li");
-        li.innerHTML = `★投稿: ${text}（${ratingArray.join(", ")}）`;
-        commentList.prepend(li);
-        commentInput.value = "";
-      } else {
+  /*const li = document.createElement("li");
+  li.textContent = `👤${nickname || "匿名"}：「${text}」 (${ratingArray.join(", ")})`;
+  commentList.prepend(li);
+  commentInput.value = "";*/
+  const li = document.createElement("li");
+li.innerHTML = `
+  <div class="comment-block">
+    👤${c.nickname || "匿名"}：「${c.comment}」 (${c.ratings.join(", ")})
+    <div class="reply-list" data-comment-id="${c.id}"></div>
+    <input type="text" class="reply-input" placeholder="返信を書く">
+    <button class="reply-btn" data-comment-id="${c.id}">返信</button>
+  </div>
+`;
+commentList.appendChild(li);
+
+} else {
         alert("投稿に失敗しました");
       }
     });
@@ -69,11 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       const { comments, avgRatings } = data;
 
-      comments.forEach(c => {
-        const li = document.createElement("li");
-        li.textContent = `「${c.comment}」 (${c.ratings.join(", ")})`;
-        commentList.appendChild(li);
-      });
+     comments.forEach(c => {
+  const li = document.createElement("li");
+  li.textContent = `👤${c.nickname || "匿名"}：「${c.comment}」 (${c.ratings.join(", ")})`;
+  commentList.appendChild(li);
+});
+
 
       const avgCtx = document.getElementById("avgChart");
       new Chart(avgCtx, {
@@ -103,4 +141,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
       });
     });
+});
+
+const db = getFirestore();
+
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      document.getElementById("nickname-popup").style.display = "block";
+
+      document.getElementById("save-nickname").addEventListener("click", async () => {
+        const nickname = document.getElementById("nickname-input").value.trim();
+        if (!nickname) return alert("ニックネームを入力してね");
+
+        await setDoc(docRef, {
+          nickname: nickname,
+          createdAt: new Date()
+        });
+
+        document.getElementById("nickname-popup").style.display = "none";
+        alert("ニックネームを保存しました！");
+      });
+    }
+  }
+});
+
+
+let nickname = null;
+
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if (user) {
+    const db = getFirestore();
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      nickname = userDoc.data().nickname;
+    }
+  }
 });

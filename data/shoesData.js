@@ -33,7 +33,7 @@ const shoes = [
   {
   id: "gelkayano32",
   name: "GEL-KAYANO 32",
-  image: "/images/asics_asics_41.jpg",
+  image: "/images/asics_asics_.41.jpg",
   weight: 300,
   midsole: "FFBLASTPLUS PUREGEL",
   drop: 8,

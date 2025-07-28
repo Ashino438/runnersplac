@@ -12,7 +12,7 @@ const shoes = [
   price: 20900,
   rating: 3.45,
   brand: "ASICS",
-  chartData: [4.5, 5, 1.5, 2.5, 4.0, 2, 4.0, 2.0, 4.5, 4],
+  chartData: [4, 5, 1.5, 1.5, 4.0, 2, 4.0, 2.0, 4.5, 4],
    hostComment: {
     "クッション性": "ミッドソールには新開発の「PureGEL」が採用され，従来比で柔らかく軽量な厚みのあるソフトなクッショニングが実現されている．実際，前作よりも柔らかい印象で「雲のように柔らかいクッション」と評する声もある．そのため長時間のジョギングやLSDでは衝撃が和らぎ，疲労の蓄積を軽減してくれる．ただし，柔らかさゆえに推進力を感じにくく，反発を求める人には物足りないかもしれない．この点で前作30やゲルニンバス26との比較対象となる．快適性は非常に高く，安心感のある走りを提供してくれる．",
     "安定性": "ゲルカヤノシリーズの特徴である「4Dガイダンスシステム」により，高い安定性が確保されている．ソールの接地面積が広く，立っているだけでも安定感があり，走行時も内側への倒れ込みが抑制される．とくにヒールストライク傾向のランナーにとっては大きな安心材料となる．実際，レビューでは「クッション性と安定性が高次元で両立している」と評価されており，フルマラソンの練習にも向いている．スピード感には欠けるが，安全性を重視するなら間違いない選択肢だ．",
@@ -42,7 +42,7 @@ const shoes = [
   price: 22000,
   rating: 3.55,
   brand: "ASICS",
-  chartData: [4.5, 5, 1.5, 2.0, 4.0, 3.5, 4.0, 2.0, 4.5, 5],
+  chartData: [4.5, 5, 1.5, 1.0, 4.0, 3.5, 4.0, 2.0, 4.5, 5],
    
 hostComment : {
     "クッション性": "GEL-KAYANO 32最大の魅力は、その圧倒的なクッション性にあります。ミッドソールには軽量でソフトな「FF BLAST PLUS」フォームを全面に採用し、前足部のスタック高が前作比+2mmの厚底仕様となりました。ヒール部分には新開発の衝撃吸収材「PureGEL」を内蔵し、かかと着地の衝撃を優しく受け止めて足への負担を軽減します。ヒールスタック高40mmの分厚いクッションは、着地の度にまるで高反発マットレスの上を走っているかのような柔らかな感触を提供します。しかも沈み込みすぎない適度な硬さがあり、高い反発力で蹴り出しをしっかりアシストしてくれるバランスの良さも魅力です。結果として長時間のジョグでも脚が守られて疲労が蓄積しにくく、脚への優しさという点で非常に完成度の高いクッショニングと言えます。",
@@ -75,7 +75,7 @@ hostComment : {
   price: 14300,
   rating: 3.15,
   brand: "ASICS",
-  chartData: [3.0, 4.0, 1.5, 4.0, 3.0, 3, 3.0, 2.0, 4.0, 4],
+  chartData: [3.0, 4.0, 1.5, 4.0, 3.0, 2.0, 3.0, 2.0, 5.0, 4],
   buyUrl: "https://www.amazon.co.jp/s?k=GEL-SONOMA８&__mk_ja_JP=カタカナ&crid=2IRH2GDH3ZRHX&sprefix=gel-sonoma8%2Caps%2C329&linkCode=ll2&tag=260407-22&linkId=6507f521a6b415c23218e98f760344a4&language=ja_JP&ref_=as_li_ss_tl"
 },
 {
@@ -90,7 +90,7 @@ hostComment : {
   price: 13200,
   rating: 2.9,
   brand: "ASICS",
-  chartData: [3.0, 3.5, 4.0, 5.0, 3.0, 3, 1.0, 2.0, 3.0, 3],
+  chartData: [3.0, 3.5, 4.0, 5.0, 3.0, 4, 2.0, 2.0, 3.0, 3],
   buyUrl: "https://amzn.to/457fuKQ"
 },
 {
@@ -105,7 +105,7 @@ hostComment : {
   price: 15400,
   rating: 3.8,
   brand: "ASICS",
-  chartData: [5.0, 4.0, 3.5, 4.5, 4.5, 3, 4, 3.5, 2.5, 4],
+  chartData: [5.0, 4.0, 4.0, 4.5, 4.5, 4, 4, 3.5, 2.5, 4],
   buyUrl: "https://amzn.to/4dN2Zq0",
 
   hostComment: {
@@ -133,7 +133,7 @@ hostComment : {
   price: 18700,
   rating: 4.1,
   brand: "ASICS",
-  chartData: [5, 2, 2.5, 4, 3.5, 3.5, 3, 5, 5, 5],
+  chartData: [5, 2, 4.0, 4, 3.5, 3.5, 3, 4.5, 5.0, 5],
   buyUrl: "https://amzn.to/4lebJZ1",
 
   hostComment: {
@@ -264,7 +264,7 @@ hostComment : {
   price: 20900,
   rating: 4.05,
   brand: "ASICS",
-  chartData: [5, 4.5, 2, 3, 5, 3.5, 4, 2, 5, 4.5],
+  chartData: [5, 4.5, 2, 3, 5, 3.5, 4, 1.5, 5, 4.5],
   buyUrl: "https://amzn.to/3Tbjanv"
 },
 {
@@ -339,7 +339,7 @@ hostComment : {
   price: 10890,
   rating: 3.7,
   brand: "ASICS",
-  chartData: [3.5, 4.5, 5, 4.5, 4, 3, 3.5, 2, 3, 5],
+  chartData: [3.5, 4.5, 3, 4.5, 4, 3, 3.5, 2, 3, 5],
   buyUrl: "https://amzn.to/44chAqT"
 },
 {
@@ -474,7 +474,7 @@ hostComment : {
   price: 29700,
   rating: 3.45,
   brand: "NIKE",
-  chartData: [4.5, 2, 2.5, 2, 4, 4, 4.5, 3.5, 3.5, 4],
+  chartData: [4.5, 2.5, 2.5, 2, 4, 5, 4.5, 3.5, 3.5, 4],
   buyUrl: "https://amzn.to/4kWymRy"
 },
 {
@@ -489,7 +489,7 @@ hostComment : {
   price: 22000,
   rating: 3.6,
   brand: "NIKE",
-  chartData: [3.5, 3.5, 3.5, 3.5, 3, 3.5, 5, 2.5, 4, 3],
+  chartData: [3.5, 3.5, 3.5, 3.5, 3, 3.5, 5, 3.5, 4, 3],
   buyUrl: "https://amzn.to/4mMsUlI"
 },
 {
@@ -504,7 +504,7 @@ hostComment : {
   price: 18700,
   rating: 3.7,
   brand: "NIKE",
-  chartData: [4, 3.5, 3.5, 3.5, 4, 3.5, 3.5, 3.5, 4, 4],
+  chartData: [4, 4.5, 3.5, 3.5, 4, 3.5, 3.5, 4, 3.5, 4],
   buyUrl: "https://amzn.to/3ZlTOqJ"
 },
 {
@@ -534,7 +534,7 @@ hostComment : {
   price: 16500,
   rating: 4.0,
   brand: "NIKE",
-  chartData: [3, 4.5, 3, 4, 3, 4, 4, 3, 4, 4.5],
+  chartData: [3, 4.5, 3, 4, 3, 4, 4.5, 4, 4, 4.5],
   buyUrl: "https://amzn.to/45PEhTQ"
 },
 {
@@ -549,7 +549,7 @@ hostComment : {
   price: 16500,
   rating: 3.7,
   brand: "NIKE",
-  chartData: [5, 4, 2, 4, 4.5, 3.5, 3.5, 2, 4, 4],
+  chartData: [5, 4, 2, 4, 4.5, 4.5, 2.5, 2, 4, 4],
   buyUrl: "https://amzn.to/4dP6Gf3"
 },
 {
@@ -699,7 +699,7 @@ hostComment : {
   price: 26730,
   rating: 3.55,
   brand: "NIKE",
-  chartData: [2.5, 2, 5, 2.5, 2, 5, 4, 5, 3.5, 2],
+  chartData: [2.5, 3.5, 5, 2.5, 2, 5, 4, 5, 3.5, 2],
   buyUrl: "https://amzn.to/4jJaFel"
 },
 {
@@ -729,7 +729,7 @@ hostComment : {
   price: 28600,
   rating: 3.72,
   brand: "adidas",
-  chartData: [4.5, 2.5, 4, 3, 3, 3.5, 2, 4.7, 5, 3],
+  chartData: [4.5, 2.5, 4, 3, 3, 4.0, 2, 4.5, 5, 3],
   buyUrl: "https://amzn.to/3Hq2KoH"
 },
 {
@@ -849,7 +849,7 @@ hostComment : {
   price: 15400,
   rating: 3.45,
   brand: "adidas",
-  chartData: [4.2, 5, 3, 2.8, 4.5, 3.5, 4, 2.5, 2.5, 2.5],
+  chartData: [4.2, 5, 3, 2.8, 4.5, 3.5, 4, 2.5, 2.5, 3.5],
   buyUrl: "https://amzn.to/4kSt0GG"
 },
 {
@@ -1057,9 +1057,9 @@ hostComment : {
   offset: "23/31",
   purpose: "オールラウンドなジョグ用",
   price: 15400,
-  rating: 3.3,
+  rating: 3.6,
   brand: "New Balance",
-  chartData: [3.5, 3, 3.5, 3, 3.5, 3, 3, 3, 3, 3.5],
+  chartData: [3.5, 4.5, 3.5, 3.5, 4, 3, 2.5, 3, 3, 3.5],
   buyUrl: "https://amzn.to/443TD5W"
 },
 {
@@ -2171,7 +2171,23 @@ hostComment : {
     brand: "PUMA",
     chartData: [2, 3, 3.5, 3.5, 4, 3.5, 3.5, 2.5, 4, 3],
     buyUrl: "https://amzn.to/445IK3z"
-  }
+  },
+
+  {
+  id: "ghost16",
+  name: "GHOST 16",
+  image: "/images/brooks_ghost_16.jpg",
+  weight: 270,
+  midsole: "DNA Loft v3",
+  drop: 12,
+  offset: "33/39",
+  purpose: "ジョグ・日常トレーニング",
+  price: 17600,
+  rating: 4.2,
+  brand: "Brooks",
+  chartData: [4.5, 4.0, 4.0, 4.0, 4.5, 4.0, 4.0, 3.5, 4.5, 4.5],
+  buyUrl: "https://amzn.to/3H6QFVB"
+}
 
 
 

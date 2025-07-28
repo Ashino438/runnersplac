@@ -12,7 +12,7 @@ const shoes = [
   price: 20900,
   rating: 3.45,
   brand: "ASICS",
-  chartData: [4.5, 5, 1.5, 2.5, 4.0, 3, 4.0, 2.0, 4.5, 4],
+  chartData: [4.5, 5, 1.5, 2.5, 4.0, 2, 4.0, 2.0, 4.5, 4],
    hostComment: {
     "クッション性": "ミッドソールには新開発の「PureGEL」が採用され，従来比で柔らかく軽量な厚みのあるソフトなクッショニングが実現されている．実際，前作よりも柔らかい印象で「雲のように柔らかいクッション」と評する声もある．そのため長時間のジョギングやLSDでは衝撃が和らぎ，疲労の蓄積を軽減してくれる．ただし，柔らかさゆえに推進力を感じにくく，反発を求める人には物足りないかもしれない．この点で前作30やゲルニンバス26との比較対象となる．快適性は非常に高く，安心感のある走りを提供してくれる．",
     "安定性": "ゲルカヤノシリーズの特徴である「4Dガイダンスシステム」により，高い安定性が確保されている．ソールの接地面積が広く，立っているだけでも安定感があり，走行時も内側への倒れ込みが抑制される．とくにヒールストライク傾向のランナーにとっては大きな安心材料となる．実際，レビューでは「クッション性と安定性が高次元で両立している」と評価されており，フルマラソンの練習にも向いている．スピード感には欠けるが，安全性を重視するなら間違いない選択肢だ．",
@@ -2053,6 +2053,21 @@ hostComment : {
     buyUrl: "https://amzn.to/4kxqTIL"
   },
   {
+    id: "velocity_nitro_4",
+    name: "Velocity Nitro 4",
+    image: "/images/puma_puma_40.jpg",
+    weight: 264,
+    midsole: "Nitro",
+    drop: 10,
+    offset: "36/26",
+    purpose: "ジョグ・テンポ",
+    price: 16500,
+    rating: 3.9, 
+    brand: "PUMA",
+    chartData: [4.5, 4, 3.5, 3.5, 4, 3.5, 3, 3.5, 4, 4.5],
+    buyUrl: "https://amzn.to/4kxqTIL"
+  },
+  {
     id: "electrifyNitro3",
     name: "Electrify Nitro 3",
     image: "/images/puma_puma_23.jpg",
@@ -2165,6 +2180,14 @@ hostComment : {
 
   // ほか追加したいだけ増やしてOK
 ];
+
+shoes.forEach(shoe => {
+  const avg = shoe.chartData.reduce((sum, val) => sum + val, 0) / shoe.chartData.length;
+  shoe.rating = Number(avg.toFixed(2));
+});
+
+console.log(shoes.map(shoe => shoe.rating)); // ちゃんと平均が入ってるか確認
+
 
 console.log(JSON.stringify(shoes))
 

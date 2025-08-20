@@ -264,7 +264,7 @@ hostComment : {
   price: 20900,
   rating: 4.05,
   brand: "ASICS",
-  chartData: [5, 4.5, 2, 3, 5, 3.5, 4, 1.5, 5, 4.5],
+  chartData: [5, 3.0, 2, 3, 5, 3.5, 4, 1.5, 5, 4.5],
   buyUrl: "https://amzn.to/3Tbjanv"
 },
 {
@@ -384,7 +384,7 @@ hostComment : {
   price: 16500,
   rating: 3.9,
   brand: "ASICS",
-  chartData: [3.5, 4, 4, 4, 4, 5, 4, 3.5, 4, 4.5],
+  chartData: [3.5, 4, 4, 3, 4, 5, 4, 3, 4, 3],
   buyUrl: "https://amzn.to/3ZlTFUd"
 },
 {
@@ -702,6 +702,87 @@ hostComment : {
   chartData: [2.5, 3.5, 5, 2.5, 2, 5, 4, 5, 3.5, 2],
   buyUrl: "https://amzn.to/4jJaFel"
 },
+
+
+  {
+    id: "vomero-plus",
+    name: "VOMERO PLUS",
+    image: "/images/nike_nike_36.jpg",
+    weight: 266,
+    midsole: "ZoomX Foam",
+    drop: 10,
+    offset: "35/45",
+    purpose: "ジョギング・ロング走・リカバリーラン向け",
+    price: 22000,
+    rating: 4.5,
+    brand: "NIKE",
+    chartData: [5, 3, 3.5, 3.5, 5, 3, 4, 3, 4, 3.5],
+    buyUrl: "https://amzn.to/3UxPjGF"
+  },
+  {
+    id: "vomero-premium",
+    name: "VOMERO PREMIUM",
+    image: "/images/nike_nike_32.jpg",
+    weight: 370,
+    midsole: "ZoomX Foam + Air Zoom units",
+    drop: 10,
+    offset: "45/55",
+    purpose: "リカバリーラン・ジョギング向け",
+    price: 29700,
+    rating: null,
+    brand: "NIKE",
+    chartData: [5, 4, 1, 1, 5, 3.5, 3, 2, 4, 4],
+    buyUrl: "https://amzn.to/4oDLXzx"
+  },
+  {
+    id: "structure26",
+    name: "AIR ZOOM STRUCTURE 26",
+    image: "/images/nike_nike_33.jpg",
+    weight: 310,
+    midsole: "ReactX Foam",
+    drop: 10,
+    offset: "26/36",
+    purpose: "安定志向のデイリートレーナー",
+    price: 16500,
+    rating: 4.2,
+    brand: "NIKE",
+    chartData: [4, 5, 2.5, 4, 2, 3, 2.5, 2.5, 4, 5],
+    buyUrl: "https://amzn.to/41M8tfM"
+  },
+  {
+    id: "vaporfly4",
+    name: "VAPORFLY 4",
+    image: "/images/nike_nike_34.jpg",
+    weight: 168,
+    midsole: "ZoomX + Carbon Plate",
+    drop: 6,
+    offset: "29/35",
+    purpose: "レース全般（5km〜フル）",
+    price: 29700,
+    rating: 4.3,
+    brand: "NIKE",
+    chartData: [4.5, 3, 5, 3, 3, 4, 4, 5, 3, 2.5],
+    buyUrl: "https://amzn.to/3JjlHdS"
+  },
+  
+  {
+    id: "invincible3",
+    name: "INVINCIBLE 35",
+    image: "/images/nike_nike_23.jpg",
+    weight: 282,
+    midsole: "ZoomX Foam",
+    drop: 9,
+    offset: "31/40",
+    purpose: "ジョギング・LSD・ロング走向け",
+    price: 26070,
+    rating: 4.0,
+    brand: "NIKE",
+    chartData: [5, 3.5, 3, 1.5, 4, 3.5, 3.5, 2.5, 3.5, 4],
+    buyUrl: "https://amzn.to/4oEtDq7"
+  },
+
+
+
 {
   id: "evo1",
   name: "evo1",
@@ -1329,7 +1410,22 @@ hostComment : {
   price: 22000,
   rating: 4.0,
   brand: "Mizuno",
-  chartData: [5, 4, 4, 3, 4, 4, 3, 4, 5, 5],
+  chartData: [5, 4, 4, 3, 4, 4, 3, 4, 4, 5],
+  buyUrl: "https://amzn.to/4dQoEgU"
+},
+{
+  id: "neovista2",
+  name: "NEO VISTA2",
+  image: "/images/mizuno_mizuno_30.jpg",
+  weight: 265,
+  midsole: "Mizuno Energy NXT + Glass Fiber Infused Nylon Plate",
+  drop: 8,
+  offset: "37/45",
+  purpose: "クッション＋スピードの万能モデル",
+  price: 22000,
+  rating: 4.0,
+  brand: "Mizuno",
+  chartData: [5, 3.5, 4, 3, 4, 2.5, 3, 4, 5, 5],
   buyUrl: "https://amzn.to/4dQoEgU"
 },
 {
@@ -2019,7 +2115,7 @@ hostComment : {
     price: 24200,
     rating: 3.8,
     brand: "PUMA",
-    chartData: [5, 4.5, 2, 1.5, 4.5, 3, 3, 1.5, 3, 4.5],
+    chartData: [5, 3.5, 2, 1.5, 4.5, 3, 3, 1.5, 3, 4.5],
     buyUrl: "https://amzn.to/3FFEsXq"
   },
   {
@@ -2185,7 +2281,7 @@ hostComment : {
   price: 17600,
   rating: 4.2,
   brand: "Brooks",
-  chartData: [4.5, 4.0, 4.0, 4.0, 4.5, 4.0, 4.0, 3.5, 4.5, 4.5],
+  chartData: [4.5, 4.0, 2.5, 2.5, 4.5, 4.0, 4.0, 3.5, 3.0, 4.5],
   buyUrl: "https://amzn.to/3H6QFVB"
 }
 

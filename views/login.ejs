@@ -1,0 +1,22 @@
+<%- include('partials/header', { current: 'login' }) %>
+
+
+<section class="section">
+  <div class="container" style="display:grid;place-items:center;min-height:48vh">
+    <article class="card" style="max-width:480px;width:100%;padding:20px">
+      <h1 style="margin:0 0 10px">ログイン</h1>
+      <p class="detail-meta">購入候補やプロフィールの保存にはログインが必要だよ。</p>
+
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+        <button id="loginBtn" class="btn brand" type="button">Googleでログイン</button>
+        <a class="btn" href="<%= redirect %>">後で</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="/js/auth.js"></script>
+<script>
+  // ログイン成功後の遷移先
+  window.__afterLoginRedirect = "<%= redirect %>";
+</script>

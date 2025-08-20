@@ -1,0 +1,22 @@
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/css/base.css">
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="/">
+      <img src="/img/logo.svg" alt="Runnersplac">
+      <span>Runnersplac</span>
+      <span class="badge">β</span>
+    </a>
+    <div class="menu">
+      <a href="/" aria-current="<%= current==='home' ? 'page' : 'false' %>">ホーム</a>
+      <a href="/wishlist" aria-current="<%= current==='wishlist' ? 'page' : 'false' %>">購入候補</a>
+      <a href="/about" aria-current="<%= current==='about' ? 'page' : 'false' %>">このサイトについて</a>
+<% if (typeof user !== 'undefined' && user) { %>
+  <span class="badge"><%= user.displayName || user.nickname || 'User' %></span>
+  <a class="btn" href="/logout">ログアウト</a>
+<% } else { %>
+  <a class="btn" href="/login">ログイン</a>
+<% } %>
+    </div>
+  </div>
+</nav>

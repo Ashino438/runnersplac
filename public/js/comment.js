@@ -10,7 +10,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("comment-form");
   const commentInput = document.getElementById("userComment");
   const commentList = document.getElementById("posted-comments");
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   li.textContent = `👤${nickname || "匿名"}：「${text}」 (${ratingArray.join(", ")})`;
   commentList.prepend(li);
   commentInput.value = "";*/
-  const li = document.createElement("li");
+/*  const li = document.createElement("li");
 li.innerHTML = `
   <div class="comment-block">
     👤${c.nickname || "匿名"}：「${c.comment}」 (${c.ratings.join(", ")})
@@ -182,4 +182,113 @@ onAuthStateChanged(auth, async (user) => {
       nickname = userDoc.data().nickname;
     }
   }
-});
+});*/
+
+// public/js/comment.js
+(() => {
+  const root = document.querySelector('.comments[data-shoe-id]') 
+            || document.querySelector('.comment-anchor[data-shoe-id]');
+  const shoeId = root?.dataset.shoeId;
+  if (!shoeId) {
+    console.error('[comment.js] shoeIdが取れない: .comments or .comment-anchor の data-shoe-id を確認して');
+    return;
+  }
+
+  const form  = document.getElementById('comment-form');
+  const list  = document.getElementById('posted-comments');
+  const more  = document.getElementById('more-btn');
+  let nextCursor = null;
+  const labels = ['クッション','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード','グリップ','耐久性'];
+
+  function esc(s){return (s||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[m]));}
+
+  async function loadComments(append=false){
+    try{
+      const url = new URL(`/api/comments/${encodeURIComponent(shoeId)}`, window.location.origin);
+      url.searchParams.set('limit','10');
+      if (nextCursor) url.searchParams.set('cursor', nextCursor);
+      const res = await fetch(url.toString());
+      const data = await res.json().catch(()=> ({}));
+      if (!res.ok) throw new Error(data?.error || `GET ${res.status}`);
+
+      renderAvg(data.avgRatings, data.count);
+      renderList(data.comments || [], append);
+      nextCursor = data.nextCursor || null;
+      if (more) more.style.display = nextCursor ? 'inline-block' : 'none';
+    }catch(e){
+      console.error('[comment.js] loadComments failed:', e);
+      alert('コメント取得に失敗したよ… サーバログも見てみて');
+    }
+  }
+
+  function renderAvg(avg, count){
+    const wrap = document.getElementById('avgWrap');
+    if (!wrap) return;
+    if (!avg || !avg.some(v=>v>0)) { wrap.innerHTML = '<p class="muted">まだ評価がありません</p>'; return; }
+    wrap.innerHTML = '<canvas id="avgChart" width="380" height="380" aria-label="みんなの平均レーダー" role="img"></canvas>';
+    if (!window.Chart) return;
+    new Chart(document.getElementById('avgChart'), {
+      type: 'radar',
+      data: { labels, datasets: [{ label: `みんなの平均（n=${count||0}）`, data: avg, pointRadius: 2, fill: true }] },
+      options: { maintainAspectRatio:false, responsive:true, plugins:{legend:{display:false}},
+        scales:{ r:{ min:0, max:5, ticks:{ stepSize:1, backdropColor:'transparent' } } } }
+    });
+  }
+
+  function renderList(items, append){
+    if (!list) return;
+    if (!append) list.innerHTML = '';
+    items.forEach(d=>{
+      const when = d.createdAt ? new Date(d.createdAt).toLocaleString() : '';
+      const stars = Array.isArray(d.ratings) ? d.ratings.map(v=> '★'.repeat(v)+'☆'.repeat(5-v)).join(' / ') : '';
+      const li = document.createElement('li');
+      li.innerHTML = `<article class="review">
+        <header><span class="nick">${esc(d.nickname||'匿名')}</span><time datetime="${esc(d.createdAt||'')}">${esc(when)}</time></header>
+        <p class="body">${esc(d.comment||'')}</p>
+        <p class="mini-stars">${esc(stars)}</p>
+      </article>`;
+      list.appendChild(li);
+    });
+  }
+
+  form?.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    try{
+      const nickname = document.getElementById('nickname')?.value?.trim() || '';
+      const comment  = document.getElementById('userComment')?.value?.trim() || '';
+      const ratings = [];
+      for(let i=0;i<10;i++){
+        const v = Number((document.querySelector(`input[name="rating-${i}"]:checked`)||{}).value || 0);
+        ratings.push(v);
+      }
+      if (!comment || comment.length < 3) { alert('本文を3文字以上書いてね'); return; }
+      if (ratings.some(v=> v<1 || v>5)) { alert('各項目の★を1〜5で選んでから投稿してね！'); return; }
+
+      const res = await fetch('/api/comments', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ shoeId, comment, ratings, nickname })
+      });
+      const data = await res.json().catch(()=> ({}));
+      if (!res.ok) throw new Error(data?.error || `POST ${res.status}`);
+
+      // reset
+      document.getElementById('userComment').value = '';
+      for(let i=0;i<10;i++){
+        const chk = document.querySelector(`input[name="rating-${i}"]:checked`);
+        if (chk) chk.checked = false;
+      }
+      nextCursor = null;
+      await loadComments(false);
+      const t = document.querySelector('.list-title'); if (t) window.scrollTo({ top: t.offsetTop-80, behavior:'smooth' });
+    }catch(e){
+      console.error('[comment.js] submit failed:', e);
+      alert('投稿に失敗したよ… ' + e.message);
+    }
+  });
+
+  more?.addEventListener('click', ()=> loadComments(true));
+
+  // 初回
+  loadComments();
+})();

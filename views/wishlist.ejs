@@ -1,0 +1,57 @@
+<%- include('partials/header', { current:'wishlist', user }) %>
+
+<section class="section">
+  <div class="container">
+    <h1>購入候補</h1>
+
+    <% if (!items || !items.length) { %>
+      <p>まだ購入候補はないよ．一覧から「購入候補に入れる」を押してみて．</p>
+    <% } else { %>
+      <div class="grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+        <% items.forEach(it => { 
+  const s = it.shoe;
+  const name = s?.name || it.slug || it.id;
+  const link = s ? `/shoes/${s.id || s.slug}` : `/shoes/${it.slug || it.id}`;
+  const img  = s?.image || '/img/placeholder-shoe.jpg';
+%>
+  <article class="card">
+    <div class="card-header">
+      <!-- ここを img / name で出す -->
+      <img class="thumb" src="<%= img %>" alt="<%= name %>">
+      <div style="flex:1">
+        <h3><a href="<%= link %>" class="detail-btn"><%= name %></a></h3>
+        <% if (s) { %>
+          <div class="meta">
+            <span><%= s.brand %></span>
+            <span>重量：<%= s.weight ? s.weight+'g' : '—' %></span>
+            <span>ドロップ：<%= s.drop ?? '—' %>mm</span>
+            <span>価格：<%= s.price ? '¥'+s.price.toLocaleString() : '—' %></span>
+          </div>
+        <% } %>
+        <div class="actions" style="margin-top:.5rem">
+          <a class="btn brand" href="<%= link %>">詳細 ▼</a>
+          <button class="btn" onclick="removeWL('<%= it.key %>')">候補から外す</button>
+        </div>
+      </div>
+    </div>
+  </article>
+<% }) %>
+
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<script>
+async function removeWL(key){
+  try{
+    const r = await fetch('/api/wishlist/remove', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ key })
+    });
+    const j = await r.json();
+    if(j.ok) location.reload(); else alert(j.msg||'削除できなかった…');
+  }catch(e){ alert('エラー：'+e.message); }
+}
+</script>

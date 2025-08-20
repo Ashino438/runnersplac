@@ -2,183 +2,204 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="<%= shoe.name %> の詳細レビュー。クッション性・グリップ・耐久性を徹底比較。市民ランナーや初心者にもおすすめのランニングシューズ。">
-<meta name="keywords" content="ランニングシューズ, <%= shoe.brand %>, <%= shoe.name %>, レビュー, マラソン, ジョギング, クッション, 安定性, 初心者, 評価">
-<meta property="og:title" content="<%= shoe.name %>｜ランニングシューズ徹底レビュー">
-<meta property="og:description" content="クッション性と安定性に優れた<%= shoe.name %>を徹底解説。実際のユーザー評価付き。">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://yourdomain.com/images/<%= shoe.image %>">
-<meta property="og:url" content="https://yourdomain.com/shoes/<%= shoe.id %>">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= shoe.name %>｜ランニングシューズ詳細</title>
 
+  <meta name="description" content="<%= shoe.name %> の詳細レビュー。クッション性・グリップ・耐久性を徹底比較。市民ランナーや初心者にもおすすめ。">
+  <meta name="keywords" content="ランニングシューズ,<%= shoe.brand %>,<%= shoe.name %>,レビュー,マラソン,ジョギング,クッション,安定性,初心者,評価">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title><%= shoe.name %> | ランニングシューズ詳細</title>
+  <link rel="canonical" href="https://runnersplac.onrender.com/shoes/<%= shoe.id %>">
+  <meta property="og:url" content="https://runnersplac.onrender.com/shoes/<%= shoe.id %>">
+  
+  <meta property="og:title" content="<%= shoe.name %>｜ランニングシューズ徹底レビュー">
+  <meta property="og:description" content="クッション性と安定性に優れた<%= shoe.name %>を徹底解説。実際のユーザー評価付き。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://runnersplac.onrender.com/images/<%= shoe.image %>">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="/css/detail.css" as="style">
   <link rel="stylesheet" href="/css/detail.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="canonical" href="https://runnersplac.onrender.com//<%= shoe.id %>">
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"<%= shoe.name %>",
+    "image":"https://runnersplac.onrender.com/images/<%= shoe.image %>",
+    "description":"<%= shoe.name %> の詳細レビュー。クッション性・グリップ・耐久性などを解説。",
+    "brand":{"@type":"Brand","name":"<%= shoe.brand %>"},
+    "sku":"<%= shoe.id %>",
+    "offers":{
+      "@type":"Offer",
+      "price":"<%= shoe.price %>",
+      "priceCurrency":"JPY",
+      "url":"https://runnersplac.onrender.com/<%= shoe.id %>",
+      "availability":"https://schema.org/InStock"
+    }<% if (typeof communityAvg === 'number') { %>,
+    "aggregateRating":{
+      "@type":"AggregateRating",
+      "ratingValue":"<%= communityAvg.toFixed(1) %>",
+      "reviewCount":"<%= communityCount || 0 %>"
+    }<% } %>
+  }
+  </script>
 </head>
 <body>
-  
-  <div id="nickname-popup" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:999;">
-  <p>ニックネームを設定してください：</p>
-  <input type="text" id="nickname-input" placeholder="例：きよし"><br><br>
-  <button id="save-nickname">保存</button>
-</div>
+  <header class="header">
+    <a href="/home" class="logo">Runnersplac</a>
+    <nav class="nav">
+      <a href="/home">Home</a>
+      <a href="https://www.instagram.com/25553runner" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <button id="login-btn">ログイン</button>
+      <span id="user-name" style="display:none;"></span>
+      <button id="logout-btn" style="display:none;">ログアウト</button>
+    </nav>
+  </header>
 
-  <div class="detail-page">
-    <h1><%= shoe.name %></h1>
-    <img src="<%= shoe.image %>" class="shoe-detail-img">
-
-    <!-- 差し込み先（JSがここにcomment-sectionを移動） -->
-    <div class="comment-anchor" data-shoe-id="<%= shoe.id %>"></div>
-
-    <p>重さ: <%= shoe.weight %>g</p>
-    <p>ドロップ: <%= shoe.offset %></p>
-    <p>ミッドソール: <%= shoe.midsole %></p>
-    <p>価格: <%= shoe.price %>円</p>
-    <a href="<%= shoe.buyUrl %>" target="_blank" class="buy-btn">▶ 購入ページへ</a>
-<h2>グラフ</h2>
-    <canvas id="chart" width="300" height="300"></canvas>
-  </div>
-    <h2>ホストによる評価</h2>
-<table class="host-eval-table">
-  <thead>
-    <tr>
-      <th class="row">項目</th>
-      <th class="hostevaluation">スコア</th>
-      <th class="hostComment">コメント</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% 
-      const labels = ['クッション性','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード性能','グリップ','耐久性'];
-      for (let i = 0; i < 10; i++) {
-        const label = labels[i];
-        const score = shoe.chartData[i];
-       
-    %>
-      <tr>
-        <td><%= label %></td>
-        <td >
-  <% for (let s = 1; s <= 5; s++) { %>
-    <% if (score >= s) { %>
-      <span class="star full">★</span>
-    <% } else if (score >= s - 0.5) { %>
-      <span class="star half">★</span>
-    <% } else { %>
-      <span class="star empty">☆</span>
+  <main class="detail">
+    <section class="hero">
+      <div class="hero-text">
+        <h1><%= shoe.name %></h1>
+        <p class="sub"><%= shoe.brand %> ｜ 重量 <%= shoe.weight %>g ／ オフセット <%= shoe.offset %> ／ ミッドソール <%= shoe.midsole %></p>
+        <p class="price">価格：<span><%= shoe.price.toLocaleString() %></span> 円</p>
+        <% if (shoe.buyUrl) { %>
+          <a class="buy-btn" href="<%= shoe.buyUrl %>" target="_blank" rel="noopener noreferrer">購入ページへ</a>
+        <% } %>
+      </div>
+    
+      <figure class="hero-img">
+        <img
+          src="<%= shoe.image %>"
+          alt="<%= shoe.brand %> <%= shoe.name %> の商品画像"
+          loading="eager" fetchpriority="high">
+      </figure>
+    </section>
+    
+    <!-- ホスト本文（ブログ） -->
+    <% if (shoe.articleHtml) { %>
+    <section class="host-article card">
+      <h2>レビュー本文</h2>
+      <article class="prose"><%- shoe.articleHtml %></article>
+    </section>
     <% } %>
-  <% } %>
-</td>
-
-        <td ><%= shoe.hostComment ? shoe.hostComment[label] : 'コメントなし' %></td>
-      </tr>
-    <% } %>
-  </tbody>
-</table>
-
-
     
 
-  <!-- 差し込まれるコメントフォームは body の一番下に1個だけ置く！ -->
-  <h2>コメント投稿</h2>
-<form id="comment-form">
-  <label>コメント:</label><br>
-  <textarea id="userComment" rows="4" cols="40" placeholder="シューズの使用感教えて下さい！"></textarea><br><br>
-<div id="userRatings" class="ratings-wrapper">
- <% labels.forEach((label, index) => { %>
-  <div class="rating-row">
-    <span class="rating-label"><%= label %>:</span>
-    <div class="rating-options">
-      <% for (let score = 1; score <= 5; score++) { %>
-  <input type="radio" id="rating-<%= index %>-<%= score %>" name="rating-<%= index %>" value="<%= score %>">
-  <label for="rating-<%= index %>-<%= score %>" class="star" data-index="<%= index %>" data-score="<%= score %>">★</label>
-<% } %>
+    <section class="charts">
+      <div class="card">
+        <h2>ホスト評価（レーダー）</h2>
+        <div class="chart-wrap">
+          <canvas id="chart" width="380" height="380" aria-label="性能レーダーチャート" role="img"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <h2>みんなの平均評価</h2>
+        <div id="avgWrap" class="chart-wrap">
+          <canvas id="avgChart" width="380" height="380" aria-label="みんなの平均レーダー" role="img"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="host-table card">
+      <h2>ホストによる評価</h2>
+      <table class="host-eval-table">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>スコア</th>
+            <th>コメント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+            const labels = ['クッション性','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード性能','グリップ','耐久性'];
+            for (let i = 0; i < 10; i++) {
+              const label = labels[i];
+              const score = shoe.chartData[i];
+          %>
+            <tr>
+              <td><%= label %></td>
+              <td class="stars">
+                <% for (let s = 1; s <= 5; s++) { %>
+                  <% if (score >= s) { %>
+                    <span class="star full">★</span>
+                  <% } else if (score >= s - 0.5) { %>
+                    <span class="star half">★</span>
+                  <% } else { %>
+                    <span class="star empty">☆</span>
+                  <% } %>
+                <% } %>
+                <span class="num"><%= score.toFixed ? score.toFixed(1) : score %></span>
+              </td>
+              <td class="hostComment"><%= shoe.hostComment ? shoe.hostComment[label] : 'コメントなし' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="comments card" data-shoe-id="<%= shoe.id %>">
+      <h2>レビュー投稿</h2>
+
+      <!-- 項目別 1..5 の投票UI（サイトの強みを継続） -->
+      <form id="comment-form">
+        <label for="nickname">ニックネーム（任意）</label>
+        <input id="nickname" name="nickname" type="text" maxlength="50" placeholder="例：きよし">
+
+        <label for="userComment">レビュー本文</label>
+        <textarea id="userComment" name="comment" rows="6" placeholder="使用距離／路面／サイズ感／走ったペースなど自由にどうぞ"></textarea>
+
+      <!-- 評価フォーム内の星パートを置き換え -->
+<div class="ratings-grid">
+  <% labels.forEach((label, idx) => { %>
+    <div class="rating-row">
+      <span class="rating-label"><%= label %></span>
+      <div class="rating-stars" data-index="<%= idx %>">
+        <% for (let s = 5; s >= 1; s--) { %>
+          <input type="radio" id="r-<%= idx %>-<%= s %>" name="rating-<%= idx %>" value="<%= s %>">
+          <label for="r-<%= idx %>-<%= s %>" aria-label="<%= s %>">★</label>
+        <% } %>
+      </div>
     </div>
-  </div>
-<% }); %>
-
+  <% }) %>
 </div>
 
-  <button type="submit">投稿する</button>
-</form>
 
-<ul id="posted-comments"></ul>
+        <button type="submit" class="submit-btn">投稿する</button>
+      </form>
 
-<h2>みんなの平均評価</h2>
-<canvas id="avgChart" width="300" height="300"></canvas>
+      <h3 class="list-title">みんなのレビュー</h3>
+      <ul id="posted-comments" class="comment-list"></ul>
+      <button id="more-btn" class="more-btn" style="display:none;">もっと見る</button>
+    </section>
+  </main>
 
-<footer class="fixed-footer" style="text-align:center; margin-top:2em;">
-  <a href="/home" style="margin-right:1em;">Home</a>
-  <a href="https://www.instagram.com/25553runner" target="_blank" rel="noopener">
-    <i class="fab fa-instagram"></i>
-  </a>
-  <a href="<%= shoe.buyUrl %>"  class="buy-btn1">購入</a>
-  <div id="user-status" style="text-align:right; padding: 10px;">
-  <button id="login-btn">ログイン</button>
-  <span id="user-name" "style="display:none;"></span>
-  <button id="logout-btn" style="display:none;">ログアウト</button>
-</div>
+  <footer class="footer">
+    <a href="/home">Home</a>
+    <% if (shoe.buyUrl) { %>
+      <a href="<%= shoe.buyUrl %>" class="buy-btn outline" target="_blank" rel="noopener noreferrer">購入</a>
+    <% } %>
+  </footer>
 
-</footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
-
-
-  <!-- グラフとコメントのスクリプト -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('chart');
-    new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['クッション', '安定性', '軽さ', 'コスパ', '履き心地', 'デザイン', '通気性', 'スピード', 'グリップ', '耐久性'],
-        datasets: [{
-          label: '<%= shoe.name %>',
-          data: <%= JSON.stringify(shoe.chartData) %>
-        }]
-      },
-      options: {
-  responsive: true,
-  scales: {
-    r: {
-      min: 0,
-      max: 5,
-      ticks: {
-        stepSize: 1,
-        backdropColor: 'transparent'
-      }
-    }
-  }
-}
-
-    });
-
-
-  </script>
+  <!-- Firebase Auth（ログインUIだけ利用） -->
   <script type="module">
-  import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged
-  } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
-    authDomain: "mystlide.firebaseapp.com",
-    projectId: "mystlide",
-    appId: "1:823773802251:web:823d531f428f02f463fc0e"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+      authDomain: "mystlide.firebaseapp.com",
+      projectId: "mystlide",
+      appId: "1:823773802251:web:823d531f428f02f463fc0e"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("login-btn");
     const logoutBtn = document.getElementById("logout-btn");
     const userName = document.getElementById("user-name");
@@ -187,37 +208,155 @@
       try {
         await signInWithPopup(auth, provider);
       } catch (err) {
-        alert("ログイン失敗：" + err.message);
+        try {
+          await signInWithRedirect(auth, provider);
+        } catch (_) {
+          alert("ログイン失敗：" + err.message);
+        }
       }
     });
 
-    logoutBtn?.addEventListener("click", () => {
-      signOut(auth);
-    });
+    logoutBtn?.addEventListener("click", () => signOut(auth));
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline";
-        userName.style.display = "inline";
+        logoutBtn.style.display = "inline-block";
+        userName.style.display = "inline-block";
         userName.textContent = `${user.displayName} さん`;
       } else {
-        loginBtn.style.display = "inline";
+        loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
         userName.style.display = "none";
       }
     });
+  </script>
+
+  <!-- コメント＆平均読み込み -->
+  <script>
+    const shoeId = "<%= shoe.id %>";
+    const labels = ['クッション','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード','グリップ','耐久性'];
+
+    // レーダー（ホスト）
+    window.addEventListener('DOMContentLoaded', () => {
+      const makeRadar = (el, data, label) => {
+        if (!el || !window.Chart) return;
+        return new Chart(el, {
+          type: 'radar',
+          data: {
+            labels,
+            datasets: [{ label, data, pointRadius: 2, fill: true }]
+          },
+          options: {
+            maintainAspectRatio: false, responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, backdropColor: 'transparent' } } }
+          }
+        });
+      };
+      makeRadar(document.getElementById('chart'), <%= JSON.stringify(shoe.chartData) %>, '<%= shoe.name %>');
+
+      // みんなの平均
+      loadComments(); // 初回ロードで平均も描画
+    });
+
+    let nextCursor = null;
+    async function loadComments(append = false) {
+      const url = new URL(`/api/comments/${shoeId}`, window.location.origin);
+      url.searchParams.set('limit', '10');
+      if (nextCursor) url.searchParams.set('cursor', nextCursor);
+      const res = await fetch(url);
+      if (!res.ok) return;
+
+      const { comments, avgRatings, count, nextCursor: nc } = await res.json();
+      renderAvg(avgRatings, count);
+      renderComments(comments, append);
+      nextCursor = nc;
+      document.getElementById('more-btn').style.display = nextCursor ? 'inline-block' : 'none';
+    }
+
+    function renderAvg(avgRatings, count) {
+      const wrap = document.getElementById('avgWrap');
+      if (!wrap) return;
+      let canvas = document.getElementById('avgChart');
+      if (!avgRatings || !avgRatings.some(v => v > 0)) {
+        wrap.innerHTML = '<p class="muted">まだ評価がありません</p>';
+        return;
+      }
+      // 再描画対策
+      wrap.innerHTML = '<canvas id="avgChart" width="380" height="380"></canvas>';
+      new Chart(document.getElementById('avgChart'), {
+        type: 'radar',
+        data: {
+          labels,
+          datasets: [{ label: `みんなの平均（n=${count}）`, data: avgRatings, pointRadius: 2, fill: true }]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, backdropColor: 'transparent' } } }
+        }
+      });
+    }
+
+    function renderComments(list, append) {
+      const ul = document.getElementById('posted-comments');
+      if (!ul) return;
+      if (!append) ul.innerHTML = '';
+      list.forEach((d) => {
+        const li = document.createElement('li');
+        const when = d.createdAt ? new Date(d.createdAt).toLocaleString() : '';
+        const stars = (Array.isArray(d.ratings) ? d.ratings : []).map(v => `★`.repeat(v) + `☆`.repeat(5-v)).join(' / ');
+        li.innerHTML = `
+          <article class="review">
+            <header>
+              <span class="nick">${(d.nickname||'匿名')}</span>
+              <time datetime="${d.createdAt||''}">${when}</time>
+            </header>
+            <p class="body">${escapeHtml(d.comment || '')}</p>
+            <p class="mini-stars">${stars}</p>
+          </article>`;
+        ul.appendChild(li);
+      });
+    }
+
+    document.getElementById('more-btn')?.addEventListener('click', () => loadComments(true));
+
+    // 投稿
+  // 送信処理の直前にバリデーション追加
+  document.getElementById('comment-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const ratings = [];
+    for (let i = 0; i < 10; i++) {
+      const v = Number((document.querySelector(`input[name="rating-${i}"]:checked`)||{}).value || 0);
+      ratings.push(v);
+    }
+    if (ratings.some(v => v < 1 || v > 5)) {
+      alert('各項目の★を1〜5で選んでから投稿してね！');
+      return;
+    }
+    const nickname = document.getElementById('nickname').value.trim();
+    const comment = document.getElementById('userComment').value.trim();
+    const payload = { shoeId: "<%= shoe.id %>", comment, ratings, nickname };
+
+    const res = await fetch('/api/comments', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(()=>({}));
+      alert('投稿失敗：' + (j.error || 'サーバエラー'));
+      return;
+    }
+    // 成功処理…
   });
-</script>
-
-<!-- 古いけど安定して使えるCDN -->
-<!--<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
-<script type="module" src="/firebase/config.js"></script>-->
 
 
-<script type="module" src="/js/comment.js"></script>
-
+    // xss軽減
+    function escapeHtml(str){
+      return str.replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[s]));
+    }
+  </script>
 </body>
 </html>

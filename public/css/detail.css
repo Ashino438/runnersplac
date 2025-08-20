@@ -1,443 +1,116 @@
-body {
-  font-family: sans-serif;
-  font-size: 14px;
-  margin: 0;
-  padding: 1em;
-  line-height: 1.6;
-  background: #f8f8f8;
+:root{
+  --bg:#0b0c10;
+  --fg:#e6e6e6;
+  --muted:#a3a3a3;
+  --card:#121318;
+  --line:#1f2230;
+  --acc:#36c9b4;
+  --btn:#1f9f8f;
+  --btn2:transparent;
 }
 
-.detail-page {
-  background: #fff;
-  padding: 1em;
-  border-radius: 8px;
-  margin-bottom: 2em;
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;line-height:1.7}
+img{max-width:100%;display:block}
+a{color:var(--acc);text-decoration:none}
+a:hover{opacity:.9}
+.muted{color:var(--muted)}
+
+.header{
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(11,12,16,.75);backdrop-filter:saturate(160%) blur(8px)
+}
+.logo{font-weight:700}
+.nav a,.nav button{margin-left:12px;color:var(--fg);background:none;border:none;font:inherit;cursor:pointer}
+
+.detail{max-width:1180px;margin:24px auto;padding:0 16px}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;margin-bottom:24px}
+.hero-text h1{font-size:clamp(24px,4vw,36px);margin:0 0 8px}
+.hero-text .sub{color:var(--muted);margin:0 0 12px}
+.price span{font-weight:700;font-size:1.15em}
+.buy-btn{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:10px;background:var(--btn);color:#fff}
+.buy-btn.outline{border:1px solid var(--acc);background:var(--btn2);color:var(--fg)}
+
+.hero-img{background:linear-gradient(180deg,#121318,transparent);border-radius:14px;padding:12px;border:1px solid var(--line)}
+
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.chart-wrap{position:relative;height:380px}
+
+.host-table table{width:100%;border-collapse:separate;border-spacing:0}
+.host-table th, .host-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.host-table th{color:var(--muted);font-weight:600;text-align:left}
+.stars .star{font-size:16px;letter-spacing:1px}
+.star.full{color:#ffd166}
+.star.half{color:#ffd166;opacity:.6}
+.star.empty{color:#444}
+.stars .num{margin-left:8px;color:var(--muted);font-size:.95em}
+.hostComment{max-height:5.2em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.hostComment:hover{max-height:none}
+
+.comments .ratings-grid{
+  display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0 10px
+}
+.rating-row{display:flex;align-items:center;justify-content:space-between;border:1px dashed var(--line);padding:10px;border-radius:10px}
+.rating-label{font-weight:600}
+.rating-stars{display:inline-flex;gap:6px}
+.rating-stars input{display:none}
+.rating-stars label{cursor:pointer;font-size:20px;filter:grayscale(.1)}
+.rating-stars input:checked ~ label{opacity:.4} /* 右側を薄くするため */
+.rating-stars input:checked + label,
+.rating-stars label:hover,
+.rating-stars label:hover ~ label{opacity:1}
+
+#comment-form{display:grid;gap:10px}
+#comment-form input[type="text"], #comment-form textarea{
+  width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1117;color:var(--fg)
+}
+.submit-btn{align-self:start;padding:10px 16px;border-radius:10px;border:1px solid var(--acc);background:var(--btn2);color:var(--fg);cursor:pointer}
+.submit-btn:hover{background:rgba(54,201,180,.08)}
+
+.comment-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.comment-list .review{border:1px solid var(--line);border-radius:12px;padding:12px;background:#0f1117}
+.review header{display:flex;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.review .nick{font-weight:700}
+.review .body{white-space:pre-wrap}
+.review .mini-stars{color:#ffd166;font-size:.9em;margin-top:6px}
+
+.more-btn{margin-top:10px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+
+.footer{max-width:1180px;margin:40px auto 24px;padding:0 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+
+/* SP */
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr;gap:12px}
+  .charts{grid-template-columns:1fr}
+  .chart-wrap{height:320px}
+  .rating-row{flex-direction:column;align-items:flex-start;gap:8px}
 }
 
-h1 {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 1em;
+/* 画像つぶれ対策＆余白圧縮 */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start;margin:8px 0 12px}
+.hero-img{display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,#121318,transparent);border-radius:14px;padding:12px;border:1px solid var(--line)}
+.hero-img img{max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain}
+
+/* 本文（ホスト記事） */
+.host-article .prose{line-height:1.9}
+.host-article .prose h3{margin-top:1.2em}
+.host-article .prose p{margin:.6em 0}
+
+/* 星：押せる・点く・わかりやすい */
+.rating-stars{display:flex;flex-direction:row-reverse;gap:6px;position:relative}
+.rating-stars input{position:absolute;opacity:0;pointer-events:none}
+.rating-stars label{cursor:pointer;font-size:22px;color:#444;opacity:.6;user-select:none;line-height:1}
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input:checked ~ label{
+  color:#ffd166;opacity:1
 }
 
-.shoe-detail-img {
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  margin: 0 auto 1em;
-  border-radius: 10px;
-}
-
-.buy-btn {
-  display: inline-block;
-  background: #007aff;
-  color: white;
-  padding: 0.6em 1em;
-  border-radius: 8px;
-  text-decoration: none;
-  margin: 1em 0;
-}
-
-table.host-eval-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1em;
-  font-size: 13px;
-}
-
-.host-eval-table th, .host-eval-table td {
-  border: 1px solid #ccc;
-  padding: 0.5em;
-}
-
-#comment-form {
-  margin-top: 2em;
-  background: #fff;
-  padding: 1em;
-  border-radius: 8px;
-}
-
-#comment-form textarea {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.5em;
-  font-size: 14px;
-  resize: vertical;
-}
-
-#comment-form select {
-  width: 100%;
-  margin-bottom: 0.8em;
-  padding: 0.4em;
-}
-
-#comment-form button {
-  background: #28a745;
-  color: white;
-  padding: 0.6em 1em;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-#posted-comments {
-  margin-top: 1em;
-  list-style: none;
-  padding-left: 0;
-}
-
-#posted-comments li {
-  background: #fff;
-  margin-bottom: 0.5em;
-  padding: 0.6em;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 13px;
-}
-
-canvas {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  margin-bottom: 2em; 
-}
-
-/* 固定フッター */
-.fixed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid #ccc;
-  padding: 0.8em 0.5em;
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  z-index: 1000;
-}
-
-.fixed-footer a {
-  background: #007aff;
-  color: #fff;
-  padding: 0.6em 1.2em;
-  border-radius: 9999px; /* 丸くしてボタン感 */
-  text-decoration: none;
-  font-size: 24px;
-  font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background 0.3s;
-}
-
-.fixed-footer a {
-  outline: none;
-}
-
-
-.fixed-footer a:hover {
-  background: #005fcc;
-}
- 
-body {
-  padding-bottom: 80px;
-}
-
-body {
-  background: #f1f3f5;
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
-  color: #333;
-}
-
-.detail-page {
-  background: #fff;
-  padding: 1.5em;
-  margin: 1em auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.05);
-  max-width: 700px;
-}
-
-h1, h2 {
-  font-weight: 600;
-  color: #222;
-  border-left: 4px solid #007aff;
-  padding-left: 0.5em;
-  margin-top: 1.5em;
-}
-
-table.host-eval-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1em;
-  background: #fff;
-  border: 1px solid #ccc;
-}
-
-.host-eval-table th {
-  background: #f8f9fa;
-  text-align: left;
-  padding: 0.6em;
-  font-size: 13px;
-  border-bottom: 1px solid #ddd;
-}
-
-.host-eval-table td {
-  padding: 0.6em;
-  font-size: 13px;
-  border-bottom: 1px solid #eee;
-}
-
-#posted-comments li {
-  font-family: monospace;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  padding: 0.4em 0.6em;
-  border-radius: 4px;
-  margin-bottom: 0.5em;
-}
-
-.star {
-  font-size: 16px;
-  color: #ffc107; /* 黄色 */
-  margin-right: 2px;
-}
-
-.star.empty {
-  color: #e0e0e0;
-}
-
-.star.half {
-  position: relative;
-  display: inline-block;
-  color: #e0e0e0;
-}
-
-.star.half::before {
-  content: "★";
-  position: absolute;
-  left: 0;
-  width: 50%;
-  overflow: hidden;
-  color: #ffc107;
-}
-
-.rating-row {
-  margin-bottom: 1em;
-  padding: 0.5em;
-  border-radius: 6px;
-  background: #fff;
-  border: 1px solid #ddd;
-}
-
-.rating-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.3em;
-}
-
-.rating-options {
-  display: flex;
-  gap: 0.3em;
-}
-
-.rating-options label {
-  cursor: pointer;
-  font-size: 18px;
-  color: #ccc;
-  transition: color 0.2s;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-
-.rating-options.star {
-  cursor: pointer;
-  font-size: 20px;
-  color: #ccc;
-}
-
-.star.selected {
-  color: #ffc107;
-}
-
-
-.rating-options.input[type="radio"]:checked + .star {
-  color: #ffc107;
-}
-
-
-
-#comment-form button {
-  background: #007aff;
-  color: white;
-  padding: 0.6em 1.5em;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  display: block;
-  margin: 1em auto 0;
-  transition: background 0.3s;
-}
-
-#comment-form button:hover {
-  background: #005fcc;
-}
-
-#posted-comments {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 1em;
-}
-
-#posted-comments li {
-  background: #ffffff;
-  border-left: 4px solid #007aff;
-  margin-bottom: 0.8em;
-  padding: 0.8em;
-  font-size: 13.5px;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.hostevaluation{
-    width: 12%;
-}
-.row{
-    width: 10%;
-}
-
-.buy-btn1 {
-  background: #ff5722; /* 明るいオレンジ */
-  color: white;
-  padding: 0.6em 1.2em;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  display: inline-block;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background 0.3s, transform 0.2s;
-}
-
-.buy-btn1:hover {
-  background: #e64a19;
-  transform: scale(1.05);
-}
-
-#login-btn {
-  padding: 10px 24px;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-  transition: all 0.2s ease-in-out;
-}
-
-#login-btn:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
-}
-
-
-@media (max-width: 768px) {
-  body {
-    padding: 0.5em;
-    font-size: 25px;
-  }
-
-  .detail-page {
-    padding: 1em;
-    margin: 0.5em;
-    border-radius: 6px;
-  }
-
-  h1, h2 {
-    font-size: 16px;
-    margin-top: 1em;
-    padding-left: 0.4em;
-  }
-
-  .shoe-detail-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-
-  .buy-btn {
-    display: block;
-    width: 100%;
-    padding: 0.8em;
-    font-size: 16px;
-    text-align: center;
-    margin: 1em auto;
-    border-radius: 10px;
-  }
-
-  table.host-eval-table {
-    font-size: 12px;
-  }
-
-  .host-eval-table th,
-  .host-eval-table td {
-    padding: 0.4em;
-  }
-
-  .fixed-footer a {
-    font-size: 18px;
-    padding: 0.5em 1em;
-  }
-
-  .rating-options {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .rating-options label {
-    font-size: 16px;
-  }
-
-  #comment-form textarea {
-    font-size: 13px;
-  }
-
-  #comment-form button {
-    width: 100%;
-    font-size: 15px;
-    padding: 0.7em;
-  }
-
-  #posted-comments li {
-    font-size: 13px;
-    padding: 0.6em;
-  }
-
-  .hostevaluation,
-  .row {
-    width: 100%;
-  }
- .hostevaluation{
-    width: 15%;
-}
-.row{
-    width: 15%;
-}
-
-canvas#avgChart {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  margin-bottom: 4em; 
-}
-
-}
+/* フォームの上下詰める */
+.hero-text .sub{margin:2px 0 6px}
+.price{margin:0}
+.buy-btn{margin-top:8px}
 

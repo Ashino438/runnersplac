@@ -1,1 +1,4 @@
 firebase/serviceAccountKey.json
+node_modules/
+.env
+npm-debug.log*

@@ -79,12 +79,27 @@
     </section>
     
     <!-- ホスト本文（ブログ） -->
-    <% if (shoe.articleHtml) { %>
+    
     <section class="host-article card">
-      <h2>レビュー本文</h2>
-      <article class="prose"><%- shoe.articleHtml %></article>
+      <h2>
+        ホストレビュー
+        <% if (user && user.isAdmin) { %>
+          <a href="/admin/articles/<%= shoe.slug || shoe.id %>" class="badge" style="margin-left:.6rem">編集</a>
+        <% } %>
+      </h2>
+    
+      <% if (shoe.articleHtml) { %>
+        <article class="prose"><%- shoe.articleHtml %></article>
+      <% } else { %>
+        <% if (user && user.isAdmin) { %>
+          <p class="muted">まだ記事がありません．
+            <a href="/admin/articles/<%= shoe.slug || shoe.id %>">新規作成</a>
+          </p>
+        <% } %>
+      <% } %>
     </section>
-    <% } %>
+    
+  
     
 
     <section class="charts">

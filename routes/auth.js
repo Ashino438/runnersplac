@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { createSessionCookie } = require('../lib/session');
 
+router.get('/api/sessionLogin/ping', (_req, res) => res.json({ ok: true, src: 'routes/auth.js' }));
+
 router.post('/api/sessionLogin', async (req,res)=>{
   const { idToken } = req.body || {};
   if(!idToken) return res.status(400).json({ok:false,msg:'no token'});

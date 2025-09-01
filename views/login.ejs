@@ -15,8 +15,9 @@
   </div>
 </section>
 
-<script src="/js/auth.js"></script>
-<script>
-  // ログイン成功後の遷移先
-  window.__afterLoginRedirect = "<%= redirect %>";
-</script>
+<script>window.__afterLoginRedirect = "<%= redirect %>"</script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script defer src="/js/auth.js"></script>
+  
+

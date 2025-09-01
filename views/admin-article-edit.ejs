@@ -1,0 +1,173 @@
+<!-- views/admin-article-edit.ejs -->
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- ★追加 -->
+<title>記事編集 <%= shoeId %></title>
+<style>
+  body{font-family:system-ui;margin:24px}
+  .row{display:flex;gap:16px;align-items:center;margin:8px 0;flex-wrap:wrap}
+  textarea{width:100%;height:55vh;font-family:ui-monospace,monospace}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width: 900px){ .grid{grid-template-columns:1fr} textarea{height:40vh} } /* ★SP対応 */
+  .card{border:1px solid #e5e7eb;border-radius:12px;padding:12px}
+  .badge{display:inline-block;background:#f59e0b;color:#fff;padding:2px 8px;border-radius:999px;margin-left:8px;font-size:12px}
+  .muted{opacity:.7;font-size:12px}
+</style>
+</head><body>
+  <h1>記事編集: <code><%= shoeId %></code>
+    <% if (doc.isDraft) { %><span class="badge">下書き</span><% } %>
+  </h1>
+  <div class="row">
+    <a href="/shoes/<%= shoeId %>" target="_blank">公開ページを開く</a>
+    <span class="muted" id="counter"></span>
+  </div>
+
+  <form id="form" method="POST" action="/admin/articles/<%= shoeId %>" class="grid">
+    <div class="card">
+      <div class="row">
+        <label>著者 <input name="author" value="<%= doc.author || '' %>"></label>
+        <label style="margin-left:auto"><input type="checkbox" name="isDraft" <%= doc.isDraft ? 'checked' : '' %>> 下書きにする</label>
+        <button type="submit" id="saveBtn">保存</button>
+      </div>
+      <textarea id="editor" name="html"><%= doc.html || '' %></textarea>
+      <div class="muted">最後に保存: <span id="savedAt">未保存</span></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="row">
+        <strong>画像</strong>
+        <button type="button" id="pickImage">画像を選ぶ</button>
+        <span class="muted">ドラッグ&ドロップ／ペーストも可</span>
+      </div>
+      <div id="dropZone" style="border:1px dashed #cbd5e1;border-radius:12px;padding:16px;text-align:center">
+        ここに画像をドロップ
+      </div>
+      <input id="fileInput" type="file" accept="image/*" hidden>
+      <div id="uploadMsg" class="muted"></div>
+    </div>
+
+    <div class="card">
+      <div class="row"><strong>プレビュー</strong></div>
+      <div id="preview" style="min-height:55vh"></div>
+    </div>
+  </form>
+
+  <!-- DOMPurify（クライアント）: サニタイズをサーバと揃える -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" integrity="sha384-8h1g1x8S3dO0TgJ8Z0zq0R7s3n6rT8bJvT1QJmQ2m2g8TQ0G5m8w6mQ2qgU3qf0Y" crossorigin="anonymous"></script>
+  <script>
+    const ed = document.getElementById('editor');
+    const pv = document.getElementById('preview');
+    const form = document.getElementById('form');
+    const savedAt = document.getElementById('savedAt');
+    const counter = document.getElementById('counter');
+
+    function render(){
+      // サーバと同様にサニタイズして表示
+      pv.innerHTML = DOMPurify.sanitize(ed.value);
+      counter.textContent = `文字数: ${ed.value.replace(/\s+/g,' ').trim().length}／語数: ${ed.value.trim().split(/\s+/).filter(Boolean).length}`;
+    }
+    ed.addEventListener('input', () => { dirty = true; render(); });
+
+    // Ctrl/Cmd+Sで保存
+    let dirty = false;
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        form.requestSubmit(document.getElementById('saveBtn'));
+      }
+    });
+
+    // 保存時刻表示
+    form.addEventListener('submit', () => {
+      dirty = false;
+      savedAt.textContent = new Date().toLocaleString();
+      // ローカルバックアップもクリア
+      localStorage.removeItem(lsKey);
+    });
+
+    // 離脱警告
+    window.addEventListener('beforeunload', (e) => {
+      if (dirty) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    // ローカル自動バックアップ（誤操作対策）
+    const lsKey = `article:${'<%= shoeId %>'}`;
+    setInterval(() => {
+      localStorage.setItem(lsKey, ed.value);
+    }, 2000);
+    // 復帰
+    const cached = localStorage.getItem(lsKey);
+    if (cached && !('<%= (doc.html||"").length %>' > 0)) {
+      ed.value = cached;
+    }
+
+    render();
+  </script>
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const pickBtn   = document.getElementById('pickImage');
+  const dz        = document.getElementById('dropZone');
+  const upMsg     = document.getElementById('uploadMsg');
+  const shoeId    = '<%= shoeId %>';
+
+  pickBtn.onclick = () => fileInput.click();
+  fileInput.onchange = () => handleFiles(fileInput.files);
+
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.background='#f8fafc'; });
+  dz.addEventListener('dragleave', () => dz.style.background='transparent');
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.style.background='transparent';
+    handleFiles(e.dataTransfer.files);
+  });
+
+  window.addEventListener('paste', e => {
+    const items = e.clipboardData?.items || [];
+    const files = [...items].map(i => i.getAsFile()).filter(Boolean);
+    if (files.length) handleFiles(files);
+  });
+
+  async function handleFiles(files){
+    const file = files[0];
+    if(!file) return;
+    if(!/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)) {
+      upMsg.textContent = '画像ファイルを選んでね';
+      return;
+    }
+    try{
+      upMsg.textContent = 'アップロード中…';
+      const url = await uploadImage(file);
+      insertImg(url);
+      upMsg.textContent = '挿入したよ：' + url;
+    }catch(err){
+      console.error(err);
+      upMsg.textContent = 'アップロード失敗：' + (err?.message || err);
+    }
+  }
+
+  async function uploadImage(file){
+    const fd = new FormData();
+    fd.append('image', file);
+    const res = await fetch(`/admin/articles/${encodeURIComponent(shoeId)}/image`, {
+      method: 'POST',
+      body: fd,
+    });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return data.url; // 署名URL or 公開URL
+  }
+
+  function insertImg(url){
+    const alt = '';
+    const tag = `<img src="${url}" alt="${alt}" loading="lazy">`;
+    const start = ed.selectionStart, end = ed.selectionEnd;
+    const v = ed.value;
+    ed.value = v.slice(0,start) + tag + v.slice(end);
+    ed.focus();
+    ed.selectionStart = ed.selectionEnd = start + tag.length;
+    dirty = true;
+    render();
+  }
+</script>
+</body></html>

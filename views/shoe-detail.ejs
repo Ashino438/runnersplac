@@ -45,7 +45,8 @@
   }
   </script>
 </head>
-<body>
+<body data-is-admin="<%= (user && user.isAdmin) ? '1' : '' %>">
+
   <header class="header">
     <a href="/home" class="logo">Runnersplac</a>
     <nav class="nav">
@@ -98,7 +99,12 @@
         <% } %>
       <% } %>
     </section>
-    
+     <section id="memo-root"
+  class="card"
+  data-shoe-id="<%= shoe.slug || shoe.id %>"
+  data-name='<%- JSON.stringify(shoe.name) %>'
+  data-chart='<%- JSON.stringify(shoe.chartData) %>'>
+</section>
   
     
 
@@ -199,53 +205,114 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script>
+  // ここは "module" じゃない普通の <script> で
+  window.__SHOE__ = {
+    id: <%- JSON.stringify(shoe.id) %>,
+    slug: <%- JSON.stringify(shoe.slug || "") %>,
+    name: <%- JSON.stringify(shoe.name) %>,
+    chartData: <%- JSON.stringify(shoe.chartData) %>
+  };
+
+  // まずPENDINGにしておく（ここまで来れば console で見ても undefined にはならない）
+  window.__TAB_MODE__ = 'PENDING';
+  console.log('[loader] alive, __SHOE__=', window.__SHOE__);
+
+  (async () => {
+    // slug → id の順で JSON を探す（どっちで置いても動く）
+    const keys = [window.__SHOE__.slug, String(window.__SHOE__.id)].filter(Boolean);
+    let ok = false;
+    for (const k of keys) {
+      try {
+        const res = await fetch(`/memos/${encodeURIComponent(k)}.json`, { cache: 'no-store' });
+        console.log('[memos]', k, res.status);
+        if (res.ok) { window.__MEMO__ = await res.json(); ok = true; break; }
+      } catch (e) { console.error(e); }
+    }
+    window.__TAB_MODE__ = ok;
+    document.dispatchEvent(new Event('tabmode:decided'));
+    if (ok) {
+      const s = document.createElement('script');
+      s.src = "/js/tabbed-ui.js";
+      s.onload = ()=>console.log('[tabbed] loaded');
+      s.onerror = (e)=>console.error('[tabbed] load failed', e);
+      document.head.appendChild(s);
+    } else {
+      console.log('[tabbed] legacy mode');
+    }
+  })();
+</script>
+
 
   <!-- Firebase Auth（ログインUIだけ利用） -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
+
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+  import {
+    getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect,
+    signOut, onAuthStateChanged, getIdToken
+  } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+  const firebaseConfig = {  apiKey: "AIzaSyBbFaRwIiYw61X5yKXhvt1nGw-MRSgagLo",
       authDomain: "mystlide.firebaseapp.com",
       projectId: "mystlide",
-      appId: "1:823773802251:web:823d531f428f02f463fc0e"
-    };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+      appId: "1:823773802251:web:823d531f428f02f463fc0e" };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const userName = document.getElementById("user-name");
+  const loginBtn  = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const userName  = document.getElementById("user-name");
 
-    loginBtn?.addEventListener("click", async () => {
-      try {
-        await signInWithPopup(auth, provider);
-      } catch (err) {
-        try {
-          await signInWithRedirect(auth, provider);
-        } catch (_) {
-          alert("ログイン失敗：" + err.message);
-        }
-      }
+   async function sessionLogin(user){
+    const idToken = await getIdToken(user, true);
+    await fetch('/sessionLogin', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      credentials:'include'
+    ,  body: JSON.stringify({ idToken })
     });
+    // ★ 一度セッション確立を試した印を付けてからリロード
+    sessionStorage.setItem('ssr:login-tried', '1');
+    location.reload();
+  }
 
-    logoutBtn?.addEventListener("click", () => signOut(auth));
+  async function sessionLogout(){
+    await fetch('/sessionLogout', { method:'POST', credentials:'include' });
+    sessionStorage.removeItem('ssr:login-tried');
+  }
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-        userName.style.display = "inline-block";
-        userName.textContent = `${user.displayName} さん`;
-      } else {
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-        userName.style.display = "none";
+  const SSR_LOGGED_IN = document.body.dataset.loggedIn === '1';
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+      userName.style.display = "inline-block";
+      userName.textContent = `${user.displayName} さん`;
+
+      const tried = sessionStorage.getItem('ssr:login-tried') === '1';
+      // ★ SSRが未ログインで、まだ一度も橋渡ししてなければだけ実行
+      if (!SSR_LOGGED_IN && !tried) {
+        await sessionLogin(user);
       }
-    });
-  </script>
+    } else {
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+      userName.style.display = "none";
+      await sessionLogout();
+    }
+  });
+
+  logoutBtn?.addEventListener("click", async () => {
+    await signOut(auth);
+    await sessionLogout();
+    location.reload();
+  });
+</script>
+
 
   <!-- コメント＆平均読み込み -->
   <script>
@@ -253,27 +320,32 @@
     const labels = ['クッション','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード','グリップ','耐久性'];
 
     // レーダー（ホスト）
-    window.addEventListener('DOMContentLoaded', () => {
-      const makeRadar = (el, data, label) => {
-        if (!el || !window.Chart) return;
-        return new Chart(el, {
-          type: 'radar',
-          data: {
-            labels,
-            datasets: [{ label, data, pointRadius: 2, fill: true }]
-          },
-          options: {
-            maintainAspectRatio: false, responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, backdropColor: 'transparent' } } }
-          }
-        });
-      };
-      makeRadar(document.getElementById('chart'), <%= JSON.stringify(shoe.chartData) %>, '<%= shoe.name %>');
+      function startLegacy(){  // ← ここに今までの初期化を移動
+    const makeRadar = (el, data, label) => {
+      if (!el || !window.Chart) return;
+      return new Chart(el, {
+        type: 'radar',
+        data: { labels, datasets: [{ label, data, pointRadius: 2, fill: true }] },
+        options: {
+          maintainAspectRatio: false, responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, backdropColor: 'transparent' } } }
+        }
+      });
+    };
+    makeRadar(document.getElementById('chart'), <%= JSON.stringify(shoe.chartData) %>, '<%= shoe.name %>');
+    loadComments(); // 初回ロード
+  }
 
-      // みんなの平均
-      loadComments(); // 初回ロードで平均も描画
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.__TAB_MODE__ === 'PENDING') {
+      document.addEventListener('tabmode:decided', () => {
+        if (!window.__TAB_MODE__) startLegacy();
+      }, { once: true });
+    } else {
+      if (!window.__TAB_MODE__) startLegacy();
+    }
+  });
 
     let nextCursor = null;
     async function loadComments(append = false) {
@@ -339,7 +411,7 @@
 
     // 投稿
   // 送信処理の直前にバリデーション追加
-  document.getElementById('comment-form')?.addEventListener('submit', async (e) => {
+  /*document.getElementById('comment-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const ratings = [];
     for (let i = 0; i < 10; i++) {
@@ -365,13 +437,151 @@
       return;
     }
     // 成功処理…
-  });
+  });*/
+function esc(s){return String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function avg(arr){if(!arr?.length) return 0; return Math.round((arr.reduce((p,c)=>p+Number(c||0),0)/arr.length)*10)/10;}
+function starsHTML(v){const n=Math.max(0,Math.min(5,Math.round(v))); return '★'.repeat(n)+'☆'.repeat(5-n);}
+// トースト
+function showToast(msg, ok=true){
+  let t=document.getElementById('toast');
+  if(!t){
+    t=document.createElement('div');
+    t.id='toast';
+    t.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:24px;padding:10px 14px;border-radius:12px;color:#fff;background:#16a34a;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:9999;max-width:90%;';
+    document.body.appendChild(t);
+  }
+  t.style.background = ok ? '#16a34a' : '#dc2626';
+  t.textContent = msg;
+  t.style.opacity='1';
+  setTimeout(()=>{t.style.transition='opacity .4s'; t.style.opacity='0';}, 2000);
+}
+// コメントDOM追加（#comments-list or .comment-list を想定）
 
+// テーマCSSを一度だけ注入
+function ensureCommentTheme(){
+  if (document.getElementById('comment-theme')) return;
+  const style = document.createElement('style');
+  style.id = 'comment-theme';
+  style.textContent = `
+    :root{
+      --c-card-bg:#ffffff;
+      --c-text:#111827;      /* 高コントラスト本文 */
+      --c-sub:#374151;       /* 補助テキスト（濃いめ） */
+      --c-border:#e5e7eb;
+    }
+    .dark, [data-theme="dark"]{
+      --c-card-bg:#0b1220;
+      --c-text:#e5e7eb;
+      --c-sub:#9ca3af;
+      --c-border:#374151;
+    }
+    .comment-item{
+      background:var(--c-card-bg);
+      color:var(--c-text);
+      border:1px solid var(--c-border);
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+    }
+    .comment-item .meta{
+      display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px;
+    }
+    .comment-item .sub{ color:var(--c-sub); }
+    .comment-item p{ white-space:pre-wrap;line-height:1.7;margin:0; }
+    .comment-item .time{ font-size:12px;margin-top:6px; }
+  `;
+  document.head.appendChild(style);
+}
+
+// 既存のesc/avg/starsHTMLはそのまま使ってOK
+function appendComment({nickname, comment, ratings, createdAt}){
+  ensureCommentTheme();
+  const host = document.getElementById('comments-list') || document.querySelector('.comment-list');
+  if(!host) return;
+
+  const node = document.createElement('div');
+  node.className = 'comment-item';
+  const mean = avg(ratings);
+
+  node.innerHTML = `
+    <div class="meta">
+      <strong>${esc(nickname||'名無し')}</strong>
+      <span title="${mean}">${starsHTML(mean)} <small class="sub">(${mean.toFixed(1)})</small></span>
+    </div>
+    <p>${esc(comment)}</p>
+    <div class="sub time">${new Date(createdAt||Date.now()).toLocaleString()}</div>
+  `;
+  host.prepend(node);
+}
+
+
+
+const form = document.getElementById('comment-form');
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const ratings = [];
+  for (let i = 0; i < 10; i++) {
+    const v = Number((document.querySelector(`input[name="rating-${i}"]:checked`)||{}).value || 0);
+    ratings.push(v);
+  }
+  if (ratings.some(v => v < 1 || v > 5)) {
+    alert('各項目の★を1〜5で選んでから投稿してね！');
+    return;
+  }
+  const nickname = document.getElementById('nickname').value.trim();
+  const comment  = document.getElementById('userComment').value.trim();
+  if (!comment) { alert('コメントを書いてね！'); return; }
+
+  const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+  const orig = btn?.textContent;
+  btn && (btn.disabled = true, btn.textContent = '投稿中…');
+
+  const payload = { shoeId: "<%= shoe.id %>", comment, ratings, nickname };
+
+  try{
+    const res = await fetch('/api/comments', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const j = await res.json().catch(()=>({}));
+      showToast('投稿に失敗したよ…もう一度試してみて！', false);
+      throw new Error(j.error || `HTTP ${res.status}`);
+    }
+
+    // APIが作成データを返す前提で拾う（なければローカル値で補完）
+    const j = await res.json().catch(()=>({}));
+    const created = j?.comment || { nickname, comment, ratings, createdAt: Date.now() };
+
+    // 画面反映
+    appendComment(created);
+
+    // フォームリセット
+    form.reset();
+
+    // 成功トースト
+    showToast('投稿ありがとう！公開されたよ。', true);
+
+    // 新しいコメントまでスクロール（任意）
+    // document.querySelector('.comment-item')?.scrollIntoView({behavior:'smooth', block:'start'});
+
+  }catch(err){
+    console.warn('[comment post] failed:', err);
+    alert('投稿失敗：' + (err?.message || 'サーバエラー'));
+  }finally{
+    btn && (btn.disabled = false, btn.textContent = orig || '投稿');
+  }
+});
 
     // xss軽減
     function escapeHtml(str){
       return str.replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[s]));
     }
   </script>
+
+
 </body>
 </html>

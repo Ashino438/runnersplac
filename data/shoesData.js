@@ -1189,6 +1189,21 @@ hostComment : {
   buyUrl: "https://amzn.to/3HndCnw"
 },
 {
+  "id": "rebelv5",
+  "name": "FuelCell REBEL v5",
+  "image": "/images/newbalance_newbalance_30.webp",
+  "weight": 224,
+  "midsole": "FuelCell（PEBA/EVAブレンド）",
+  "drop": 6,
+  "offset": "29/35",
+  "purpose": "デイリートレーナー・スピードジョグ兼用",
+  "price": 16940,
+  "rating": 3.8,
+  "brand": "New Balance",
+  "chartData": [4.3, 3.2, 4.0, 4.0, 4.0, 4.2, 3.0, 3.9, 4.0, 3.5],
+  "buyUrl": "https://amzn.to/3HndCnw"
+},
+{
   id: "elitev4",
   name: "FuelCell SuperComp ELITE v4",
   image: "/images/newbalance_newbalance_16.jpg",

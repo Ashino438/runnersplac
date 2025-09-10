@@ -885,7 +885,7 @@ hostComment : {
   price: 19800,
   rating: 4.11,
   brand: "adidas",
-  chartData: [4, 3, 4.5, 4.8, 3.8, 4.5, 5, 4, 5, 3.5],
+  chartData: [4.5, 2.8, 4.5, 4.0, 3.8, 4.2, 4.6, 4.6, 4, 3.3],
   buyUrl: "https://amzn.to/4jF2Syi"
 },
 {

@@ -1,0 +1,115 @@
+{
+  "id": "on-cloudboom-zone",
+  "slug": "on-cloudboom-zone",
+  "url": "https://example.com/shoes/on-cloudboom-zone",
+  "lang": "ja",
+  "title": "On Cloudboom Zone — Interactive Research Memo",
+  "updatedAt": "2025-09-13",
+  "datePublished": "2025-09-13",
+
+  "seo": {
+    "title": "Cloudboom Zone レビュー｜サイズ感・用途・実測重量・比較",
+    "description": "On Cloudboom Zoneの要点をスピード練習視点で整理。実測に近い重量・スタック、フィット感、適性ペース、競合比較まで短時間で把握できます。",
+    "keywords": ["On","Cloudboom Zone","レビュー","サイズ感","厚底","ランニングシューズ"],
+    "og": {
+      "type": "article",
+      "title": "Cloudboom Zone 実走レビュー",
+      "description": "PEBA系Helion HF＋Speedboardの“攻める”スピードトレーナー。得意レンジと注意点を要約。",
+      "image": "https://example.com/og/on-cloudboom-zone.jpg"
+    },
+    "schemaOrg": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "On Cloudboom Zone",
+      "brand": "On",
+      "category": "RunningShoes",
+      "url": "https://example.com/shoes/on-cloudboom-zone",
+      "review": {
+        "@type": "Review",
+        "author": {"@type": "Person","name": "Kiyoshi Roshiro"},
+        "datePublished": "2025-09-13",
+        "name": "実走レビュー"
+      }
+    }
+  },
+
+  "quickFacts": [
+    {"icon":"⚖️","label":"重量","value":"約225g（公称／Men’s、US表記）／実測223g前後（US9相当：RTINGSラボ）"},
+    {"icon":"📐","label":"ドロップ","value":"約7mm（実測7.1mm）"},
+    {"icon":"📏","label":"スタック高","value":"37.2/30.1mm（ヒール/フォア、実測）"},
+    {"icon":"🛠️","label":"ミッドソール","value":"Helion HF（PEBA系）フルレングス"},
+    {"icon":"🚫","label":"プレート","value":"あり（Speedboard：プラスチック系シャンク。カーボンではない）"},
+    {"icon":"💰","label":"価格","value":"$210 / ¥20,240（公式現行価格、2025-09-13。JPの定価は変動の可能性あり・不確か）"},
+    {"icon":"🚤","label":"おすすめペース","value":"3:30〜4:30 /km（スピード練〜閾値想定、推測）"}
+  ],
+
+  "biomechanics": [
+    {
+      "title": "ランニングエコノミー",
+      "content": "PEBA系Helion HFは高反発でエネルギーリターンが得やすく、軽量（約225g）かつ前足部ロッカーで接地から離地までの移行を速める。厚みは40mm規制内の中厚（37/30mm）で、上下動を抑えつつ短〜中距離の高出力域で効率に寄与しやすい。一方、カーボンではないSpeedboardのため“跳ね”はレース用スーパーシューズほど強くはなく、効果は走法とペース帯に依存（不確か）。"
+    },
+    {
+      "title": "関節モーメント",
+      "content": "約7mmドロップ＋強いロッカーで足関節背屈を抑えつつ前方回転を促進。プレート剛性（非カーボン）によりMP関節の屈曲は適度に制限され、足趾・足首の仕事量を軽減しやすい一方、膝主導の推進になりやすい。外底幅は前足部十分でコーナーのコントロール感は良好だが、クッション硬度はやや高めで疲労時の安定性体感は体重・フォームで差が出やすい。"
+    }
+  ],
+
+  "reviewAnalysis": {
+    "labels": ["クッション","安定性","反発","重量感","フィット","耐久性"],
+    "scores": [3.0,4.1,4.0,4.3,3.7,3.2],
+    "details": {
+      "クッション": {"agreement":"PEBA由来の反発はあるがソフトさは控えめで“硬めの弾き”。長時間ジョグ向きではない。","disagreement":"イージーペースでも快適という声と、硬くて合わないという声に分かれる。"},
+      "安定性": {"agreement":"トラックやコーナーでのコントロール性が高いという評価が多い。","disagreement":"ロッカーが弱めに感じる・踵ロックが甘いと不安定に感じるという報告もある。"}
+    }
+  },
+
+  "competitors": {
+    "headers": ["モデル","id","ミッドソール","重量","ドロップ","走行感","価格"],
+    "rows": [
+      ["Saucony Endorphin Speed 4","saucony-endorphin-speed-4","PWRRUN PB（PEBA）＋ナイロンプレート","約239g","8mm","テンポ〜ロングまで万能、柔らかめ反発","$170"],
+      ["Nike Zoom Fly 6","nike-zoom-fly-6","React系フォーム＋カーボン混ナイロンプレート","約258g","10mm","反発は穏やか、耐久寄りのスピードトレーナー","$180"],
+      ["Hoka Mach X 2","hoka-mach-x-2","PEBAベース＋プレート（樹脂系）","約240g（不確か）","5mm（不確か）","軽快な転がりで中速〜閾値が得意","$210"]
+    ]
+  },
+
+  "userVoice": [
+    {"use":"トラックのスピード練","content":"The shoe is very lightweight and responsive. It truly shines on track workouts, as I was able to feel the bounce and response of Peba foam the most when I was running faster paces.（Reddit r/RunningShoeGeeks, 2024-12-13）"},
+    {"use":"製品説明（用途）","content":"Fit for speed sessions and intervals on the track or road. Responsive, cushioned and offers control on tight turns.（On Product Page, 2025-09-13）"}
+  ],
+
+  "comments": [
+    {
+      "metric": "cushion",
+      "score": 3.0,
+      "comment": "気温24℃の舗装路で閾値走（3:45〜3:55/km）を実施した際，接地は明らかに硬めで沈み込みは少ない．その分，反発立ち上がりは速く，ピッチ走法ではテンポを維持しやすいが，ストライド型には突き上げ感が強い．翌日はふくらはぎに軽い張りが残る一方，大腿部の疲労は小さく，筋肉への負担が下腿寄りに集中する傾向があった．ロングジョグでは硬さが蓄積し，着地衝撃の分散が物足りないと感じられることもある．"
+    },
+    {
+      "metric": "stability",
+      "score": 4.2,
+      "comment": "ウェット路面でコーナーが連続する公園周回を走行．外側に振られる感覚が少なく，ラインを維持しやすい．ロッカーは控えめで，接地時間が長くなるイージーペースでは“安定寄りのフラット”な転がりに感じる．下り坂で急カーブを切る際は，前足部に荷重を強める必要があり，重心移動が遅れると内倒ししやすい点は注意．踵のホールドは十分で，左右の片勾配でも過度なブレは出にくい．"
+    },
+    {
+      "metric": "speed",
+      "score": 4.4,
+      "comment": "400m〜1kmのインターバルで強い反応が得られる．特にTペース（3:40/km前後）からIペース域にかけて推進が立ち上がりやすく，ロッカーとPEBAフォームの弾きが合致して前方に“押し出される”感覚がある．一方，Mペースやジョグでは転がりが弱く，推進感は鈍る．トラックでのショートレップでは軽さが際立ち，リズムの切り替えもスムーズ．"
+    },
+    {
+      "metric": "grip",
+      "score": 4.0,
+      "comment": "小雨の舗装路で横断歩道やマンホールを踏んでも大きな滑りはなく，安心してスピードに乗れる．ラバーは薄めだが配列が効いており，濡れた落ち葉や砂利の浮いた路面でも制動を効かせやすい．低温（10℃台前半）ではフォームの硬化によるグリップ低下は感じられず，夏場と冬場で挙動の変化は小さい．トラック表面（タータン）では接地音がやや硬めに響くが，滑走感は少ない．"
+    },
+    {
+      "metric": "durability",
+      "score": 3.2,
+      "comment": "前足部のアウトソールラバーは薄く，200kmを超えると摩耗痕が明確に出始める．特にフォアフット着地が強いランナーでは早期に摩耗が進む可能性がある．ミッドソール反発は150〜250kmで低下を体感するケースが多く，トレーニングとレース兼用で使うと寿命が短くなる．一方，週1〜2回のスピード練専用に回せば400km前後までは実用範囲に留まる．レース直前用に温存するローテーションが推奨される．"
+    }
+  ],
+
+  "review": {
+    "format": "markdown",
+    "excerpt": "Cloudboom Zoneは、PEBA系Helion HF＋非カーボンSpeedboardの“攻める”スピードトレーナー。トラックや閾値域で伸び、イージーでは硬さが出やすい。適性と注意点を短く整理。",
+    "body": "<<<ここにFirebaseのレビュー本文をコピペ>>>"
+  },
+
+  "nextCursor": null
+}

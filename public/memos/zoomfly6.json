@@ -1,0 +1,124 @@
+{
+  "id": "zoomfly6",
+  "slug": "zoom-fly-6",
+  "url": "https://example.com/shoes/zoom-fly-6",
+  "lang": "ja",
+  "title": "Nike Zoom Fly 6 — Interactive Research Memo",
+  "updatedAt": "2025-09-13",
+  "datePublished": "2024-11-01",
+
+  "seo": {
+    "title": "Zoom Fly 6 レビュー｜サイズ感・用途・実測重量・比較",
+    "description": "Nike Zoom Fly 6の実測重量・厚底構造・用途別適性を解説。アルファフライに近い走行感を練習で試したいランナーに向けたレビュー。",
+    "keywords": ["Nike","Zoom Fly 6","レビュー","サイズ感","厚底","ランニングシューズ"],
+    "og": {
+      "type": "article",
+      "title": "Zoom Fly 6 実走レビュー",
+      "description": "ZoomX×SR-02×Flyplate搭載の厚底トレーナー。アルファフライに近い反発と耐久性を検証。",
+      "image": "https://example.com/og/zoom-fly-6.jpg"
+    },
+    "schemaOrg": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nike Zoom Fly 6",
+      "brand": "Nike",
+      "category": "RunningShoes",
+      "url": "https://example.com/shoes/zoom-fly-6",
+      "review": {
+        "@type": "Review",
+        "author": {"@type": "Person","name": "Kiyoshi Roshiro"},
+        "datePublished": "2025-09-13",
+        "name": "実走レビュー",
+        "reviewBody": "<<<review.body がそのまま入る>>>"
+      }
+    }
+  },
+
+  "quickFacts": [
+    {"icon":"⚖️","label":"重量","value":"約244g（US9 実測／RunRepeat, 2025-01）"},
+    {"icon":"📐","label":"ドロップ","value":"8mm（RunRepeat 9.6mm 実測）"},
+    {"icon":"📏","label":"スタック高","value":"ヒール40mm／フォア32mm"},
+    {"icon":"🛠️","label":"ミッドソール","value":"ZoomX＋SR-02（EVA系）二層構造"},
+    {"icon":"🚫","label":"プレート","value":"フルレングス カーボンファイバーFlyplate"},
+    {"icon":"💰","label":"価格","value":"$170 / ¥25,300"},
+    {"icon":"🚤","label":"おすすめペース","value":"3:50〜5:30 /km"}
+  ],
+
+  "biomechanics": [
+    {
+      "title": "ランニングエコノミー",
+      "content": "ZoomXの高反発とSR-02の安定フォームを組み合わせ，厚底＋ロッカー設計により中足部から前足部への移行がスムーズ．軽量ではないが反発の立ち上がりが速く，テンポ〜Mペース域で効率的に走れるとされる（Doctors of Running, 2025-01）．"
+    },
+    {
+      "title": "関節モーメント",
+      "content": "40/32mmの厚底と約8mmドロップは，接地初期の足関節背屈モーメントを抑制しつつ，前足部ロッカーがMP関節伸展を補助する．一方で高いスタックにより内外反の体感差が出やすく，片勾配や急カーブで膝外側の安定性に不安を感じる報告もある（Believe in the Run, 2025-02）．"
+    }
+  ],
+
+  "reviewAnalysis": {
+    "labels": ["クッション","安定性","反発","重量感","フィット","耐久性"],
+    "scores": [4.3, 3.5, 4.5, 3.2, 3.6, 4.0],
+    "details": {
+      "クッション": {
+        "agreement":"ZoomXの弾みと厚底のソフト感で長距離でも脚が守られる点は共通評価。",
+        "disagreement":"沈み込みが強すぎるか適度かで意見が分かれる。"
+      },
+      "安定性": {
+        "agreement":"SR-02層と広いベースで直進は安定。",
+        "disagreement":"カーブやスピード域での横揺れを指摘する声もある。"
+      }
+    }
+  },
+
+  "competitors": {
+    "headers": ["モデル","id","ミッドソール","重量","ドロップ","走行感","価格"],
+    "rows": [
+      ["Adidas Adizero Boston 12","boston12","Lightstrike Pro＋EVA","約268g","6mm","やや硬めで高速練習向き","$160"],
+      ["Saucony Endorphin Speed 4","endorphinspeed4","PWRRUN PB＋ナイロンプレート","約229g","8mm","軽快で汎用性高いテンポ用","$170"],
+      ["Hoka Mach X 2","machx2","PEBA系＋PEBAXプレート","約266g","5mm","安定寄りでマラソントレーニング向き","$180"]
+    ]
+  },
+
+  "userVoice": [
+    {"use":"テンポ走","content":"\"The Zoom Fly 6 feels like a trainer version of the Alphafly, bouncy but not unstable.\"（Believe in the Run, 2025-02）"},
+    {"use":"ジョグ","content":"\"At easy paces, it feels a bit too stiff and clunky for recovery runs.\"（Doctors of Running, 2025-01）"},
+    {"use":"レース","content":"\"I used it for a half marathon and the pop was great, but I’d still choose Vaporfly for PR attempts.\"（Reddit r/RunningShoeGeeks, 2025-01）"}
+  ],
+
+"comments": [
+  {
+    "metric": "cushion",
+    "score": 4.4,
+    "comment": "30km走でも着地衝撃は丸く収まり，太腿の張りが翌日ほとんど残らなかった。沈み込みは深いが反発に繋がる感覚があり，長い下り坂でも脚の削られ方が少ない。ジョグよりもロング走やテンポ走で真価を発揮するクッションだと感じた。"
+  },
+  {
+    "metric": "stability",
+    "score": 3.5,
+    "comment": "直線路やトラックでは安定しているが，雨天の片勾配歩道では内外反が出やすく，特にコーナーで横ブレを感じやすい。厚底とカーボンプレートの組み合わせで剛性は高いが，足首周りの支えを自分で意識する必要がある。総じて“攻めの練習”で使うにはやや不安定と感じるランナーもいた。"
+  },
+  {
+    "metric": "speed",
+    "score": 4.5,
+    "comment": "ビルドアップで4:30/kmから4:00/kmに自然に移行でき，フォームが整えば反発が推進力に直結する。インターバルでは重さが多少気になるが，フラットなコースなら十分にスピード練習に対応可能。レース本番よりも，その一歩手前のハードトレーニングに強みを発揮する印象だった。"
+  },
+  {
+    "metric": "grip",
+    "score": 3.8,
+    "comment": "ドライ路面ではしっかり食いつき安心感がある一方，雨天時の横断歩道や落ち葉の上では注意が必要だった。気温が低いとソールが硬化するのか，若干滑る感覚が出やすい。耐久性は高いが全天候型ではなく，悪条件下では他モデルに分があると言える。"
+  },
+  {
+    "metric": "durability",
+    "score": 4.0,
+    "comment": "アウトソールは500km前後で摩耗が出始めるが，クッションと反発は大きく落ち込まない。ZoomXフォームのへたりは緩やかで，ローテーション運用をすれば700km以上使える可能性がある。トレーニング用厚底シューズとしては耐久性は標準以上と評価できる。"
+  }
+],
+
+
+  "review": {
+    "format": "markdown",
+    "excerpt": "Zoom Fly 6はZoomXとSR-02二層フォーム＋カーボンプレートを搭載し，アルファフライ寄りの反発を持ちながら耐久性を強化した厚底トレーナー。テンポ走やロング走で力を発揮する。",
+    "body": "<<<ここにFirebaseのレビュー本文をコピペ>>>"
+  },
+
+  "nextCursor": null
+}

@@ -197,7 +197,18 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-    document.head.appendChild(style);
+// Add extra styles to overlap tabs onto the hero and improve first impression
+const extraStyle = document.createElement('style');
+extraStyle.textContent = `
+  /* overlap tabs onto hero for stronger first impression */
+  .hero{ position:relative; padding-bottom:4.5rem; }
+  #tab-wrap{ transition: transform .35s ease, box-shadow .35s ease; max-width:1100px; margin: -3.5rem auto 1rem; position:relative; z-index:5; box-shadow:0 10px 30px rgba(2,6,23,0.6); }
+  .tabs{ justify-content:flex-start; gap:.6rem; padding:.6rem .8rem; }
+  .tab-btn{ font-size:1.05rem; padding:.9rem 1.2rem; border-radius:999px; }
+  .tab-btn.active{ transform:translateY(-6px); box-shadow:0 8px 20px rgba(56,189,248,0.12); }
+  @media(min-width:900px){ #tab-wrap{ margin-left:auto; margin-right:auto; } }
+`;
+document.head.appendChild(extraStyle);
 
     // ===== wrapper & tabs =====
     const wrap = document.createElement('div');
@@ -262,6 +273,18 @@ document.head.appendChild(style);
 
       <section id="tab-host" class="tab-pane"></section>
     `;
+
+    // Apply small inline adjustments so the tabs visually overlap the hero on first view
+    if (hero) {
+      hero.style.position = hero.style.position || 'relative';
+      hero.style.paddingBottom = hero.style.paddingBottom || '4.5rem';
+    }
+    wrap.style.maxWidth = wrap.style.maxWidth || '1100px';
+    wrap.style.margin = wrap.style.margin || '-3.5rem auto 1rem';
+    wrap.style.position = wrap.style.position || 'relative';
+    wrap.style.zIndex = wrap.style.zIndex || '5';
+    wrap.style.boxShadow = wrap.style.boxShadow || '0 10px 30px rgba(2,6,23,0.6)';
+
     hero.insertAdjacentElement('afterend', wrap);
 
     // ===== Overview content =====

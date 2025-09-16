@@ -370,3 +370,19 @@ header.main-header {
   }
   
 }
+
+/* Mobile specific override: force single column and full-width cards on small screens */
+@media (max-width: 640px) {
+  .container.grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .container.grid .card {
+    grid-column: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  /* ensure actions/buttons wrap nicely */
+  .card .actions { display:flex; gap:8px; flex-wrap:wrap; }
+}

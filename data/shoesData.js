@@ -324,7 +324,7 @@ hostComment : {
   price: 9890,
   rating: 3.8,
   brand: "ASICS",
-  chartData: [3.5, 3, 4.5, 5, 3.5, 3.5, 4, 3.5, 3.5, 4],
+  chartData: [3.5, 3, 4.5, 5, 3.5, 3.5, 3.5, 3.5, 3.0, 4],
   buyUrl: "https://amzn.to/4kSXWqk"
 },
 {

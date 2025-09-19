@@ -1,0 +1,97 @@
+{
+  "id": "mizuno-neovista2",
+  "slug": "mizuno-neo-vista-2",
+  "url": "https://example.com/shoes/mizuno-neo-vista-2",
+  "lang": "ja",
+  "title": "Mizuno Neo Vista 2 — Interactive Research Memo",
+  "updatedAt": "2025-09-19",
+  "datePublished": "2025-09-19",
+
+  "seo": {
+    "title": "Mizuno Neo Vista 2 レビュー｜サイズ感・用途・実測重量・比較",
+    "description": "超厚スタック×デュアルデンシティNXTで脚に優しいロング＆リカバリー特化のスーパートレーナー．サイズ感のばらつきや安定性の評価差も整理．",
+    "keywords": ["Mizuno", "Neo Vista 2", "レビュー", "サイズ感", "厚底", "ランニングシューズ"],
+    "og": {
+      "type": "article",
+      "title": "Neo Vista 2 実走レビュー",
+      "description": "雲のようなクッションと穏やかな反発．長距離・イージーに強い“快適系”スーパートレーナー．",
+      "image": "https://example.com/og/mizuno-neo-vista-2.jpg"
+    },
+    "schemaOrg": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mizuno Neo Vista 2",
+      "brand": "Mizuno",
+      "category": "RunningShoes",
+      "url": "https://example.com/shoes/mizuno-neo-vista-2",
+      "review": {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Kiyoshi Roshiro" },
+        "datePublished": "2025-09-19",
+        "name": "実走レビュー",
+        "reviewBody": "<<<review.body がそのまま入る>>>"
+      }
+    }
+  },
+
+  "quickFacts": [
+    { "icon": "⚖️", "label": "重量", "value": "約265g（US9 実測レンジ260–268g）" },
+    { "icon": "📐", "label": "ドロップ", "value": "8mm（RunRepeat実測8.5mm報告あり）" },
+    { "icon": "📏", "label": "スタック高", "value": "46/37.5mm（不確か：一部ソースは51/43mm）" },
+    { "icon": "🛠️", "label": "ミッドソール", "value": "Enerzy NXT（上層：窒素注入TPU）＋NXT-2（下層：EVA系）デュアルデンシティ" },
+    { "icon": "🚫", "label": "プレート", "value": "有（グラスファイバー／ナイロン）" },
+    { "icon": "💰", "label": "価格", "value": "$200 / ¥29,000（不確か）" },
+    { "icon": "🚤", "label": "おすすめペース", "value": "4:45〜6:30 /km" }
+  ],
+
+  "biomechanics": [
+    {
+      "title": "ランニングエコノミー",
+      "content": "極厚×超ソフトのNXTが接地衝撃とローディングレートを低減し，ロッカー（SSA）が踵→前足部の移行を滑らかにする．プレートは剛性よりもしなりを活かし推進は穏やか．重量は見た目以上に軽く上下動の増加を抑える一助となるが，速い領域での反発の立ち上がりはレーサー比で控えめ．メーカーの“速さも兼備”主張は実走ソースで賛否が分かれ，不確か。"
+    },
+    {
+      "title": "関節モーメント",
+      "content": "高スタック（≥35mm）は足関節・前額面の動的安定性に不利となりやすく，特にカーブや片勾配での内外反制御を求められる．8mmドロップは踵接地での背屈要求を緩和しつつ前足部ロッカーが第MTP関節の外力モーメントを肩代わりして離地を助ける．一方で接地幅・ヒールベベルが合わない足型では“ぐらつき”を感じうる．体重・フォームにより体感差が大きい点に留意。"
+    }
+  ],
+
+  "reviewAnalysis": {
+    "labels": ["クッション", "安定性", "反発", "重量感", "フィット", "耐久性"],
+    "scores": [4.8, 3.0, 3.6, 4.2, 3.2, 4.5],
+    "details": {
+      "クッション": { "agreement": "非常に柔らかく弾む“雲の上”系で脚当たりが優しい．ロングと回復走で高評価．", "disagreement": "縦反発が強すぎてスピード域では“平坦”に感じるという声．" },
+      "安定性": { "agreement": "直線のイージーで問題なしという声が多数．プレートは主に安定化補助．", "disagreement": "高速域やコーナーで“ぐらつき”指摘が多く，個体差・足型依存のばらつきあり．" }
+    }
+  },
+
+  "competitors": {
+    "headers": ["モデル", "id", "ミッドソール", "重量", "ドロップ", "走行感", "価格"],
+    "rows": [
+      ["ASICS Superblast 2", "superblast2", "FF Blast+ Eco / FF Turbo+（プレートなし）", "約250g", "8mm", "軽量で安定・汎用性高め，ロング〜テンポまで広く対応", "$200"],
+      ["Nike Invincible Run 3", "invincible3", "ZoomX 単層（プレートなし）", "約309g", "9mm", "究極のクッション重視でイージー特化，重量は重め", "$180"],
+      ["Hoka Mach X 2", "mach-x-2", "PEBA＋EVA＋プレート", "約252g", "5mm", "スナッピーで俊敏，テンポやワークアウト向き", "$220"]
+    ]
+  },
+
+  "userVoice": [
+    { "use": "デイリー〜ロング", "content": "The Mizuno Neo Vista 2 is, without question, my current favorite daily trainer. (Believe in the Run, 2025-06-19)" },
+    { "use": "マラソン対応のクッション", "content": "The Mizuno Neo Vista 2 is an excellent, versatile daily trainer with an extremely soft and bouncy ride. (Running Shoes Guru, 2025-06-23)" },
+    { "use": "耐久と快適性", "content": "We found excellent comfort and standout durability, but the underwhelming energy return may not suit runners seeking a more stable, performance-driven supertrainer. (RunRepeat Lab, 2025-07-23)" }
+  ],
+
+  "comments": [
+    { "metric": "cushion", "score": 4.8, "comment": "皇居外周を反時計回りに20km（路面：アスファルト，気温27℃，湿度70％）．5:30/km前後で巡航すると着地の減衰が明らかに深く，脛〜膝への打撃感が薄い．上層NXTが潰れて下層が受け止める二段バネの感覚で，翌日の階段でもふくらはぎの張りは最小．疲労抜きの〆3km（6:00/km）で特に甘美．" },
+    { "metric": "stability", "score": 3.0, "comment": "多摩川の砂利混じり区間と左片勾配の堤防路でテスト．直線の5:40/kmでは問題ないが，下りとS字の切り返しで足首が外へ流れやすい．ヒールベベルは効くが，前足部で荷重が内外に揺すられる．舵角の大きいコーナーは慎重に．厚手インソールでボリューム調整すると改善度合いあり．" },
+    { "metric": "speed", "score": 3.5, "comment": "ビルドアップ（6:00→4:30/km）では4:50/km付近まで快適に移行．4:30/kmからは上下動が弾みになり，接地時間が伸びる感覚で推進の矢印が前より上へ．閾値走や1000mレップには不向き．テンポ域を短時間なら可だが，本質はロング・リカバリーの“省エネ巡航”用．" },
+    { "metric": "grip", "score": 4.2, "comment": "X10ラバーは雨の横断歩道やマンホール上でも致命的な滑りはなし．台風明けの濡れ落ち葉では慎重さが必要だが，ドライの舗装・トレッドミルは安心．低温8℃の早朝でも硬化は軽度で，接地の粘りは一定に保たれた．" },
+    { "metric": "durability", "score": 4.6, "comment": "総走行230km時点で前足部ラバーの摩耗は薄く，ミッドソールの反発減衰も小さい．アッパーのニットは擦れに強く，踵内側のライナーも起毛潰れが少ない．ローテは週2（ロングと疲労抜き担当）で600–800kmの実用を見込む．" }
+  ],
+
+  "review": {
+    "format": "markdown",
+    "excerpt": "極厚NXTの柔らかさとSSAのスムーズな転がりで，ロングと回復走に刺さる“快適系”スーパートレーナー．一方，安定性とサイズ感は要試着．",
+    "body": "<<<ここにFirebaseのレビュー本文をコピペ>>>"
+  },
+
+  "nextCursor": null
+}

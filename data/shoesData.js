@@ -2298,8 +2298,37 @@ hostComment : {
   brand: "Brooks",
   chartData: [4.5, 4.0, 2.5, 2.5, 4.5, 4.0, 4.0, 3.5, 3.0, 4.5],
   buyUrl: "https://amzn.to/3H6QFVB"
-}
-
+},
+  {
+    "id": "metaspeedtokyo",
+    "name": "METASPEED SKY TOKYO",
+    "image": "metaspeedtokyo.jpg",
+    "weight": "約170g（27.0cm片足）:contentReference[oaicite:0]{index=0}",
+    "midsole": "FF LEAP™フォーム＋FF TURBO™ PLUSクッション:contentReference[oaicite:1]{index=1}",
+    "drop": "5mm:contentReference[oaicite:2]{index=2}",
+    "offset": "39.5/34.5mm:contentReference[oaicite:3]{index=3}",
+    "purpose": "マラソンなどレースおよびスピード練習向け（ストライド型ランナー向き）:contentReference[oaicite:4]{index=4}",
+    "price": "¥29,700（税込）:contentReference[oaicite:5]{index=5}",
+    "rating": "4.7/5:contentReference[oaicite:6]{index=6}",
+    "brand": "ASICS",
+    "chartData": [4.5, 3, 5, 3.5, 5, 4, 3.5, 4, 3, 2.5],
+    "buyUrl": "https://amzn.to/3Kv1PEX"
+  },
+  {
+    "id": "metaspeedray",
+    "name": "METASPEED RAY",
+    "image": "metaspeedray.jpg",
+    "weight": "約129g（27.0cm片足）:contentReference[oaicite:7]{index=7}",
+    "midsole": "FF LEAP™フォーム（フルレングス）:contentReference[oaicite:8]{index=8}",
+    "drop": "5mm:contentReference[oaicite:9]{index=9}",
+    "offset": "39.5/34.5mm:contentReference[oaicite:10]{index=10}",
+    "purpose": "トップレベルのレース専用（エリートランナー向き、前足部着地に最適）:contentReference[oaicite:11]{index=11}",
+    "price": "¥33000（税込）:contentReference[oaicite:12]{index=12}",
+    "rating": "4.0/5",
+    "brand": "ASICS",
+    "chartData": [5, 2.5, 5, 4.5, 5, 4, 4, 5, 3, 1.5],
+    "buyUrl": "https://amzn.to/3Kv1PEX"
+  },
 
 
 

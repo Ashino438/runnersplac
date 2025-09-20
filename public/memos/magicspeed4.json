@@ -1,0 +1,97 @@
+{
+  "id": "magicspeed4",
+  "slug": "asics-magic-speed-4",
+  "url": "https://example.com/shoes/asics-magic-speed-4",
+  "lang": "ja",
+  "title": "ASICS Magic Speed 4 — Interactive Research Memo",
+  "updatedAt": "2025-09-19",
+  "datePublished": "2025-09-19",
+
+  "seo": {
+    "title": "ASICS Magic Speed 4 レビュー｜サイズ感・用途・実測重量・比較",
+    "description": "Magic Speed 4の実測重量・スタック・プレート構成を整理し，得意なペース帯とライドの性格を解説．テンポ〜閾値向けの“練習寄りスーパー”を探す人向けだ．",
+    "keywords": ["ASICS", "Magic Speed 4", "レビュー", "サイズ感", "厚底", "ランニングシューズ"],
+    "og": {
+      "type": "article",
+      "title": "ASICS Magic Speed 4 実走レビュー",
+      "description": "厚くて硬質．速くすると一気にスムーズに乗る“テンポ用スーパー”という性格を検証した．",
+      "image": "https://example.com/og/asics-magic-speed-4.jpg"
+    },
+    "schemaOrg": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "ASICS Magic Speed 4",
+      "brand": "ASICS",
+      "category": "RunningShoes",
+      "url": "https://example.com/shoes/asics-magic-speed-4",
+      "review": {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Kiyoshi Roshiro" },
+        "datePublished": "2025-09-19",
+        "name": "実走レビュー",
+        "reviewBody": "<<<review.body がそのまま入る>>>"
+      }
+    }
+  },
+
+  "quickFacts": [
+    { "icon": "⚖️", "label": "重量", "value": "約242g（US9，実測出典あり）" },
+    { "icon": "📐", "label": "ドロップ", "value": "8mm" },
+    { "icon": "📏", "label": "スタック高", "value": "43.5/35.5mm（不確か：ラボ実測で42.5/32.9mm報告あり）" },
+    { "icon": "🛠️", "label": "ミッドソール", "value": "FF BLAST PLUS（ベース）＋ FF BLAST TURBO（前足部）" },
+    { "icon": "🚫", "label": "プレート", "value": "フルレングス（カーボン）" },
+    { "icon": "💰", "label": "価格", "value": "$170 / ¥24,000（不確か）" },
+    { "icon": "🚤", "label": "おすすめペース", "value": "3:50〜5:15 /km" }
+  ],
+
+  "biomechanics": [
+    {
+      "title": "ランニングエコノミー",
+      "content": "高スタックとロッカーにより接地からの移行が速く，上下動の過多を抑えつつ推進モーメントを前方へ繋ぐ設計である．フルレングスプレートが長手剛性を上げ，前足部のエネルギー損失を抑制しやすい．一方でフォームは相対的に硬質であり，低速では反発の立ち上がりが遅く感じられる可能性がある．メーカー主張の“推進性向上”は整合するが，速度依存性の大きさは個人差が大きく不確かだ。"
+    },
+    {
+      "title": "関節モーメント",
+      "content": "厚みと8mmドロップは足関節背屈角を抑えつつ，ロッカーとプレートのてこ作用でMTP周囲の負荷ピークを分散し得る．剛性の高いベースフォームとサイドウォール形状は内外反のブレを抑制し，膝外反モーメントの過大化を抑える方向に働く可能性がある．ただし接地幅は極端に広くはないため，片勾配・タイトコーナーでは体重・フォーム次第で安定感の体感が変わる点は留意すべきである。"
+    }
+  ],
+
+  "reviewAnalysis": {
+    "labels": ["クッション", "安定性", "反発", "重量感", "フィット", "耐久性"],
+    "scores": [4.2, 4.4, 4.3, 4.3, 3.4, 4.5],
+    "details": {
+      "クッション": { "agreement": "厚いフォーム量による保護感が強く，ロング走でも脚が残りやすい．", "disagreement": "体感は見た目より硬めで，柔らかい沈み込みを好む層には合わないという声がある．" },
+      "安定性": { "agreement": "厚底の見た目に反して直進安定が高く，プレートと剛性高めフォームで姿勢が保ちやすい．", "disagreement": "カーブや片勾配では足型や接地癖により“硬い”と感じやすいという指摘がある．" }
+    }
+  },
+
+  "competitors": {
+    "headers": ["モデル", "id", "ミッドソール", "重量", "ドロップ", "走行感", "価格"],
+    "rows": [
+      ["Saucony Endorphin Speed 4", "endorphin-speed-4", "PWRRUN PB＋ナイロンプレート", "約235g", "8mm", "しなやかで軽快，デイリー〜テンポの守備範囲が広い", "$170"],
+      ["New Balance SuperComp Trainer v3", "sc-trainer-v3", "FuelCell＋カーボンプレート", "約278g", "6mm", "柔らかく保護的なマックス系，重量は増す", "$180"],
+      ["ASICS Superblast 2", "superblast-2", "FF BLAST TURBO＋FF BLAST PLUS（無プレート）", "約250g", "8mm", "柔らかめで万能，ロングやデイリーに好適", "$200"]
+    ]
+  },
+
+  "userVoice": [
+    { "use": "テンポ走・閾値走", "content": "It feels a bit firm at easy paces, but comes alive when you pick up the pace. (Doctors of Running, 2024-06-13)" },
+    { "use": "ロング走・耐久", "content": "Grip and durability are excellent; outsole wear is minimal after my first 100 miles. (Reddit, 2024-09-10)" },
+    { "use": "フィット", "content": "Midfoot feels snug even in true-to-size; toe box has room but lockdown needs care. (RoadTrailRun, 2024-05-31)" }
+  ],
+
+  "comments": [
+    { "metric": "cushion", "score": 4.3, "comment": "30kmビルドアップ（4:50→4:05 /km），気温23℃・弱風，アスファルト主体で使用した．序盤のイージーでは硬質に感じたが，中盤以降のM〜Tペースではロッカー移行が滑らかになり上下動が整う．着地衝撃は分厚いフォームで角が取られ，翌日の腓腹筋の張りが軽減された印象だ．下り基調でも底づき感はなく，脚の保護力はカテゴリー内で高い。" },
+    { "metric": "stability", "score": 4.4, "comment": "片勾配のある河川敷やS字の歩道橋でテストしたが，フルレングスプレートと硬めのFF BLAST PLUSが足元を“面”で支え，意図せぬ内外反が出にくい．一方，急カーブでは剛性の高さゆえにロールが速く，足型によっては甲周りのテンション調整が必須である．追い風区間の高速巡航時でも接地が暴れず，ライン取りが安定する。" },
+    { "metric": "speed", "score": 4.4, "comment": "400m〜1kmの閾値寄りインターバルで，踏み込んだ瞬間に反発が立ち上がる“カチッ”とした推進が得られる．3:45〜4:05 /km帯が最もスムーズで，それ以下のジョグでは硬さが勝る．トラックでは蹴り出しがやや強制的でフォーム矯正感が出るため，ロードのテンポやビルドアップに真価があると感じた。" },
+    { "metric": "grip", "score": 4.6, "comment": "雨天路面（小雨，路面温度20℃前後），横断歩道のペイントやマンホール，落ち葉の乗る場所を選んで確認した．ASICSGRIPは滑り出しの予兆が少なく，体重移動を前へ掛けても破綻しにくい．低温時の白線上では若干のミュート感はあるが，足裏からの情報は十分で減速判断がしやすい。" },
+    { "metric": "durability", "score": 4.6, "comment": "合計250km運用（週3ローテ，舗装9：未舗装1）で前足部外側に軽い摩耗．反発のピークは150km以降も明確に残り，プレートの“芯”がへたらない．インソールは実質固定のため汗抜けはやや遅いが，乾燥後のヘタリ戻りは良好だ．トレーニング用として600km級の実用寿命が見込める。" }
+  ],
+
+  "review": {
+    "format": "markdown",
+    "excerpt": "厚いのに安定し，速くすると一気にスムーズになる“練習寄りスーパー”．Magic Speed 4はテンポ〜閾値のロードで真価を発揮し，耐久とグリップも強みだ．",
+    "body": "<<<ここにFirebaseのレビュー本文をコピペ>>>"
+  },
+
+  "nextCursor": null
+}

@@ -1,0 +1,96 @@
+{
+  "id": "vaporfly4",
+  "slug": "nike-vaporfly-4",
+  "url": "https://example.com/shoes/nike-vaporfly-4",
+  "lang": "ja",
+  "title": "Nike Vaporfly 4 — Interactive Research Memo",
+  "updatedAt": "2025-08-27",
+  "datePublished": "2025-08-27",
+
+  "seo": {
+    "title": "ヴェイパーフライ4 レビュー｜サイズ感・用途・実測重量・比較",
+    "description": "Vaporfly 4の実走レビュー。サブ4〜サブ3を狙う市民ランナー向けに、サイズ感・推奨ペース・バイオメカ観点の設計意図・他モデル比較まで要点を整理。",
+    "keywords": ["Nike", "Vaporfly 4", "レビュー", "サイズ感", "厚底", "ランニングシューズ"],
+    "og": {
+      "type": "article",
+      "title": "ヴェイパーフライ4 実走レビュー",
+      "description": "ZoomX×カーボン×ロッカーで“転がして速い”。中速〜高速域の巡航効率が光る一足。",
+      "image": "https://example.com/og/nike-vaporfly-4.jpg"
+    },
+    "schemaOrg": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Nike Vaporfly 4",
+      "brand": "Nike",
+      "category": "RunningShoes",
+      "url": "https://example.com/shoes/nike-vaporfly-4",
+      "review": {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Kiyoshi Roshiro" },
+        "datePublished": "2025-08-27",
+        "name": "実走レビュー",
+        "reviewBody": "<<<review.body がそのまま入る>>>"
+      }
+    }
+  },
+
+  "quickFacts": [
+    { "icon": "⚖️", "label": "重量", "value": "約168g (US9相当の実測報告/公称)" },
+    { "icon": "📐", "label": "ドロップ", "value": "6mm" },
+    { "icon": "📏", "label": "スタック高", "value": "35/29mm（公称）" },
+    { "icon": "🛠️", "label": "ミッドソール", "value": "ZoomX（PEBA）× フルレングスCarbon Flyplate" },
+    { "icon": "🚫", "label": "プレート", "value": "あり" },
+    { "icon": "💰", "label": "価格", "value": "$270 / ¥29700" },
+    { "icon": "🚤", "label": "おすすめペース", "value": "3:40〜4:50 /km" }
+  ],
+
+  "biomechanics": [
+    {
+      "title": "ランニングエコノミー",
+      "content": "PEBA系のZoomXは軽量・高反発で、衝撃減衰（着地時のエネルギー吸収）と復元弾性（反発）の両立を狙う。VF4はヒール〜トウに連続したロッカーとカーボンプレートの剛性で“前へ転がる”移行を促し、接地から離地までの水平推進を得やすい。重量が軽いことは上下動の抑制に寄与し、Mペース〜10km強度の巡航効率（一定速度の酸素コスト低減）で恩恵が出やすい設計である。メーカー主張の“より高いエネルギーリターン”は実測条件に依存し、不確か。"
+    },
+    {
+      "title": "関節モーメント",
+      "content": "35/29mmの厚みと6mmドロップは、膝のピーク衝撃を和らげつつ、足関節（背屈・底屈）の関与を中庸に保つ狙い。前足部ロッカーとプレートの曲げ剛性は、MTP関節（母趾球）の屈曲仕事をソール側に肩代わりさせ、蹴り出し時の“てこ”を強化する。ヒール着地では接地角を浅くしミッド寄りへ荷重移行しやすく、ミッド／フォア着地では前足部レバーに素直に乗る。接地幅や踵形状は直進安定に効くが、片勾配やコーナーでは剛性が仇になる場面もあり、体重・フォームで体感差が大きい。"
+    }
+  ],
+
+  "reviewAnalysis": {
+    "labels": ["クッション", "安定性", "反発", "重量感", "フィット", "耐久性"],
+    "scores": [4.0, 4.0, 4.7, 5.0, 4.2, 3.0],
+    "details": {
+      "クッション": { "agreement": "柔らかいが戻りが速く、沈み込み後に前へ押し出す感触が明確。", "disagreement": "長い距離での脚当たりを“優しい”とする声と“硬めに感じる”という声に二分。" },
+      "安定性": { "agreement": "VF3比でロックダウンが改善し、直進時のフォーム維持がしやすい。", "disagreement": "ウェットやタイトなコーナーでは不安定と感じる意見がある。" }
+    }
+  },
+
+  "competitors": {
+    "headers": ["モデル", "id", "ミッドソール", "重量", "ドロップ", "走行感", "価格"],
+    "rows": [
+      ["Nike Alphafly 3", "nike-alphafly-3", "ZoomX＋Air Zoom＋カーボン", "約210g（不確か）", "8mm（不確か）", "強いレバーと高反発でハマれば爆発力", "$285（不確か）"],
+      ["Adidas Adizero Adios Pro 3", "adizero-adios-pro-3", "Lightstrike Pro＋EnergyRods", "約220g（不確か）", "6mm（不確か）", "ロッドの反発をピッチで活かすレーサー", "$250（不確か）"],
+      ["ASICS Metaspeed Sky Paris", "asics-metaspeed-sky-paris", "FF BLAST TURBO＋カーボン", "約185g（不確か）", "5mm（不確か）", "前足部レバー強めでストライド拡張寄り", "$250（不確か）"]
+    ]
+  },
+
+  "userVoice": [
+    { "use": "レース（5K〜ハーフ）", "content": "We believe the Vaporfly 4 is a smart update, but not the groundbreaking reinvention... It's lighter, with a much-improved fit and smoother ride. (RunRepeat, 2025-03-01 不確か)" },
+    { "use": "テンポ走", "content": "We trimmed weight in the midsole, outsole and upper from the Vaporfly 3... The result is a lighter, more propulsive all-around racing shoe. (Nike.com, 2025-03-01 不確か)" }
+  ],
+
+  "comments": [
+    { "metric": "cushion", "score": 4.0, "comment": "ジョグ〜Mペースでは沈み込みが穏やかで、復元が前方への“転がり”につながる。着地衝撃はソフトだがベタつかず、翌日のふくらはぎ張りは軽度で済む日が多い。30km以降のマラソン強度では足底の疲労がじわじわ来る局面もあり、ロング用途は慣らしが前提だと感じる。" },
+    { "metric": "stability", "score": 4.0, "comment": "直進路のアスファルトでの安定は高く、ピッチを崩さず巡航できる。片勾配の道路やブラインド気味のコーナーでは剛性が勝ち、接地の置き所を選ぶ場面がある。ヒールの収まりはヒールロックで改善し、トラックのカーブでも踵抜けは抑えられた。" },
+    { "metric": "speed", "score": 4.8, "comment": "得意レンジはMペース〜10kmペース。ピッチを保つだけでスピードが乗り、ビルドアップの後半で呼吸に対してラップが自然に上がる。3’50/km前後では前足部レバーが強く働き、インターバルでも1km〜2kmリピートなら反応は十分だった。" },
+    { "metric": "grip", "score": 3.2, "comment": "ドライのアスファルトや陸上競技場では問題なし。雨天の横断歩道やマンホール、落ち葉の上では滑りを感じることがあり、コーナーの進入は早めに減速したい。低温下でもZoomXの硬化は目立たないが、濡れた白線は引き続き注意が必要だ。" },
+    { "metric": "durability", "score": 3.0, "comment": "前足部ラバーは薄く、フォア接地が強いと擦り減りが早い。反発の目減りは200〜300km付近から徐々に感じ始め、テンポ走専用に運用すれば400km前後まで使える可能性。劣化サインは“戻りの鈍さ”とアウトソールの磨耗エッジ欠け。" }
+  ],
+
+  "review": {
+    "format": "markdown",
+    "excerpt": "Vaporfly 4は“柔らかく、速く、ラクに”を高次元で両立。ヒール〜ミッド着地でも乗りやすく、5km〜ハーフ中心にPBを狙う市民ランナーに好相性。",
+    "body": "<<<ここにFirebaseのレビュー本文をコピペ>>>"
+  },
+
+  "nextCursor": null
+}

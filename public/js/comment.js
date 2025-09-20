@@ -199,8 +199,18 @@ onAuthStateChanged(auth, async (user) => {
   const more  = document.getElementById('more-btn');
   let nextCursor = null;
   const labels = ['クッション','安定性','軽さ','コスパ','履き心地','デザイン','通気性','スピード','グリップ','耐久性'];
+  let isSubmitting = false; // 送信中フラグで二重送信を防止
 
-  function esc(s){return (s||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[m]));}
+  // 多重バインド防止（スクリプト重複読込対策）
+  if (form) {
+    if (form.dataset.bound === '1') {
+      console.warn('[comment.js] submit handler already bound');
+    } else {
+      form.dataset.bound = '1';
+    }
+  }
+
+  function esc(s){return (s||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#039;' }[m]));}
 
   async function loadComments(append=false){
     try{
@@ -251,43 +261,57 @@ onAuthStateChanged(auth, async (user) => {
     });
   }
 
-  form?.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    try{
-      const nickname = document.getElementById('nickname')?.value?.trim() || '';
-      const comment  = document.getElementById('userComment')?.value?.trim() || '';
-      const ratings = [];
-      for(let i=0;i<10;i++){
-        const v = Number((document.querySelector(`input[name="rating-${i}"]:checked`)||{}).value || 0);
-        ratings.push(v);
+  // submit: 二重送信防止とボタン無効化
+  if (form) {
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      if (isSubmitting) return; // 連打や多重バインド対策
+      isSubmitting = true;
+      const submitBtn = form.querySelector('[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try{
+        const nickname = document.getElementById('nickname')?.value?.trim() || '';
+        const comment  = document.getElementById('userComment')?.value?.trim() || '';
+        const ratings = [];
+        for(let i=0;i<10;i++){
+          const v = Number((document.querySelector(`input[name="rating-${i}"]:checked`)||{}).value || 0);
+          ratings.push(v);
+        }
+        if (!comment || comment.length < 3) { alert('本文を3文字以上書いてね'); return; }
+        if (ratings.some(v=> v<1 || v>5)) { alert('各項目の★を1〜5で選んでから投稿してね！'); return; }
+
+        const res = await fetch('/api/comments', {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify({ shoeId, comment, ratings, nickname })
+        });
+        const data = await res.json().catch(()=> ({}));
+        if (!res.ok) throw new Error(data?.error || `POST ${res.status}`);
+
+        // reset
+        const area = document.getElementById('userComment'); if (area) area.value = '';
+        for(let i=0;i<10;i++){
+          const chk = document.querySelector(`input[name="rating-${i}"]:checked`);
+          if (chk) chk.checked = false;
+        }
+        nextCursor = null;
+        await loadComments(false);
+        const t = document.querySelector('.list-title'); if (t) window.scrollTo({ top: t.offsetTop-80, behavior:'smooth' });
+      }catch(e){
+        console.error('[comment.js] submit failed:', e);
+        alert('投稿に失敗したよ… ' + e.message);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        isSubmitting = false;
       }
-      if (!comment || comment.length < 3) { alert('本文を3文字以上書いてね'); return; }
-      if (ratings.some(v=> v<1 || v>5)) { alert('各項目の★を1〜5で選んでから投稿してね！'); return; }
+    });
+  }
 
-      const res = await fetch('/api/comments', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({ shoeId, comment, ratings, nickname })
-      });
-      const data = await res.json().catch(()=> ({}));
-      if (!res.ok) throw new Error(data?.error || `POST ${res.status}`);
-
-      // reset
-      document.getElementById('userComment').value = '';
-      for(let i=0;i<10;i++){
-        const chk = document.querySelector(`input[name="rating-${i}"]:checked`);
-        if (chk) chk.checked = false;
-      }
-      nextCursor = null;
-      await loadComments(false);
-      const t = document.querySelector('.list-title'); if (t) window.scrollTo({ top: t.offsetTop-80, behavior:'smooth' });
-    }catch(e){
-      console.error('[comment.js] submit failed:', e);
-      alert('投稿に失敗したよ… ' + e.message);
-    }
-  });
-
-  more?.addEventListener('click', ()=> loadComments(true));
+  // 「もっと見る」も多重バインド防止
+  if (more && more.dataset.bound !== '1') {
+    more.addEventListener('click', ()=> loadComments(true));
+    more.dataset.bound = '1';
+  }
 
   // 初回
   loadComments();

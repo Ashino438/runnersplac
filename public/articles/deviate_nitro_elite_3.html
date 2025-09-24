@@ -1,0 +1,393 @@
+<!doctype html>
+
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PUMA Deviate Nitro Elite 3レビュー｜高速巡航に特化した反発系レーシングシューズの真価</title>
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --bg-soft: #121319;
+      --card: #151821;
+      --text: #e6e8ee;
+      --muted: #aab0bd;
+      --accent: #6ad1ff;
+      --accent-2: #9bffb7;
+      --danger: #ff6a8a;
+      --ok: #7cf2c6;
+      --warn: #ffd166;
+      --ring: rgba(106, 209, 255, .35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius-xl: 18px;
+      --radius: 12px;
+      --radius-sm: 10px;
+      --fw-bold: 700;
+      --fw-medium: 600;
+      --gap: 22px;
+      --gap-sm: 14px;
+      --maxw: 1080px;
+      --hero-h:4px;
+      --bp: 960px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f8fb; --bg-soft:#eef1f7; --card:#ffffff; --text:#111827; --muted:#606a7b; --shadow:0 10px 25px rgba(16,24,40,.08);
+        --ring: rgba(17, 89, 201, .25);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; line-height:1.8}
+    a{color:var(--accent)}
+    .wrap{max-width:var(--maxw);margin:auto; padding: 20px 20px 80px}
+
+```
+/* Hero */
+.hero{position:fixed; top:0; left:0; right:0; transform:translateY(0); transition:transform .28s ease, opacity .2s ease, background .3s ease; background:linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(255,255,255,0)); backdrop-filter:saturate(1.2) blur(8px); z-index:5; border-bottom:1px solid rgba(255,255,255,.06); will-change: transform, opacity}
+.hero-hidden .hero{ transform: translateY(-120%) !important; opacity: 0 !important; pointer-events: none; }
+.hero-inner{max-width:var(--maxw);margin:auto;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.title{font-size:clamp(20px, 3vw, 28px);font-weight:800;letter-spacing:.2px;margin:0}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;background:var(--bg-soft);border:1px solid rgba(255,255,255,.06);border-radius:999px;color:var(--muted);font-size:12px}
+.actions{display:flex;gap:10px}
+.btn{border:1px solid rgba(255,255,255,.12);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)}
+.btn:hover{outline:2px solid var(--ring)}
+
+/* Grid layout */
+.grid{display:grid;gap:var(--gap);grid-template-columns: 220px 1fr}
+.toc-collapsed .grid{grid-template-columns:1fr}
+@media (max-width: var(--bp)){.grid{grid-template-columns: 1fr}}
+
+/* Cards */
+.card{background:var(--card);border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.06)}
+.card h2{font-size:clamp(18px, 2.2vw, 22px);margin:0 0 8px;font-weight:800}
+.sub{color:var(--muted);font-size:14px;margin:6px 0 0}
+
+.lead{font-size:18px;line-height:1.9}
+
+/* Spec chips */
+.spec-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.spec{background:linear-gradient(120deg, rgba(106,209,255,.12), rgba(155,255,183,.10));border:1px solid rgba(106,209,255,.3);padding:10px 12px;border-radius:12px;font-weight:600}
+
+/* Two-column section cards */
+.stack{display:grid;gap:var(--gap)}
+
+/* Like/Dislike split */
+.split{display:grid;gap:var(--gap);grid-template-columns: 1fr 1fr}
+@media (max-width: 780px){.split{grid-template-columns:1fr}}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.good{background:rgba(124,242,198,.15);border:1px solid rgba(124,242,198,.5);color:#00c58e}
+.bad{background:rgba(255,106,138,.15);border:1px solid rgba(255,106,138,.5);color:#ff6a8a}
+
+/* Scores */
+.scores{display:grid;grid-template-columns: 1fr 1fr;gap:14px}
+@media (max-width: 720px){.scores{grid-template-columns:1fr}}
+.score{background:var(--bg-soft);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 14px}
+.score .label{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.bar{height:10px;border-radius:999px;background:linear-gradient(90deg, rgba(106,209,255,.25), rgba(155,255,183,.25));overflow:hidden;margin-top:10px}
+.bar>span{display:block;height:100%;width:0%;background:linear-gradient(90deg, var(--accent), var(--accent-2));border-radius:inherit;transition:width .8s ease}
+
+/* Comparison */
+.compare{display:grid;grid-template-columns: 1fr 1fr;gap:var(--gap)}
+@media (max-width: 900px){.compare{grid-template-columns:1fr}}
+.compare .mini{display:grid;gap:10px}
+
+/* Tips */
+.tips{display:grid;gap:var(--gap);grid-template-columns: .65fr .35fr}
+@media (max-width: var(--bp)){.tips{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);padding-left:16px}
+.kpis{display:grid;gap:10px}
+.kpi{background:var(--bg-soft);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
+
+/* Footer summary */
+.summary{background:linear-gradient( to bottom right, rgba(106,209,255,.10), rgba(155,255,183,.08) );border:1px solid rgba(106,209,255,.35)}
+.hashtags{opacity:.8}
+
+/* Smooth anchors */
+html{scroll-behavior:smooth}
+.toc{position:sticky; top: 10px; align-self:flex-start;width:200px;transition:opacity .25s ease, visibility .25s ease}
+.toc-collapsed .toc{opacity:0; visibility:hidden; pointer-events:none}
+.toc .card{padding:12px; position:relative}
+.toc .toc-close{position:absolute; top:8px; right:8px; height:28px; width:28px; border-radius:8px; border:1px solid rgba(255,255,255,.12); background:var(--bg-soft); color:var(--muted); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px}
+.toc .toc-close:hover{outline:2px solid var(--ring); color:var(--text)}
+.toc a{display:block;padding:6px 8px;border-radius:10px;color:var(--muted);text-decoration:none; font-size:14px}
+.toc a:hover{background:var(--bg-soft);color:var(--text)}
+
+/* モバイル時のTOCドロワー */
+@media (max-width: var(--bp)){
+  .toc{position:fixed; top:12px; left:12px; right:12px; bottom:12px; width:auto; max-width:560px; margin:0 auto; transform:translateX(-110%); opacity:0; visibility:hidden; z-index:60}
+  .toc .card{height:100%; overflow:auto; padding-top:36px}
+  body:not(.toc-collapsed) .toc{transform:translateX(0); opacity:1; visibility:visible; pointer-events:auto}
+  .toc-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:55; opacity:0; visibility:hidden; transition:opacity .2s ease}
+  body:not(.toc-collapsed) .toc-backdrop{opacity:1; visibility:visible}
+}
+```
+
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1 class="title">PUMA Deviate Nitro Elite 3レビュー｜高速巡航に特化した反発系レーシングシューズの真価</h1>
+      <div class="actions">
+        <span class="chip" title="価格">💴 ¥29,700 / $230</span>
+        <span class="chip" title="重量">⚖️ 約195〜209g（US9〜10.5）</span>
+        <button id="tocToggle" class="btn" aria-label="目次の表示切替" aria-pressed="false">📑 目次</button>
+        <button id="themeBtn" class="btn" aria-label="テーマ切替">🌓 テーマ</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+      <aside class="toc">
+        <nav class="card"><button class="toc-close" aria-label="目次を閉じる" title="閉じる">✕</button>
+          <a href="#lead">リード</a>
+          <a href="#spec">概要とスペック</a>
+          <a href="#design-biomech">設計思想 × バイオメカ</a>
+          <a href="#impressions">実走インプレ</a>
+          <a href="#likes-dislikes">好き×惜しい</a>
+          <a href="#scores">10項目評価</a>
+          <a href="#comparison">ライバル比較</a>
+          <a href="#tips-longevity">Tips＆寿命</a>
+          <a href="#summary">まとめ</a>
+        </nav>
+      </aside>
+      <div class="toc-backdrop" aria-hidden="true" tabindex="-1"></div>
+
+```
+  <main class="stack">
+    <!-- LEAD -->
+    <section id="lead" class="card lead">
+      <p>「マラソンであと数分を削りたい」「スピード練習で反発を感じたい」――そう考える市民ランナーに試してほしいのが，PUMAのDeviate Nitro Elite 3である．軽量かつ高反発のフォームと剛性の強いカーボンプレートが生み出す推進力は，特に閾値走やレース本番で武器となる．本稿では実測データと走行体験を交えて，この一足の核心を伝える．</p>
+    </section>
+
+    <!-- SPEC -->
+    <section id="spec" class="card">
+      <h2>概要とスペック</h2>
+      <p>重量は約195〜209g（US9〜10.5の実測値）．スタック高は公称40/32mm（RunRepeatの実測は39.2/28.6mmでドロップ10.6mmと差があるため不確か），公称ドロップは8mm．ミッドソールはNITROFOAM ELITE（A-TPU超臨界発泡）で立ち上がりの反発が鋭い．メーカーは「エネルギーリターン93%」と謳うが第三者検証は未確認で不確か．フルレングスカーボンプレート「PWRPLATE」搭載，アウトソールはPUMAGRIP．価格は$230／¥29,700．</p>
+      <div class="spec-chips">
+        <div class="spec">⚖️ 重量：195〜209g（実測）</div>
+        <div class="spec">📏 ドロップ：8mm（公称）</div>
+        <div class="spec">📐 スタック：40/32mm 公称（実測差あり）</div>
+        <div class="spec">🧪 ミッドソール：NITROFOAM ELITE（A-TPU）</div>
+        <div class="spec">🪭 プレート：PWRPLATE（カーボン）</div>
+        <div class="spec">💴 価格：¥29,700（$230）</div>
+      </div>
+      <p class="sub">※ スタック・ドロップは情報源・測定条件で差異あり．レンジ把握推奨．</p>
+    </section>
+
+    <!-- DESIGN × BIOMECH -->
+    <section id="design-biomech" class="card">
+      <h2>設計思想 × バイオメカ</h2>
+      <p>狙いは「スピード域での推進力最大化」である．NITROFOAM ELITEはPEBAではなくA-TPU基材で，柔らかさよりも剛性と即応性を優先．例えるなら柔らかいゴムではなく金属スプリングで弾かれる感覚．前足部ロッカーは“つま先が転がる”ように体重移動を補助し，厚底由来の足関節・膝モーメントの増加を，カーボン×ロッカーの組み合わせでMTP背屈負荷を抑えつつ前方へ逃がす設計（Doctors of Running, 2024-10-24）．一方で高剛性はふくらはぎやアキレス腱に負担が集中しやすく，合わないランナーには疲労が出やすい．</p>
+    </section>
+
+    <!-- IMPRESSIONS -->
+    <section id="impressions" class="card">
+      <h2>実走インプレ</h2>
+      <p>キロ6分前後のジョグでは硬めで“板乗り”の印象で反発は感じにくい．キロ4:30付近に上げると性格が一変し，接地〜離地がスムーズに連結．ロッカーとプレートのスナップで“転がされる”感覚が強まり，テンポ走や10kmレースでピッチ維持が容易になる．</p>
+      <p>濡れたアスファルトでもPUMAGRIPは強力で，横断歩道やマンホールでも空転が少ない．サイズはやや細身．RunRepeat Labの計測ではトウボックス幅69.5mmと狭く，広めの足ではタイトに感じやすい．踵ホールドは良好で，二段ハトメを活用すれば長時間でも抜けにくい．</p>
+    </section>
+
+    <!-- LIKES / DISLIKES -->
+    <section id="likes-dislikes" class="card">
+      <h2>ここが好き！× ここは惜しい！</h2>
+      <div class="split">
+        <div class="mini card" style="padding:16px">
+          <span class="badge good">👍 ここが好き！</span>
+          <p>第一に「軽さ」．200g切り級の軽量性は足を軽く感じさせる．第二に「推進力」．高速域でロッカー×プレートが噛み合い“弾かれる”反発が楽しい．第三に「グリップ」．雨天でも安心できるPUMAGRIPは他ブランド比でも優位．</p>
+        </div>
+        <div class="mini card" style="padding:16px">
+          <span class="badge bad">⚠️ ここは惜しい！</span>
+          <p>「安定性」．中足部の接地幅が狭く，踵接地や疲労時に横ブレが出やすい．「ロング快適性」．30km以降は前足部の層厚が薄く足裏疲労が出やすい場面があった．</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCORES -->
+    <section id="scores" class="card">
+      <h2>10項目評価</h2>
+      <div class="scores" aria-live="polite">
+        <div class="score"><div class="label"><span>クッション性</span><span class="val">4／5</span></div><div class="bar"><span></span></div><p class="sub">やや硬質だが反発を引き出す設計．</p></div>
+        <div class="score"><div class="label"><span>安定性</span><span class="val">3／5</span></div><div class="bar"><span></span></div><p class="sub">高速直進は良好だが踵接地で不安定さが残る．</p></div>
+        <div class="score"><div class="label"><span>軽さ</span><span class="val">5／5</span></div><div class="bar"><span></span></div><p class="sub">200g切り級の軽量性が武器．</p></div>
+        <div class="score"><div class="label"><span>コスパ</span><span class="val">3／5</span></div><div class="bar"><span></span></div><p class="sub">価格は高いが性能で納得感．</p></div>
+        <div class="score"><div class="label"><span>履き心地</span><span class="val">3.5／5</span></div><div class="bar"><span></span></div><p class="sub">細めの足向け．広めの足には窮屈．</p></div>
+        <div class="score"><div class="label"><span>デザイン</span><span class="val">4／5</span></div><div class="bar"><span></span></div><p class="sub">流線形シルエットでスピード感．</p></div>
+        <div class="score"><div class="label"><span>通気性</span><span class="val">4／5</span></div><div class="bar"><span></span></div><p class="sub">モノメッシュで夏場も蒸れにくい．</p></div>
+        <div class="score"><div class="label"><span>スピード性能</span><span class="val">5／5</span></div><div class="bar"><span></span></div><p class="sub">閾値走〜レースで真価．</p></div>
+        <div class="score"><div class="label"><span>グリップ</span><span class="val">4.5／5</span></div><div class="bar"><span></span></div><p class="sub">ウェットで安心感高い．</p></div>
+        <div class="score"><div class="label"><span>耐久性</span><span class="val">3.5／5</span></div><div class="bar"><span></span></div><p class="sub">200km超で反発低下が目立ち始める傾向．</p></div>
+      </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section id="comparison" class="card">
+      <h2>ライバルシューズと比較</h2>
+      <div class="compare">
+        <div class="mini card">
+          <h3 style="margin:0 0 6px">ASICS Metaspeed Sky Paris</h3>
+          <p>柔らかくしなやかな反発で長距離巡航に適性．フルの安定感重視ならこちらが合わせやすい．</p>
+        </div>
+        <div class="mini card">
+          <h3 style="margin:0 0 6px">Saucony Endorphin Pro 4</h3>
+          <p>中庸な剛性とロール感でフルを安定走行．DNE3は軽さと硬めスナップで10km〜ハーフに強い．</p>
+        </div>
+      </div>
+      <p class="sub">※ 安定感重視のフルはMSP/EP4，スピード感を楽しむならDNE3．</p>
+    </section>
+
+    <!-- TIPS & LONGEVITY -->
+    <section id="tips-longevity" class="card">
+      <h2>使いこなしTips＆寿命</h2>
+      <div class="tips">
+        <div class="callout">
+          <p>活きるのはスピード練習や閾値走．ミッド〜フォア接地で真価を発揮．二段ハトメで踵抜け防止．寿命は200〜300kmで反発低下が始まる印象のため，レース専用運用で延命を狙いたい．</p>
+        </div>
+        <div class="kpis">
+          <div class="kpi">⏱️ 得意領域：閾値〜レース（10km〜ハーフ）</div>
+          <div class="kpi">👟 推奨ローテ：DNE3 × 安定系トレーナー × マラソン用</div>
+          <div class="kpi">📈 寿命目安：200〜300km（使用強度で±）</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUMMARY -->
+    <section id="summary" class="card summary">
+      <h2>まとめ</h2>
+      <p>DNE3は軽量性と高剛性を武器に，閾値走やレースで「もっと前へ」という感覚を強く与える一足．購入時は「足幅が合うか」「高速域で反発が心地よく感じられるか」を試着で必ず確認したい．</p>
+      <p class="summary-100"><strong>要約（約100字）</strong>：軽量×高剛性×強ロッカーで，高速巡航の“弾かれ感”が魅力．フルの安定性よりも10km〜ハーフのスピード感を楽しみたいランナーにハマる．</p>
+      <p class="hashtags">#反発 #マラソン #DeviateNitroElite3</p>
+    </section>
+  </main>
+</div>
+```
+
+  </div>
+
+  <script>
+    // ヘッダー高さをCSS変数に反映
+    (function(){
+      const header = document.querySelector('.hero');
+      function applyHeroH(){
+        if(!header) return;
+        const h = header.offsetHeight || 64;
+        document.documentElement.style.setProperty('--hero-h', h + 'px');
+      }
+      window.addEventListener('load', applyHeroH);
+      window.addEventListener('resize', () => { requestAnimationFrame(applyHeroH); });
+    })();
+
+    // テーマ切替
+    const btn = document.getElementById('themeBtn');
+    let light = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const toggle = () => {
+      document.documentElement.style.filter = light ? 'invert(0) hue-rotate(0)' : 'invert(0)';
+      document.documentElement.dataset.theme = light ? 'dark' : 'light';
+      light = !light;
+    };
+    btn?.addEventListener('click', toggle);
+
+    // スコアバー幅を値から自動計算
+    const toPct = (text) => {
+      if(!text) return 0;
+      const m = text.trim().match(/([0-9]+(?:\.[0-9]+)?)\s*[／\/]\s*([0-9]+)/);
+      if(!m) return 0;
+      const val = parseFloat(m[1]);
+      const max = parseFloat(m[2]);
+      return Math.max(0, Math.min(100, (val / max) * 100));
+    };
+    document.querySelectorAll('#scores .score').forEach((el)=>{
+      const valText = el.querySelector('.val')?.textContent || '';
+      const pct = toPct(valText);
+      const bar = el.querySelector('.bar>span');
+      requestAnimationFrame(()=>{ if(bar) bar.style.width = pct + '%'; });
+    });
+
+    // スクロールでヘッダーを隠す
+    (function(){
+      let lastY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const threshold = 10;
+      const topKeep = 60;
+      let ticking = false;
+      function update(){
+        const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (y > topKeep && y - lastY > threshold){
+          document.body.classList.add('hero-hidden');
+        } else if (lastY - y > threshold || y <= topKeep){
+          document.body.classList.remove('hero-hidden');
+        }
+        lastY = y;
+        ticking = false;
+      }
+      window.addEventListener('scroll', ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
+      let touchStartY = null;
+      window.addEventListener('touchstart', e => { touchStartY = (e.touches?.[0]?.clientY) ?? null; }, {passive:true});
+      window.addEventListener('touchmove', e => {
+        const cy = (e.touches?.[0]?.clientY) ?? null;
+        const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (touchStartY !== null && cy !== null){
+          const dy = touchStartY - cy;
+          if (y > topKeep && dy > 4) document.body.classList.add('hero-hidden');
+          if (dy < -4) document.body.classList.remove('hero-hidden');
+        }
+      }, {passive:true});
+      requestAnimationFrame(update);
+    })();
+
+    // TOC toggle（デスクトップは表示、モバイルはドロワー）
+    const tocBtn = document.getElementById('tocToggle');
+    const BP = 960;
+    const isDesktop = () => window.matchMedia(`(min-width: ${BP+1}px)`).matches;
+
+    const applyTocState = (on) => {
+      document.body.classList.toggle('toc-collapsed', !on);
+      tocBtn?.setAttribute('aria-pressed', String(on));
+      tocBtn?.setAttribute('aria-label', on ? '目次を隠す' : '目次を表示');
+    };
+
+    (function initToc(){
+      const saved = localStorage.getItem('toc-visible');
+      if (isDesktop()) {
+        applyTocState(true);
+      } else {
+        if (saved === null) applyTocState(false); else applyTocState(saved === '1');
+      }
+    })();
+
+    tocBtn?.addEventListener('click', ()=>{
+      const visible = !document.body.classList.contains('toc-collapsed');
+      const next = !visible;
+      applyTocState(next);
+      localStorage.setItem('toc-visible', next? '1':'0');
+    });
+
+    window.addEventListener('resize', () => {
+      if (isDesktop()) {
+        applyTocState(true);
+      } else {
+        const saved = localStorage.getItem('toc-visible');
+        if (saved === null) applyTocState(false); else applyTocState(saved === '1');
+      }
+    }, { passive: true });
+
+    document.querySelector('.toc .toc-close')?.addEventListener('click', ()=>{
+      applyTocState(false);
+      localStorage.setItem('toc-visible','0');
+    });
+
+    // バックドロップとTOCリンクで閉じる（モバイル時のみ）
+    (function(){
+      const backdrop = document.querySelector('.toc-backdrop');
+      const toc = document.querySelector('.toc');
+      backdrop && backdrop.addEventListener('click', ()=> applyTocState(false));
+      toc && toc.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          if (window.matchMedia(`(max-width: ${BP}px)`).matches) applyTocState(false);
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -232,6 +232,173 @@
 
 </main>
 
+<!-- ブログセクション -->
+<section class="blog-section">
+  <div class="blog-container">
+    <h2 class="blog-title">🏃‍♂️ ランナーのためのブログ</h2>
+    <p class="blog-description">ランニングギアやトレーニングに関する実体験レビューをお届けします。</p>
+    
+    <div class="blog-cards">
+      <article class="blog-card">
+        <div class="blog-card-header">
+          <span class="blog-category">GEAR</span>
+          <time class="blog-date">2025-09-24</time>
+        </div>
+        <h3 class="blog-card-title">
+          <a href="/blog/oldspice">【ランナー必見】Old Spiceデオドラントで走った後も"爽やかランナー"に</a>
+        </h3>
+        <p class="blog-card-excerpt">ランニング後の大敵「汗とニオイ」――その不安を丸ごと減らしてくれたのが，アメリカ発のOld Spiceだった．実際に走る生活の中で効いた理由と使い分けをまとめた．</p>
+        <div class="blog-card-footer">
+          <span class="blog-author">by Kiyoshi Roshiro</span>
+          <a href="/blog/oldspice" class="blog-read-more">続きを読む →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+.blog-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 60px 20px;
+  margin-top: 40px;
+}
+
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #2d3748;
+}
+
+.blog-description {
+  text-align: center;
+  color: #718096;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.blog-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 25px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.blog-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08), 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.blog-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.blog-category {
+  background: linear-gradient(135deg, #ff2f6d, #ff6b3d);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blog-date {
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+.blog-card-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.blog-card-title a {
+  color: #2d3748;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.blog-card-title a:hover {
+  color: #ff2f6d;
+}
+
+.blog-card-excerpt {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.blog-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.blog-author {
+  color: #718096;
+  font-size: 14px;
+}
+
+.blog-read-more {
+  color: #ff2f6d;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.blog-read-more:hover {
+  color: #e53e3e;
+}
+
+@media (max-width: 768px) {
+  .blog-section {
+    padding: 40px 16px;
+  }
+  
+  .blog-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .blog-card {
+    padding: 20px;
+  }
+  
+  .blog-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+</style>
+
 
 
 

@@ -1,0 +1,12 @@
+<%- include('../partials/header', { current:'blog', user, req }) %>
+<section class="section">
+  <div class="container">
+    <article class="card">
+      <h1><%= blog.title %></h1>
+      <div class="muted">by <%= blog.author || 'Runnersplac' %> · <%= blog.updatedAt ? new Date(blog.updatedAt).toLocaleDateString() : '' %></div>
+      <hr>
+      <div class="blog-body"><%- blog.html || blog.content || '' %></div>
+    </article>
+  </div>
+</section>
+<%- include('../partials/footer') %>

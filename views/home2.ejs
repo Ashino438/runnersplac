@@ -15,16 +15,29 @@
         <span class="badge"><%= activeFilters.length %> 件の条件</span>
       <% } %>
     </div>
+
+    <% const brandsList = (typeof brands !== 'undefined' && Array.isArray(brands) && brands.length) ? brands : Array.from(new Set((shoes||[]).map(s=>s.brand).filter(Boolean))).sort(); %>
+
+    <!-- brand tabs: clickable quick filters -->
+    <div class="brand-tabs" role="tablist" aria-label="ブランドで絞り込み" style="margin-top:10px">
+      <a href="/home2" class="brand-tab <%= !brand ? 'active' : '' %>">すべて</a>
+      <% brandsList.forEach(function(b){ %>
+        <a href="/home2?brand=<%= encodeURIComponent(b) %>" class="brand-tab <%= (brand===b) ? 'active' : '' %>"><%= b %></a>
+      <% }) %>
+    </div>
+
   </div>
 </section>
 
+<!-- blog & community moved below the shoe cards -->
+
 <section class="section">
   <div class="container grid" id="shoeGrid">
-    <% (shoes || []).forEach(function(s){ %>
-      <article class="card" data-slug="<%= s.slug %>"
+    <% (shoes || []).forEach(function(s, i){ %>
+      <article class="card <%= (i >= 10) ? 'hidden-card' : '' %>" data-index="<%= i %>" data-slug="<%= s.slug %>"
         onclick="if(event.target.closest('.actions')) return; location.href='/shoes/<%= s.slug %>'">
         <div class="card-header">
-          <img class="thumb" src="<%= s.image || '/img/placeholder-shoe.jpg' %>" alt="<%= s.name %>">
+          <img class="thumb" src="<%= s.image || '/img/placeholder-shoe.jpg' %>" alt="<%= s.name %>" loading="lazy" decoding="async">
           <div style="flex:1">
             <h3><%= s.name %></h3>
             <div class="meta">
@@ -68,10 +81,79 @@
       </article>
     <% }) %>
   </div>
+
+  <!-- load more button -->
+  <div style="text-align:center;margin:18px 0">
+    <button id="loadMoreBtn" class="btn">さらに表示</button>
+  </div>
 </section>
 
-  
+<!-- blog section (moved below cards) -->
+<% 
+const defaultBlogs = [
+  {
+    slug: 'oldspice',
+    title: '【ランナー必見】Old Spiceデオドラントで走った後も"爽やかランナー"に',
+    excerpt: 'ランニング後の大敵「汗とニオイ」――その不安を丸ごと減らしてくれたのが，アメリカ発のOld Spiceだった．実際に走る生活の中で効いた理由と使い分けをまとめた．',
+  image: '/img/blog-oldspice.jpg',
+    category: 'GEAR',
+    date: '2025-09-24'
+  }
+];
+const blogsList = (typeof blogs !== 'undefined' && Array.isArray(blogs)) ? [...defaultBlogs, ...blogs] : defaultBlogs;
+%>
+<section class="section blog-section">
+  <div class="container">
+    <h2>ランニングブログ</h2>
+    <p class="muted">役立つコラムやニュースをピックアップ</p>
+    <div class="blog-grid" style="margin-top:12px">
+      <% blogsList.forEach(function(b){ %>
+        <article class="blog-card">
+          <a href="/blog/<%= b.slug %>" class="blog-thumb-link">
+            <img class="blog-thumb" src="<%= (b.image ? (typeof b.image === 'string' && (b.image.match(/^https?:\/\//) ? b.image : (b.image.startsWith('/') ? b.image : '/images/' + b.image))) : '/images/1.png') %>" alt="<%= b.title %>" loading="lazy" decoding="async">
+            <% if (b.category) { %>
+              <div class="blog-category-badge"><%= b.category %></div>
+            <% } %>
+          </a>
+          <div class="blog-content">
+            <h3><a href="/blog/<%= b.slug %>"><%= b.title %></a></h3>
+            <p class="excerpt"><%= b.excerpt || '' %></p>
+            <% if (b.date) { %>
+              <div class="blog-meta">
+                <time datetime="<%= b.date %>"><%= new Date(b.date).toLocaleDateString('ja-JP') %></time>
+              </div>
+            <% } %>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+    <div style="text-align:right;margin-top:8px"><a href="/blog" class="btn">ブログ一覧へ</a></div>
+  </div>
+</section>
 
+<!-- community reviews (moved below cards) -->
+<% const reviewsList = (typeof reviews !== 'undefined' && Array.isArray(reviews)) ? reviews : []; %>
+<section class="section community-section">
+  <div class="container">
+    <h2>コミュニティの最近のレビュー</h2>
+    <p class="muted">ユーザーが最近投稿したレビューをピックアップ</p>
+    <div class="reviews-list">
+      <% (reviewsList.slice(0,3) || []).forEach(function(r){ %>
+        <article class="review-card">
+          <div class="rc-head">
+            <a href="/shoes/<%= r.shoeSlug || '' %>" class="rc-shoe"><strong><%= r.shoeName || 'シューズ' %></strong></a>
+            <span class="muted">by <%= r.nickname || '匿名' %></span>
+          </div>
+          <p class="rc-body"><%= (r.comment && r.comment.length>140) ? r.comment.substring(0,140)+'…' : (r.comment || '') %></p>
+          <div class="rc-meta">
+            <span class="rating">評価: <%= Array.isArray(r.ratings) ? (Math.round(r.ratings.reduce((a,b)=>a+(b||0),0) / (r.ratings.filter(Boolean).length || 1) * 10)/10) : (r.rating || '—') %></span>
+            <time datetime="<%= r.createdAt || '' %>"><%= r.createdAt ? new Date(r.createdAt).toLocaleDateString() : '' %></time>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
 
 <!-- フィルタモーダル -->
 <div id="filtersModal" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55)">
@@ -107,24 +189,72 @@
   </div>
 </div>
 
-
-
-
-<footer class="footer">
-  <div class="container">© <%= new Date().getFullYear() %> Runnersplac．</div>
+<!-- enhanced footer -->
+<footer class="footer site-footer">
+  <div class="container footer-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start;padding:24px 0">
+    <div class="footer-col">
+      <h4>サイト情報</h4>
+      <ul>
+        <li><a href="/about">このサイトについて</a></li>
+        <li><a href="/privacy">プライバシーポリシー</a></li>
+        <li><a href="/terms">利用規約</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>ナビゲーション</h4>
+      <ul>
+        <li><a href="/">シューズレビュー</a></li>
+        <li><a href="/blog">ブログ</a></li>
+        <li><a href="/memos">メモ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>サポート</h4>
+      <ul>
+        <li><a href="/contact">お問い合わせ</a></li>
+        <li><a href="/faq">よくある質問</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>SNS</h4>
+      <div class="social-links" style="display:flex;gap:8px">
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+      </div>
+      <div style="margin-top:12px;color:var(--muted);font-size:0.9rem">© <%= new Date().getFullYear() %> Runnersplac．All Rights Reserved.</div>
+    </div>
+  </div>
 </footer>
 
 <!-- 必要スクリプト -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script>
   const $ = (q)=>document.querySelector(q);
+
+  // debounce helper
+  const debounce = (fn, wait=400) => { let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); }; };
+
   $('#openFilters')?.addEventListener('click',()=>{$('#filtersModal').style.display='block'});
   $('#closeFilters')?.addEventListener('click',()=>{$('#filtersModal').style.display='none'});
-  $('#q')?.addEventListener('keydown',(e)=>
- { if(e.key==='Enter'){ location.href = '/home2?q=' + encodeURIComponent(e.target.value); } }); 
 
+  // search: enter or debounce auto-apply (updates URL)
+  (function(){
+    const q = $('#q');
+    if(!q) return;
+    const apply = ()=>{ const url = '/home2?q=' + encodeURIComponent(q.value.trim()); if(location.pathname+location.search !== url){ history.replaceState(null,'',url); location.assign(url); } };
+    q.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); apply(); } if(e.key==='Escape'){ q.value=''; } });
+    q.addEventListener('input', debounce(()=>{ apply(); }, 600));
+  })();
 
-  // 10軸レーダー
+  // highlight active brand-tab based on query param
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const b = params.get('brand');
+    if(!b) return;
+    document.querySelectorAll('.brand-tab').forEach(a=>{ if(a.href.includes('brand='+encodeURIComponent(b))){ a.classList.add('active'); } else a.classList.remove('active'); });
+  })();
+
+  // mini charts lazy render (IntersectionObserver aware) - keep existing logic
   const miniCharts = document.querySelectorAll('canvas.mini-radar');
   if (miniCharts.length) {
     const labels10 = [
@@ -140,7 +270,7 @@
       const ds = cv.dataset;
       const vals = keys10.map(k => {
         const v = ds[k];
-        return v !== undefined && v !== '' ? Number(v) : null; // 未入力はnullでスキップ
+        return v !== undefined && v !== '' ? Number(v) : null;
       });
 
       new Chart(cv.getContext('2d'), {
@@ -160,19 +290,8 @@
         options: {
           responsive: false,
           animation: { duration: 300 },
-          scales: {
-            r: {
-              beginAtZero: true,
-              min: 0, max: 5, ticks: { stepSize: 1, display: false },
-              grid: { color: 'rgba(255,255,255,0.08)' },
-              angleLines: { color: 'rgba(255,255,255,0.08)' },
-              pointLabels: { color: getComputedStyle(document.documentElement).getPropertyValue('--muted') || '#9aa7b2', font: { size: 8 } }
-            }
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: { enabled: true }
-          }
+          scales: { r: { beginAtZero: true, min: 0, max: 5, ticks: { stepSize: 1, display: false } } },
+          plugins: { legend: { display: false }, tooltip: { enabled: true } }
         }
       });
       cv.dataset.rendered = '1';
@@ -188,9 +307,8 @@
       });
     }, { rootMargin: '100px' }) : null;
 
-    miniCharts.forEach(cv=>{
-      if(io) io.observe(cv); else makeRadar(cv);
-    });
+    // render all mini charts immediately (show charts from start)
+    miniCharts.forEach(cv=>{ if(!cv.dataset.rendered) makeRadar(cv); });
   }
 
 
@@ -198,13 +316,13 @@
   const btn = e.target.closest('.wish-btn');
   if (!btn) return;
 
-  const id = btn.dataset.shoeId; // ← 'id' に統一
+  const id = btn.dataset.shoeId;
   if (!id) { alert('シューズIDが取れない…'); return; }
 
   const r = await fetch('/api/wishlist', {
     method: 'POST',
     headers: { 'Content-Type':'application/json' },
-    body: JSON.stringify({ id }) // ← サーバは id を見る
+    body: JSON.stringify({ id })
   });
   const j = await r.json().catch(()=> ({}));
 
@@ -216,9 +334,33 @@
 });
 
 
-
+  // progressive reveal: show 10 more cards per click
+  (function(){
+    const btn = document.getElementById('loadMoreBtn');
+    if (!btn) return;
+    const batch = 10;
+    const hiddenSelector = '.card.hidden-card';
+    const showNext = ()=>{
+      const hidden = Array.from(document.querySelectorAll(hiddenSelector));
+      if (!hidden.length) { btn.style.display = 'none'; return; }
+      const slice = hidden.slice(0, batch);
+      slice.forEach(el=> el.classList.remove('hidden-card'));
+      // if none left, hide button
+      if (document.querySelectorAll(hiddenSelector).length === 0) btn.style.display = 'none';
+      // smooth scroll to the first revealed
+      if (slice.length) slice[0].scrollIntoView({ behavior:'smooth', block:'center' });
+    };
+    // initial hide if no more cards
+    if (document.querySelectorAll(hiddenSelector).length === 0) btn.style.display = 'none';
+    btn.addEventListener('click', showNext);
+  })();
 </script>
 
+<!-- load reviews fallback script -->
+<script src="/js/fetchReviews.js"></script>
+<script src="/js/fetchBlogs.js"></script>
+
+<!-- add CSS for blog-thumb zoom effect -->
 <style>
   .mini-radar{
     display:block;
@@ -258,5 +400,84 @@
   transform: translateY(0);
 }
 
+/* brand-tabs */
+.brand-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px }
+.brand-tab{ display:inline-block; padding:8px 14px; border:1px solid var(--border); border-radius:999px; text-decoration:none; color:var(--text); white-space:nowrap }
+.brand-tab.active{ background:var(--brand); color:#fff; border-color:var(--brand) }
+
+/* blog grid */
+.blog-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:16px }
+.blog-card{ 
+  border:1px solid var(--border); 
+  border-radius:12px; 
+  overflow:hidden; 
+  background:var(--surface); 
+  display:flex; 
+  flex-direction:column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.blog-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+.blog-card .blog-thumb-link{ 
+  position:relative; 
+  display:block;
+}
+.blog-card img{ width:100%; height:160px; object-fit:cover }
+.blog-category-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background: linear-gradient(135deg, #ff2f6d, #ff6b3d);
+  color:white;
+  padding:4px 8px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.blog-content{ padding:14px }
+.blog-content h3{ margin:0 0 8px 0; font-size:1.1rem; line-height:1.3 }
+.blog-content h3 a{ color:var(--text); text-decoration:none; transition: color 0.2s ease }
+.blog-content h3 a:hover{ color:var(--brand) }
+.blog-content .excerpt{ color:var(--muted); font-size:0.9rem; margin:0 0 10px 0; line-height:1.4 }
+/* ensure excerpt is clamped to 3 lines with fallbacks */
+.blog-content .excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3; /* standard property where supported */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blog-meta{
+  font-size:0.85rem;
+  color:var(--muted);
+  margin-top:auto;
+}
+
+.hidden-card{ display:none !important; }
+#loadMoreBtn{ padding:10px 18px; border-radius:999px; background:var(--brand); color:#fff; border:0; cursor:pointer }
+#loadMoreBtn:hover{ filter:brightness(.95) }
+
+.blog-thumb{ transition: transform 220ms cubic-bezier(.2,.9,.2,1); display:block; width:100%; height:160px; object-fit:cover }
+
+/* review cards */
+.reviews-list{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px }
+.review-card{ flex:1 1 calc(33% - 12px); min-width:200px; border:1px solid var(--border); background:var(--surface); border-radius:10px; padding:12px; box-shadow:0 2px 8px rgba(0,0,0,0.04) }
+.rc-head{ display:flex; justify-content:space-between; gap:8px; align-items:center; margin-bottom:8px }
+.rc-shoe{ color:var(--brand); text-decoration:none }
+.rc-body{ color:var(--text); margin:0 0 8px; font-size:0.95rem }
+.rc-meta{ font-size:0.85rem; color:var(--muted); display:flex; gap:8px; align-items:center }
+
+@media (max-width:900px){ .review-card{ flex:1 1 100% } }
+
+/* Blog desktop layout: prefer 3 columns on larger screens and limit excerpt length */
+@media (min-width: 900px) {
+  .blog-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
 </style>
 

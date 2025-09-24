@@ -1,0 +1,21 @@
+<%- include('../partials/header', { current:'blog', user, req }) %>
+<section class="section">
+  <div class="container">
+    <h1>ランニングブログ</h1>
+    <div class="blog-grid">
+      <% (blogs || []).forEach(function(b){ %>
+        <article class="blog-card">
+          <a href="/blog/<%= b.id || b.slug %>">
+            <img src="<%= b.image || '/img/blog-placeholder.jpg' %>" alt="<%= b.title %>">
+          </a>
+          <div class="blog-content">
+            <h3><a href="/blog/<%= b.id || b.slug %>"><%= b.title %></a></h3>
+            <p class="excerpt"><%= b.excerpt || '' %></p>
+            <div class="muted"><%= b.author || '' %> · <%= b.updatedAt ? new Date(b.updatedAt).toLocaleDateString() : '' %></div>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

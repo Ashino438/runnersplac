@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- ...existing code... -->
+</head>
+<body data-user-uid="<%= user && user.uid ? user.uid : '' %>" data-shoe-id="<%= shoeId %>">
+  <!-- Ensure memo-root exists for tabbed-ui -->
+  <div id="memo-root" data-shoe-id="<%= shoeId %>"></div>
+  <script>
+    // Populate globals for front-end without embedding server-side values into JS code
+    (function(){
+      try{
+        var uid = document.body.dataset.userUid || '';
+        if(uid){ window.__USER__ = window.__USER__ || {}; window.__USER__.uid = uid; }
+        var sid = document.body.dataset.shoeId || '';
+        if(sid){ window.__SHOE__ = window.__SHOE__ || {}; window.__SHOE__.id = window.__SHOE__.id || sid; }
+      }catch(e){ /* ignore */ }
+    })();
+  </script>
+
+  <!-- ...existing code... -->
+</body>
+</html>

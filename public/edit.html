@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事編集</title>
+</head>
+<body>
+    <div class="container">
+        <h1>記事編集</h1>
+        
+        <form id="articleForm">
+            <div>
+                <label for="articleId">記事ID:</label>
+                <input type="text" id="articleId" required>
+            </div>
+            
+            <div>
+                <label for="articleTitle">タイトル:</label>
+                <input type="text" id="articleTitle" required>
+            </div>
+            
+            <div>
+                <label for="articleContent">内容:</label>
+                <textarea id="articleContent" rows="10" cols="50" required></textarea>
+            </div>
+            
+            <button type="submit">保存</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('articleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById('articleId').value;
+            const title = document.getElementById('articleTitle').value;
+            const content = document.getElementById('articleContent').value;
+            
+            try {
+                const response = await fetch(`/api/articles/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ title, content })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('記事が保存されました');
+                } else {
+                    alert('保存に失敗しました: ' + result.message);
+                }
+            } catch (error) {
+                console.error('保存エラー:', error);
+                alert('保存中にエラーが発生しました');
+            }
+        });
+    </script>
+</body>
+</html>

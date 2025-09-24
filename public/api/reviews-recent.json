@@ -1,0 +1,29 @@
+[
+  {
+    "id": "r1",
+    "shoeSlug": "pegasus41",
+    "shoeName": "Nike Pegasus 41",
+    "nickname": "runner_tomo",
+    "comment": "軽さとクッションのバランスが良くて普段のジョグにぴったり。ソールのグリップも安心感あり。",
+    "ratings": [4,4,4,4,4,4,3,4,4,4],
+    "createdAt": "2025-09-15T08:12:00.000Z"
+  },
+  {
+    "id": "r2",
+    "shoeSlug": "novablast5",
+    "shoeName": "New Balance NovaBlast 5",
+    "nickname": "ayaka_run",
+    "comment": "反発が強くてスピード感ある。長い距離は足が疲れやすかったけど、ペース走には最高。",
+    "ratings": [5,3,4,4,3,4,3,5,4,3],
+    "createdAt": "2025-09-14T19:40:00.000Z"
+  },
+  {
+    "id": "r3",
+    "shoeSlug": "metaspeededge",
+    "shoeName": "ASICS Metaspeed Edge",
+    "nickname": "ken_s",
+    "comment": "レース用に投入。前への転がりが気持ちいい。フォームを作るときに使いやすい一足。",
+    "ratings": [5,4,3,5,4,4,3,5,4,4],
+    "createdAt": "2025-09-13T07:05:00.000Z"
+  }
+]

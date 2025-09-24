@@ -271,7 +271,15 @@ document.head.appendChild(extraStyle);
         <div class="card" id="user-voice-slot"></div>
       </section>
 
-      <section id="tab-host" class="tab-pane"></section>
+      <section id="tab-host" class="tab-pane">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <h2>レビュー本文</h2>
+            <button id="host-edit-btn" class="tab-edit-btn" type="button" style="padding:.5rem 1rem;border:1px solid var(--border);border-radius:6px;background:var(--accent-weak);color:var(--accent-strong);cursor:pointer;">編集</button>
+          </div>
+          <div id="host-content"></div>
+        </div>
+      </section>
     `;
 
     // Apply small inline adjustments so the tabs visually overlap the hero on first view
@@ -362,10 +370,85 @@ document.head.appendChild(extraStyle);
     });
 })();
 
-    // ===== move existing DOM =====
+    // ===== move existing DOM / load host article from local HTML or JSON =====
     if (heroImg) document.getElementById('ov-media')?.appendChild(heroImg);
+    // remove any pre-rendered hostArticle to avoid duplicates
     const hostArticle = document.querySelector('.host-article.card');
-    if (hostArticle) document.getElementById('tab-host')?.appendChild(hostArticle);
+    if (hostArticle) hostArticle.remove();
+    // load host article: prefer static HTML files over JSON
+    (async function loadHostArticle(){
+      const hostSlot = document.getElementById('host-content');
+      if (!hostSlot || !shoeId) return;
+      
+      try{
+        // 静的HTMLファイルを最優先で読み込み（編集ページで生成されたもの）
+        const htmlRes = await fetch(`/articles/${encodeURIComponent(shoeId)}.html`, { cache:'no-store' });
+        if (htmlRes.ok) {
+          const txt = await htmlRes.text();
+          hostSlot.innerHTML = txt;
+          return;
+        }
+      }catch(_e){ /* ignore and fallback */ }
+
+      try{
+        // フォールバック：JSONから読み込み（レガシー対応）
+        const res = await fetch(`/data/articles/${encodeURIComponent(shoeId)}.json`, { cache:'no-store' });
+        if (!res.ok) {
+          hostSlot.innerHTML = '<p class="muted">まだレビュー本文が書かれていません。</p>';
+          return;
+        }
+        const doc = await res.json();
+        if (doc.isDraft) {
+          hostSlot.innerHTML = '<p class="muted">この記事は下書きです。</p>';
+          return;
+        }
+        // doc.html may contain rich HTML markup
+        hostSlot.innerHTML = doc.html || doc.content || '<p class="muted">コンテンツがありません。</p>';
+      }catch(err){ 
+        console.warn('loadHostArticle failed', err);
+        hostSlot.innerHTML = '<p class="muted">レビュー本文の読み込みに失敗しました。</p>';
+      }
+    })();
+
+    // add admin '編集' button to tabs (accessible to everyone, auth happens server-side)
+    (function addAdminEditButton(){
+      // derive id from window.__SHOE__ or from URL (/shoes/:slug)
+      const idFromPath = (function(){ const m = location.pathname.match(/\/shoes\/([^\/\?#]+)/i); return m ? decodeURIComponent(m[1]) : ''; })();
+      const id = shoeId || idFromPath;
+      if (!id) return;
+
+      // レビュー本文タブ内の編集ボタンにイベントを追加
+      const hostEditBtn = document.getElementById('host-edit-btn');
+      if (hostEditBtn) {
+        hostEditBtn.addEventListener('click', ()=>{
+          const url = `/admin/articles/${encodeURIComponent(id)}`;
+          window.open(url, '_blank');
+        });
+      }
+
+      // フォールバック：タブが読み込まれていない場合の浮動ボタン（以前のコードを保持）
+      if (!hostEditBtn && !document.querySelector('.tab-edit-btn')) {
+        const floatBtn = document.createElement('button');
+        floatBtn.className = 'tab-edit-btn';
+        floatBtn.type = 'button';
+        floatBtn.textContent = '編集';
+        floatBtn.style.position = 'fixed';
+        floatBtn.style.right = '12px';
+        floatBtn.style.top = '12px';
+        floatBtn.style.zIndex = '9999';
+        floatBtn.style.padding = '.6rem .9rem';
+        floatBtn.style.borderRadius = '6px';
+        floatBtn.style.background = 'rgba(56,189,248,.12)';
+        floatBtn.style.color = 'var(--text, #fff)';
+        floatBtn.style.border = '1px solid rgba(56,189,248,.25)';
+        floatBtn.style.cursor = 'pointer';
+        floatBtn.addEventListener('click', ()=>{
+          const url = `/admin/articles/${encodeURIComponent(id)}`;
+          window.open(url, '_blank');
+        });
+        document.body.appendChild(floatBtn);
+      }
+    })();
 
     // コメントフォームをコミュニティタブへ
     const commentsSec = document.querySelector('.comments.card');
